@@ -2,8 +2,8 @@ import type { IconProps } from "./icon.model";
 import classNames from "classnames";
 import styles from './LogoIcon.module.scss';
 
-function LogoIcon({ size, className }: IconProps) {
-    const logoIconClass = classNames(styles.logoIcon, className);
+function LogoIcon({ size = 48, className }: IconProps) {
+    const logoIconClass = classNames(styles['logo-icon'], className);
     
     return (
         <img 

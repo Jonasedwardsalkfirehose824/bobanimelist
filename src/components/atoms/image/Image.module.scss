@@ -13,6 +13,7 @@
   &--enhanced {
     image-rendering: -webkit-optimize-contrast;
     image-rendering: crisp-edges;
+
     /* Proper sharpening using unsharp mask technique */
     filter: contrast(1.1) saturate(1.15) brightness(1.03);
   }

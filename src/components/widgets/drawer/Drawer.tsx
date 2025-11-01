@@ -8,7 +8,7 @@ import Label from '../../atoms/label';
 import AnimeIcon from '../../atoms/icons/AnimeIcon';
 import MangaIcon from '../../atoms/icons/MangaIcon';
 import HomeIcon from '../../atoms/icons/HomeIcon';
-import { Link, useLocation } from 'react-router';
+import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import ThemeToggle from '../../atoms/theme-toggle';
 import LogoIcon from '../../atoms/icons/LogoIcon';
@@ -136,7 +136,7 @@ function Drawer() {
                                                 className={`${styles['drawer__nav-item']} ${location.pathname === '/' ? styles['drawer__nav-item--active'] : ''}`}
                                             >
                                                 <HomeIcon size={20} color="s-color-fg-primary" />
-                                                <span className={styles['drawer__nav-text']}>{t('HOME')}</span>
+                                                <span className={styles['drawer__nav-text']}>{t('Home')}</span>
                                             </Link>
                                         </motion.div>
                                         <motion.div 
@@ -149,7 +149,7 @@ function Drawer() {
                                                 className={`${styles['drawer__nav-item']} ${location.pathname === '/anime' ? styles['drawer__nav-item--active'] : ''}`}
                                             >
                                                 <AnimeIcon size={20} color="s-color-fg-primary" />
-                                                <span className={styles['drawer__nav-text']}>{t('ANIME')}</span>
+                                                <span className={styles['drawer__nav-text']}>{t('Anime')}</span>
                                             </Link>
                                         </motion.div>
                                         <motion.div 
@@ -162,7 +162,7 @@ function Drawer() {
                                                 className={`${styles['drawer__nav-item']} ${location.pathname === '/manga' ? styles['drawer__nav-item--active'] : ''}`}
                                             >
                                                 <MangaIcon size={20} color="s-color-fg-primary" />
-                                                <span className={styles['drawer__nav-text']}>{t('MANGA')}</span>
+                                                <span className={styles['drawer__nav-text']}>{t('Manga')}</span>
                                             </Link>
                                         </motion.div>
                                     </nav>

@@ -23,6 +23,7 @@
   from {
     stroke-dashoffset: 1200;
   }
+
   to {
     stroke-dashoffset: 0;
   }
@@ -33,6 +34,7 @@
   from {
     fill: transparent;
   }
+
   to {
     fill: var(--logo-fill-color);
   }

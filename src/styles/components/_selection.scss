@@ -1,0 +1,40 @@
+// Selection styles for both light and dark modes
+// Background: Pink similar to Zero Two's hair color (#FF6B81)
+// Text color: Black in light mode, White in dark mode
+
+@use "../tokens/primitives/color" as *;
+
+// Define the selection color variables
+$p-color-selection-pink: #FF6B81; // Zero Two pink color
+
+// Default selection (light mode fallback)
+::selection {
+  background-color: #{$p-color-selection-pink};
+  color: #{$p-color-common-black};
+}
+
+// Light theme selection (when light-theme class is on body)
+.light-theme ::selection {
+  background-color: #{$p-color-selection-pink};
+  color: #{$p-color-common-black};
+}
+
+// Dark theme selection (fallback when light-theme class is not on body)
+body:not(.light-theme) ::selection {
+  background-color: #{$p-color-selection-pink};
+  color: #{$p-color-common-white};
+}
+
+// System preference for dark mode as additional fallback
+@media (prefers-color-scheme: dark) {
+  ::selection {
+    background-color: #{$p-color-selection-pink};
+    color: #{$p-color-common-white};
+  }
+  
+  // Ensure light theme still uses black text when system is dark but theme is light
+  .light-theme ::selection {
+    background-color: #{$p-color-selection-pink};
+    color: #{$p-color-common-black};
+  }
+}
