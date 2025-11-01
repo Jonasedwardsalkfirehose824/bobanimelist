@@ -1,7 +1,6 @@
 import type { IconProps } from "./icon.model";
-import { cssColorVar } from "../../../shared/design-system/util";
 
-function LogoIcon({ size, color }: IconProps) {
+function LogoIcon({ size }: IconProps) {
     return (
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width={size} height={size}>
             <path
