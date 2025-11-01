@@ -9,10 +9,10 @@ interface LogoProps {
 
 function Logo({ hideName }: LogoProps) {
     const { t } = useTranslation();
-    
+
     return (
         <div className={styles.logo}>
-            <LogoIcon size={48} color={'s-color-fg-logo'} />
+            <LogoIcon size={48} color={'s-color-fg-logo'} className={styles['logo-icon']} />
             {!hideName && <Label as='h1' font='typo-primary-xl-medium' className={styles['logo__title']} >
                 {t('APP_NAME')}
             </Label>}

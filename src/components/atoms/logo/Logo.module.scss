@@ -4,6 +4,7 @@
   display: flex;
   align-items: center;
   transition: scale 0.2s ease;
+  gap: var(--s-spacing-2);
 
   @include screen-mouse-first {
     &:hover {
@@ -19,8 +20,40 @@
 
   &__title {
     color: var(--s-color-fg-primary);
-    margin-left: var(--s-spacing-2);
     margin-top: var(--s-spacing-1);
     text-wrap-mode: nowrap;
+
+    @include screen-xs {
+      font-size: 18px;
+    }
+
+    @include screen-sm {
+      font-size: 20px;
+    }
+
+    @include screen-md {
+      font-size: 22px;
+    }
+
+    @include screen-lg {
+      font-size: 24px;
+    }
+  }
+
+  &__icon {
+    @include screen-xs {
+      width: 36px;
+      height: 36px;
+    }
+
+    @include screen-sm {
+      width: 40px;
+      height: 40px;
+    }
+
+    @include screen-md {
+      width: 48px;
+      height: 48px;
+    }
   }
 }

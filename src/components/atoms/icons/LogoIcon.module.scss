@@ -1,0 +1,21 @@
+@use "/src/styles/tokens/semantics" as *;
+
+.logoIcon {
+  width: 48px;
+  height: 48px;
+
+  @include screen-xs {
+    width: 36px;
+    height: 36px;
+  }
+
+  @include screen-sm {
+    width: 40px;
+    height: 40px;
+  }
+
+  @include screen-md {
+    width: 48px;
+    height: 48px;
+  }
+}

@@ -20,7 +20,7 @@ import { VernacUtil } from "../../../services/vernac/vernac-util";
 
 function HeaderNav() {
   const location = useLocation();
-  const { t } = useTranslation(); // Gunakan hook di sini
+  const { t } = useTranslation();
 
   return (
     <nav className={styles.header__nav}>
@@ -28,10 +28,10 @@ function HeaderNav() {
         <Pill icon={HomeIcon} text={t("home")} active={location.pathname === "/"} />
       </Link>
       <Link to={{ pathname: "/anime", search: "" }}>
-        <Pill icon={AnimeIcon} text={t("anime_nav")} active={location.pathname === "/anime"} /> {/* Tambahkan kunci ini ke file terjemahan nanti */}
+        <Pill icon={AnimeIcon} text={t("anime_nav")} active={location.pathname === "/anime"} /> 
       </Link>
       <Link to={{ pathname: "/manga", search: "" }}>
-        <Pill icon={MangaIcon} text={t("manga_nav")} active={location.pathname === "/manga"} /> {/* Tambahkan kunci ini ke file terjemahan nanti */}
+        <Pill icon={MangaIcon} text={t("manga_nav")} active={location.pathname === "/manga"} />
       </Link>
     </nav>
   );
