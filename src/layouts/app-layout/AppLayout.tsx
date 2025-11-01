@@ -4,8 +4,9 @@ import styles from './AppLayout.module.scss';
 import { Footer } from "../../components/widgets/footer";
 import { Drawer } from "../../components/widgets/drawer";
 import { AnimatePresence, motion, type Variants } from "motion/react";
-import { Suspense } from "react";
+import { Suspense, useState, useEffect } from "react";
 import { Loader } from "../loader";
+import AnimatedLogo from "../../components/atoms/animated-logo/AnimatedLogo";
 
 const pageVariants: Variants = {
     initial: {
@@ -31,29 +32,37 @@ const pageVariants: Variants = {
 function AppLayout() {
     const location = useLocation();
     const outlet = useOutlet();
+    const [showIntro, setShowIntro] = useState(true);
 
     return (
-        <div className={styles['app-layout']}>
-            <Drawer />
-            <Header />
-            <main className={styles['app-layout__content']}>
-                <ScrollRestoration />
-                <AnimatePresence mode="sync">
-                    <Suspense key={location.key} fallback={<Loader />}>
-                        <motion.div
-                            key={location.pathname}
-                            variants={pageVariants}
-                            initial="initial"
-                            animate="in"
-                            exit="out"
-                        >
-                            {outlet}
-                        </motion.div>
-                    </Suspense>
-                </AnimatePresence>
-            </main>
-            <Footer />
-        </div>
+        <>
+            {showIntro && (
+                <div className={styles['animated-logo-container']}>
+                    <AnimatedLogo onAnimationComplete={() => setShowIntro(false)} />
+                </div>
+            )}
+            <div className={`${styles['app-layout']} ${showIntro ? styles['intro-active'] : ''}`}>
+                <Drawer />
+                <Header />
+                <main className={styles['app-layout__content']}>
+                    <ScrollRestoration />
+                    <AnimatePresence mode="sync">
+                        <Suspense key={location.key} fallback={<Loader />}>
+                            <motion.div
+                                key={location.pathname}
+                                variants={pageVariants}
+                                initial="initial"
+                                animate="in"
+                                exit="out"
+                            >
+                                {outlet}
+                            </motion.div>
+                        </Suspense>
+                    </AnimatePresence>
+                </main>
+                <Footer />
+            </div>
+        </>
     );
 }
 
