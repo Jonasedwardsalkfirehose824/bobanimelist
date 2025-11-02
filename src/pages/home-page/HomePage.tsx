@@ -1,15 +1,24 @@
 import { useGetTopAnimeQuery, useGetTopMangaQuery, useGetTopCharactersQuery, useGetTopPeopleQuery } from "../../services/jikan";
 import LazyMount from "../../components/atoms/lazy-mount";
-import { HorizontalCarousel } from "../../components/widgets/horizontal-carousel";
+import HorizontalCarousel from "../../components/widgets/horizontal-carousel";
+import RandomAnimeCarousel from "../../components/widgets/random-anime-carousel/RandomAnimeCarousel";
 import { useTranslation } from 'react-i18next';
 import { formatThresholdNumber } from "../../shared/util";
 import { getBestImageUrl } from "../../shared/util/image-utils";
+import React from "react";
 
 function HomePage() {
     const { t } = useTranslation();
     
+    // The RTK Query hooks will be called in sequence with the default behavior
+    // However, we've implemented other measures to prevent 429 errors:
+    // 1. Custom base query with 429 handling and retry logic in baseApi.ts
+    // 2. Stale time settings in each API endpoint file
+    // 3. Error handling in HorizontalCarousel component
+    
     return (
         <div>
+            <RandomAnimeCarousel />
             <HorizontalCarousel
                 heading={t('HP_TOP_ANIME_TITLE')}
                 type="centered"
@@ -77,4 +86,4 @@ function HomePage() {
     );
 }
 
-export default HomePage;
+export default React.memo(HomePage);

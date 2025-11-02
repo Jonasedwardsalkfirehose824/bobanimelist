@@ -2,6 +2,19 @@
 
 .horizontal-carousel {
   padding-top: var(--s-spacing-5);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+
+  &--ready {
+    opacity: 1;
+  }
+
+  &--loading {
+    visibility: hidden;
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+  }
 
   &__header {
     display: flex;

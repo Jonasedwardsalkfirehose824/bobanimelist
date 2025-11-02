@@ -20,13 +20,16 @@ export const mangaApi = jikanApi.injectEndpoints({
                         type
                     },
                 };
-            }
+            },
+            // Set stale time to 5 minutes to avoid refetching too often
+            keepUnusedDataFor: 60 * 5, // 5 minutes
         }),
 
         getMangaById: builder.query<JikanResponse<Manga>, { id: number; }>({
             query: ({ id }) => ({
                 url: MangaEndpoints.mangaFullById.replace('{id}', String(id)),
-            })
+            }),
+            keepUnusedDataFor: 60 * 30, // 30 minutes for detailed manga data
         }),
 
         getMangaGenres: builder.query<JikanResponse<Genre[]>, void>({
@@ -34,7 +37,8 @@ export const mangaApi = jikanApi.injectEndpoints({
                 return {
                     url: MangaEndpoints.mangaGenres
                 };
-            }
+            },
+            keepUnusedDataFor: 60 * 60, // 60 minutes for genres (rarely change)
         }),
 
         getMangaSearch: builder.query<JikanResponse<Manga[]>, MangaSearchParams>({
@@ -43,7 +47,8 @@ export const mangaApi = jikanApi.injectEndpoints({
                     url: MangaEndpoints.mangaSearch,
                     params: data,
                 };
-            }
+            },
+            keepUnusedDataFor: 60 * 5, // 5 minutes for search results
         }),
     }),
 });

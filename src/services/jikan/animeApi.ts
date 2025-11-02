@@ -22,22 +22,26 @@ const AnimeEndpoints = {
 export const animeApi = jikanApi.injectEndpoints({
     endpoints: (builder) => ({
         getTopAnime: builder.query<JikanResponse<Anime[]>, AnimeTopParams>({
-            query: ({ sfw = true, limit = 15, filter = 'bypopularity' }) => {
+            query: ({ sfw = true, limit = 15, filter = 'bypopularity', type }) => {
                 return {
                     url: AnimeEndpoints.topAnime,
                     params: {
                         sfw,
                         limit,
-                        filter
+                        filter,
+                        type
                     },
                 };
-            }
+            },
+            // Set stale time to 5 minutes to avoid refetching too often
+            keepUnusedDataFor: 60 * 5, // 5 minutes
         }),
 
         getAnimeById: builder.query<JikanResponse<Anime>, { id: number; }>({
             query: ({ id }) => ({
                 url: AnimeEndpoints.animeFullById.replace('{id}', String(id)),
-            })
+            }),
+            keepUnusedDataFor: 60 * 30, // 30 minutes for detailed anime data
         }),
 
         getAnimeSeasonsNow: builder.query<JikanResponse<Anime[]>, SeasonNowParams>({
@@ -48,7 +52,8 @@ export const animeApi = jikanApi.injectEndpoints({
                         limit,
                     },
                 };
-            }
+            },
+            keepUnusedDataFor: 60 * 10, // 10 minutes for seasonal data
         }),
 
         getAnimeSeasonsUpcoming: builder.query<JikanResponse<Anime[]>, JikanSeasonsParams>({
@@ -59,7 +64,8 @@ export const animeApi = jikanApi.injectEndpoints({
                         limit
                     },
                 };
-            }
+            },
+            keepUnusedDataFor: 60 * 10, // 10 minutes for seasonal data
         }),
 
         getAnimeSearch: builder.query<JikanResponse<Anime[]>, AnimeSearchParams>({
@@ -68,7 +74,8 @@ export const animeApi = jikanApi.injectEndpoints({
                     url: AnimeEndpoints.animeSearch,
                     params: data,
                 };
-            }
+            },
+            keepUnusedDataFor: 60 * 5, // 5 minutes for search results
         }),
 
         getRecentAnimeRecommendations: builder.query<JikanResponse<Anime[]>, { page?: number; }>({
@@ -79,7 +86,8 @@ export const animeApi = jikanApi.injectEndpoints({
                         page
                     },
                 };
-            }
+            },
+            keepUnusedDataFor: 60 * 10, // 10 minutes for recommendations
         }),
 
         // TODO: remove
@@ -88,7 +96,24 @@ export const animeApi = jikanApi.injectEndpoints({
                 return {
                     url: AnimeEndpoints.animeGenres
                 };
-            }
+            },
+            keepUnusedDataFor: 60 * 60, // 60 minutes for genres (rarely change)
+        }),
+        
+        getRandomAnime: builder.query<JikanResponse<Anime[]>, { page?: number; limit?: number; sfw?: boolean; }>({
+            query: ({ page = 1, limit = 25, sfw = true }) => {
+                return {
+                    url: AnimeEndpoints.animeSearch,
+                    params: {
+                        page,
+                        limit,
+                        sfw,
+                        order_by: 'popularity', // Get popular anime and then shuffle on client
+                        sort: 'desc'
+                    },
+                };
+            },
+            keepUnusedDataFor: 60 * 5, // 5 minutes for random anime
         })
     }),
 });
@@ -100,5 +125,6 @@ export const {
     useGetAnimeSeasonsUpcomingQuery,
     useGetAnimeSearchQuery,
     useGetRecentAnimeRecommendationsQuery,
-    useGetAnimeGenresQuery
+    useGetAnimeGenresQuery,
+    useGetRandomAnimeQuery
 } = animeApi;

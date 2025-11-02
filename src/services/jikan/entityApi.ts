@@ -20,7 +20,9 @@ export const entityApi = jikanApi.injectEndpoints({
                         limit,
                     },
                 };
-            }
+            },
+            // Set stale time to 5 minutes to avoid refetching too often
+            keepUnusedDataFor: 60 * 5, // 5 minutes
         }),
 
         getTopCharacters: builder.query<JikanResponse<Character[]>, { limit?: number; }>({
@@ -31,20 +33,24 @@ export const entityApi = jikanApi.injectEndpoints({
                         limit,
                     },
                 };
-            }
+            },
+            // Set stale time to 5 minutes to avoid refetching too often
+            keepUnusedDataFor: 60 * 5, // 5 minutes
         }),
 
         getCharacterById: builder.query<JikanResponse<CharacterFull>, { id: number; }>({
             query: ({ id }) => ({
                 url: EntityEndpoints.characterFullById.replace('{id}', String(id)),
-            })
+            }),
+            keepUnusedDataFor: 60 * 30, // 30 minutes for detailed character data
         }),
 
 
         getPersonById: builder.query<JikanResponse<JikanPersonFull>, { id: number; }>({
             query: ({ id }) => ({
                 url: EntityEndpoints.personFullById.replace('{id}', String(id)),
-            })
+            }),
+            keepUnusedDataFor: 60 * 30, // 30 minutes for detailed person data
         }),
 
         getCharacterSearch: builder.query<JikanResponse<Character[]>, CharactersSearchParams>({
@@ -53,7 +59,8 @@ export const entityApi = jikanApi.injectEndpoints({
                     url: EntityEndpoints.characterSearch,
                     params
                 };
-            }
+            },
+            keepUnusedDataFor: 60 * 5, // 5 minutes for search results
         }),
 
         getPeopleSearch: builder.query<JikanResponse<JikanPerson[]>, PeopleSearchParams>({
@@ -62,7 +69,8 @@ export const entityApi = jikanApi.injectEndpoints({
                     url: EntityEndpoints.peopleSearch,
                     params
                 };
-            }
+            },
+            keepUnusedDataFor: 60 * 5, // 5 minutes for search results
         }),
     }),
 });

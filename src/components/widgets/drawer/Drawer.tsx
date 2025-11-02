@@ -3,7 +3,6 @@ import { useAppDispatch, useAppSelector } from '../../../store';
 import { updateIsDrawerOpen } from '../../../store/slices/appContextSlice';
 import { RemoveScroll } from 'react-remove-scroll';
 import { AnimatePresence, motion } from 'motion/react';
-import CloseIcon from '../../atoms/icons/CloseIcon';
 import Label from '../../atoms/label';
 import AnimeIcon from '../../atoms/icons/AnimeIcon';
 import MangaIcon from '../../atoms/icons/MangaIcon';

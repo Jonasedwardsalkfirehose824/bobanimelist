@@ -1,6 +1,6 @@
 import { useGetTopMangaQuery } from "../../services/jikan";
 import LazyMount from "../../components/atoms/lazy-mount";
-import { HorizontalCarousel } from "../../components/widgets/horizontal-carousel";
+import HorizontalCarousel from "../../components/widgets/horizontal-carousel";
 import { useTranslation } from 'react-i18next';
 import { formatThresholdNumber } from "../../shared/util";
 import { getBestImageUrl } from "../../shared/util/image-utils";

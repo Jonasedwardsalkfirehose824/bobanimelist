@@ -10,6 +10,7 @@ import LeftChevron from "../../atoms/icons/LeftChevron";
 import RightChevron from "../../atoms/icons/RightChevron";
 import classNames from "classnames";
 import MediaDetailCard, { MediaDetailCardLoading } from "../../atoms/media-detail-card";
+import { shuffleArray } from "../../../shared/util/image-utils";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type UseQuery = TypedUseQuery<any, any, any>;
@@ -71,9 +72,56 @@ function HorizontalCarousel<TQueryHook extends UseQuery, TCardType extends CardT
     const swiperRef = React.useRef<SwiperClass>(null);
     const [isBeginning, setIsBeginning] = React.useState(true);
     const [isEnd, setIsEnd] = React.useState(false);
-    const { data, isLoading, isError, isFetching } = useQueryHook(options);
+    
+    const isTopPeople = heading === 'Top People';
 
-    const adaptedData = data ? adapter(data) : undefined;
+    const finalOptions = React.useMemo(() => {
+        if (isTopPeople && typeof options === 'object' && options !== null) {
+            return {
+                ...options,
+                page: Math.floor(Math.random() * 5) + 1,
+            };
+        }
+        return options;
+    }, [isTopPeople, options]);
+
+    // Optimized query with better error handling
+    const { data, isLoading, isError, isFetching, error } = useQueryHook(finalOptions);
+
+    const adaptedData = React.useMemo(() => {
+        if (!data) {
+            return undefined;
+        }
+        
+        const adapted = adapter(data);
+
+        if (isTopPeople) {
+            return shuffleArray(adapted).slice(0, 15);
+        }
+
+        return adapted;
+    }, [data, adapter, isTopPeople]);
+
+    // Smart loading state: only show loading initially, not during background updates
+    const [hasInitialData, setHasInitialData] = React.useState(false);
+    const [isReady, setIsReady] = React.useState(false);
+    const showLoading = (isLoading || isFetching) && !hasInitialData;
+
+    // Track when we first receive data or an error to hide loading state
+    React.useEffect(() => {
+        if ((data || (!isLoading && !isFetching)) && !hasInitialData) {
+            setHasInitialData(true);
+        }
+        // Also set hasInitialData to true if there's an error (to stop showing loading state)
+        if (isError && !hasInitialData) {
+            setHasInitialData(true);
+        }
+        
+        // Set ready state once we have initial data or error to show content
+        if (hasInitialData || (isError && !hasInitialData)) {
+            setIsReady(true);
+        }
+    }, [data, isLoading, isFetching, isError, hasInitialData]);
 
     const getCarouselInstance = (swiper: SwiperClass) => {
         swiperRef.current = swiper;
@@ -85,32 +133,43 @@ function HorizontalCarousel<TQueryHook extends UseQuery, TCardType extends CardT
     };
 
     const getContent = React.useCallback((): React.ReactNode[] => {
-        // If there's an error, show the error state
-        if (isError) {
+        // If data is not loaded and we're still fetching, show loading state
+        if (showLoading) {
+            switch (cardType) {
+                case 'media-detail':
+                    return Array.from({ length: 10 }, (_, idx) => <MediaDetailCardLoading key={`loading-${idx}`} />);
+                case 'image':
+                default:
+                    return Array.from({ length: 10 }, (_, idx) => <ImageCardLoading key={`loading-${idx}`} />);
+            }
+        }
+
+        // If there's an error and no cached data, show the error state
+        if (isError && (!adaptedData || adaptedData.length === 0)) {
+            console.error('HorizontalCarousel error:', error); // Log error for debugging
+            
+            // Check if the error is due to 429 (Too Many Requests)
+            let errorMessage = "There was an error loading the content. Please try again later.";
+            let errorTitle = "Failed to load content";
+            
+            if (error && typeof error === 'object' && 'status' in error && error.status === 429) {
+                errorMessage = "Too many requests — please wait a moment before refreshing.";
+                errorTitle = "Rate Limit Exceeded";
+            }
+            
             return [<div key="error" className={styles['error-container']}>
                 <ErrorState 
                     key="error-state"
-                    title="Failed to load content" 
-                    message="There was an error loading the content. Please try again later." 
+                    title={errorTitle} 
+                    message={errorMessage} 
                     onRetry={() => window.location.reload()}
                     retryButtonText="Reload"
                 />
             </div>];
         }
 
-        // If data is not loaded and we're still fetching, show loading state
-        if (!adaptedData && (isLoading || isFetching)) {
-            switch (cardType) {
-                case 'media-detail':
-                    return Array.from({ length: 15 }, (_, idx) => <MediaDetailCardLoading key={`loading-${idx}`} />);
-                case 'image':
-                default:
-                    return Array.from({ length: 15 }, (_, idx) => <ImageCardLoading key={`loading-${idx}`} />);
-            }
-        }
-
-        // If data is loaded but empty, we should handle empty state
-        if (adaptedData && adaptedData.length === 0) {
+        // If data is loaded but empty (and no error), we should handle empty state
+        if (adaptedData && adaptedData.length === 0 && !isError) {
             return [<div key="empty" className={styles['empty-container']}>
                 <ErrorState 
                     key="empty-state"
@@ -121,7 +180,7 @@ function HorizontalCarousel<TQueryHook extends UseQuery, TCardType extends CardT
             </div>];
         }
 
-        // Render the actual content
+        // Render the actual content (this handles both successful data and error with cached data)
         switch (cardType) {
             case 'media-detail': {
                 return (adaptedData as MediaDetailCardCarouselData[]).map((data) => (
@@ -154,10 +213,10 @@ function HorizontalCarousel<TQueryHook extends UseQuery, TCardType extends CardT
                 ));
             }
         }
-    }, [cardType, adaptedData, isError, isLoading, isFetching]);
+    }, [cardType, adaptedData, isError, showLoading, error]);
 
     return (
-        <div className={styles['horizontal-carousel']}>
+        <div className={`${styles['horizontal-carousel']} ${!isReady ? styles['horizontal-carousel--loading'] : styles['horizontal-carousel--ready']}`}>
             <div className={styles['horizontal-carousel__header']}>
                 {<Label as='h3' font="typo-primary-l-semibold" className={styles['horizontal-carousel__heading']}>{heading ?? ''}</Label>}
                 <div className={styles['horizontal-carousel__nav']}>

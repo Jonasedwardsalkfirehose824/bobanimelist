@@ -1,3 +1,1 @@
-import HorizontalCarousel from "./HorizontalCarousel";
-
-export { HorizontalCarousel };
+export { default } from "./HorizontalCarousel";
