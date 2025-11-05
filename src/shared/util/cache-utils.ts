@@ -151,7 +151,7 @@ export function debounce<T extends (...args: any[]) => any>(
 ): (...args: Parameters<T>) => Promise<ReturnType<T>> {
   let timeout: NodeJS.Timeout;
   
-  return function executedFunction(...args: Parameters<T>): Promise<ReturnType<T>> {
+  return function executedFunction(this: any, ...args: Parameters<T>): Promise<ReturnType<T>> {
     return new Promise((resolve, reject) => {
       const later = () => {
         clearTimeout(timeout);

@@ -1,11 +1,13 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import path from 'path';
+import { resolve } from 'path';
+import { fileURLToPath } from 'url';
 import stylelint from 'vite-plugin-stylelint';
 // @ts-expect-error: vite-plugin-eslint may not have TypeScript types
 import eslint from 'vite-plugin-eslint';
 import { VitePWA } from 'vite-plugin-pwa';
 
+const __dirname = fileURLToPath(new URL('.', import.meta.url));
 const BASE_PATH = '/bobanimelist/';
 
 export default defineConfig({
@@ -92,7 +94,7 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, 'src'),
+      '@': resolve(__dirname, 'src'),
     },
   },
   build: {

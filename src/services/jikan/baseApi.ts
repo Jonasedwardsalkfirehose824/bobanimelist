@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import type { BaseQueryFn, FetchArgs, FetchBaseQueryError } from '@reduxjs/toolkit/query';
+import type { BaseQueryFn, FetchArgs, FetchBaseQueryError, QueryReturnValue } from '@reduxjs/toolkit/query';
 import i18n from '@/i18n';
 import { apiLimiter } from './apiLimiter';
 
@@ -9,7 +9,7 @@ const CACHE_TTL = 600 * 1000; // 10 minutes (maximum as per requirements)
 // Global cache storage for all Jikan API data
 const cache = new Map<string, { data: unknown; timestamp: number }>();
 // Track ongoing requests globally to prevent duplicate requests
-const ongoingRequests = new Map<string, Promise<{ data?: unknown; error?: FetchBaseQueryError }>>();
+const ongoingRequests = new Map<string, Promise<QueryReturnValue<unknown, FetchBaseQueryError, Record<string, unknown>>>>();
 
 // Check if cached data is still valid
 const isCacheValid = (timestamp: number): boolean => {
@@ -62,7 +62,7 @@ const baseQueryWithRateLimiting: BaseQueryFn<
     const cachedResult = cache.get(cacheKey);
     if (cachedResult && isCacheValid(cachedResult.timestamp)) {
         console.log(`[GLOBAL API] Cache hit for: ${cacheKey}`);
-        return { data: cachedResult.data };
+        return { data: cachedResult.data, meta: undefined as Record<string, unknown> | undefined };
     }
 
     // Check for ongoing identical requests (global request deduplication)

@@ -45,13 +45,8 @@ declare module '*.module.scss' {
   export default classes;
 }
 
-declare module '../i18n' {
-  const i18n: import('i18next').i18n;
-  export default i18n;
-}
-
-declare module '../../i18n' {
-  const i18n: import('i18next').i18n;
+declare module '@/i18n' {
+  import i18n from 'i18next';
   export default i18n;
 }
 
