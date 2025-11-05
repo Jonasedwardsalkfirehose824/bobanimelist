@@ -8,7 +8,11 @@ import eslint from 'vite-plugin-eslint';
 import { VitePWA } from 'vite-plugin-pwa';
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
-const BASE_PATH = '/bobanimelist/';
+// Determine base path based on deployment environment
+let BASE_PATH = '/bobanimelist/';
+if (process.env.DEPLOY_ENV === 'vercel' || process.env.VERCEL || process.env.CI) {
+  BASE_PATH = '/';
+}
 
 export default defineConfig({
   base: BASE_PATH,
