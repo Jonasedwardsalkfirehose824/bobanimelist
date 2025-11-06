@@ -1,0 +1,283 @@
+// ============================================
+// HEADER LAYOUT - BobaNimeList
+// ============================================
+
+@use '../base/variables' as *;
+@use '../base/mixins' as *;
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: map-get($z-index, 'sticky');
+  width: 100%;
+  background: var(--color-glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--color-border-light);
+  @include transition(background-color, border-color);
+
+  &__container {
+    @include container('xxl');
+    @include flex-between;
+    height: 72px;
+    gap: map-get($spacing, 'lg');
+    
+    @include respond('md') {
+      height: 64px;
+      gap: map-get($spacing, 'md');
+    }
+  }
+
+  &__brand {
+    @include flex-center;
+    gap: map-get($spacing, 'sm');
+    text-decoration: none;
+    color: var(--color-text-primary);
+    font-size: map-get($font-sizes, 'xl');
+    font-weight: map-get($font-weights, 'bold');
+    @include transition(transform);
+
+    &:hover {
+      transform: scale(1.05);
+    }
+
+    &-logo {
+      width: 40px;
+      height: 40px;
+      border-radius: map-get($radius, 'md');
+    }
+
+    &-text {
+      @include gradient-text;
+      
+      @include respond('sm') {
+        display: none;
+      }
+    }
+  }
+
+  &__nav {
+    display: flex;
+    align-items: center;
+    gap: map-get($spacing, 'md');
+    flex: 1;
+    max-width: 800px;
+
+    @include respond('md') {
+      display: none;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: map-get($spacing, 'sm');
+  }
+
+  &__theme-toggle {
+    @include button-ghost;
+    padding: map-get($spacing, 'sm');
+    width: 40px;
+    height: 40px;
+    border-radius: map-get($radius, 'full');
+
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  &__mobile-toggle {
+    @include button-ghost;
+    padding: map-get($spacing, 'sm');
+    width: 40px;
+    height: 40px;
+    display: none;
+
+    @include respond('md') {
+      display: flex;
+    }
+  }
+
+  &__user {
+    @include flex-center;
+    gap: map-get($spacing, 'sm');
+    padding: map-get($spacing, 'sm') map-get($spacing, 'md');
+    background: var(--color-bg-surface);
+    border-radius: map-get($radius, 'full');
+    cursor: pointer;
+    @include transition(background-color);
+
+    &:hover {
+      background: var(--color-bg-elevated);
+    }
+
+    &-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: map-get($radius, 'full');
+      border: 2px solid var(--color-border-medium);
+    }
+
+    &-name {
+      font-size: map-get($font-sizes, 'sm');
+      font-weight: map-get($font-weights, 'medium');
+      color: var(--color-text-primary);
+
+      @include respond('sm') {
+        display: none;
+      }
+    }
+  }
+}
+
+// Navigation Links
+.nav {
+  &__list {
+    display: flex;
+    align-items: center;
+    gap: map-get($spacing, 'sm');
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  &__item {
+    position: relative;
+  }
+
+  &__link {
+    display: flex;
+    align-items: center;
+    gap: map-get($spacing, 'xs');
+    padding: map-get($spacing, 'sm') map-get($spacing, 'md');
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    font-size: map-get($font-sizes, 'sm');
+    font-weight: map-get($font-weights, 'medium');
+    border-radius: map-get($radius, 'md');
+    @include transition(color, background-color);
+
+    &:hover {
+      color: var(--color-text-primary);
+      background: var(--color-bg-surface);
+    }
+
+    &--active {
+      color: var(--color-accent-primary);
+      background: var(--color-bg-surface);
+    }
+
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  &__dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: map-get($spacing, 'xs');
+    min-width: 200px;
+    background: var(--color-bg-elevated);
+    border: 1px solid var(--color-border-light);
+    border-radius: map-get($radius, 'lg');
+    @include shadow-lg;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    @include transition(opacity, transform, visibility);
+
+    .nav__item:hover & {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    &-item {
+      padding: map-get($spacing, 'sm') map-get($spacing, 'md');
+      color: var(--color-text-secondary);
+      text-decoration: none;
+      display: block;
+      @include transition(color, background-color);
+
+      &:hover {
+        color: var(--color-text-primary);
+        background: var(--color-bg-surface);
+      }
+
+      &:first-child {
+        border-radius: map-get($radius, 'lg') map-get($radius, 'lg') 0 0;
+      }
+
+      &:last-child {
+        border-radius: 0 0 map-get($radius, 'lg') map-get($radius, 'lg');
+      }
+    }
+  }
+}
+
+// Search in Header
+.header-search {
+  flex: 1;
+  max-width: 600px;
+
+  @include respond('lg') {
+    max-width: 400px;
+  }
+
+  @include respond('md') {
+    display: none;
+  }
+
+  &__input {
+    width: 100%;
+    padding: map-get($spacing, 'sm') map-get($spacing, 'md');
+    padding-left: map-get($spacing, 'xl');
+    background: var(--color-bg-surface);
+    border: 1px solid var(--color-border-light);
+    border-radius: map-get($radius, 'full');
+    color: var(--color-text-primary);
+    font-size: map-get($font-sizes, 'sm');
+    @include transition(border-color, background-color);
+
+    &:focus {
+      outline: none;
+      border-color: var(--color-accent-primary);
+      background: var(--color-bg-elevated);
+    }
+
+    &::placeholder {
+      color: var(--color-text-tertiary);
+    }
+  }
+
+  &__icon {
+    position: absolute;
+    left: map-get($spacing, 'md');
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    color: var(--color-text-tertiary);
+    pointer-events: none;
+  }
+}
+
+// Header fixed variant
+.header--fixed {
+  @include shadow-md;
+}
+
+// Header transparent variant (for hero sections)
+.header--transparent {
+  background: transparent;
+  border-bottom: 1px solid transparent;
+
+  &.header--scrolled {
+    background: var(--color-glass-bg);
+    border-bottom-color: var(--color-border-light);
+    @include shadow-sm;
+  }
+}

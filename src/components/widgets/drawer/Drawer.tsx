@@ -7,6 +7,8 @@ import Label from '../../atoms/label';
 import AnimeIcon from '../../atoms/icons/AnimeIcon';
 import MangaIcon from '../../atoms/icons/MangaIcon';
 import HomeIcon from '../../atoms/icons/HomeIcon';
+import CalendarIcon from '../../atoms/icons/CalendarIcon';
+import ReviewIcon from '../../atoms/icons/ReviewIcon';
 import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import ThemeToggle from '../../atoms/theme-toggle';
@@ -97,6 +99,7 @@ function Drawer() {
                     <RemoveScroll enabled={isDrawerOpen} style={{ position: 'absolute' }}>
                         <motion.aside
                             className={styles['drawer__content']}
+                            onClick={(e) => e.stopPropagation()}
                             initial="hidden"
                             animate="visible"
                             exit="exit"
@@ -138,7 +141,7 @@ function Drawer() {
                                                 className={`${styles['drawer__nav-item']} ${location.pathname === '/' ? styles['drawer__nav-item--active'] : ''}`}
                                             >
                                                 <HomeIcon size={20} color="s-color-fg-primary" />
-                                                <span className={styles['drawer__nav-text']}>{t('Home')}</span>
+                                                <span className={styles['drawer__nav-text']}>{t('home')}</span>
                                             </Link>
                                         </motion.div>
                                         <motion.div 
@@ -151,7 +154,7 @@ function Drawer() {
                                                 className={`${styles['drawer__nav-item']} ${location.pathname === '/anime' ? styles['drawer__nav-item--active'] : ''}`}
                                             >
                                                 <AnimeIcon size={20} color="s-color-fg-primary" />
-                                                <span className={styles['drawer__nav-text']}>{t('Anime')}</span>
+                                                <span className={styles['drawer__nav-text']}>{t('anime_nav')}</span>
                                             </Link>
                                         </motion.div>
                                         <motion.div 
@@ -164,7 +167,46 @@ function Drawer() {
                                                 className={`${styles['drawer__nav-item']} ${location.pathname === '/manga' ? styles['drawer__nav-item--active'] : ''}`}
                                             >
                                                 <MangaIcon size={20} color="s-color-fg-primary" />
-                                                <span className={styles['drawer__nav-text']}>{t('Manga')}</span>
+                                                <span className={styles['drawer__nav-text']}>{t('manga_nav')}</span>
+                                            </Link>
+                                        </motion.div>
+                                        <motion.div 
+                                            whileHover={{ scale: 1.02 }}
+                                            whileTap={{ scale: 0.98 }}
+                                        >
+                                            <Link 
+                                                onClick={handleDrawerClose} 
+                                                to={{ pathname: '/schedule', search: '' }}
+                                                className={`${styles['drawer__nav-item']} ${location.pathname === '/schedule' ? styles['drawer__nav-item--active'] : ''}`}
+                                            >
+                                                <CalendarIcon size={20} color="s-color-fg-primary" />
+                                                <span className={styles['drawer__nav-text']}>{t('schedule_nav', 'Schedule')}</span>
+                                            </Link>
+                                        </motion.div>
+                                        <motion.div 
+                                            whileHover={{ scale: 1.02 }}
+                                            whileTap={{ scale: 0.98 }}
+                                        >
+                                            <Link 
+                                                onClick={handleDrawerClose} 
+                                                to={{ pathname: '/seasons', search: '' }}
+                                                className={`${styles['drawer__nav-item']} ${location.pathname === '/seasons' ? styles['drawer__nav-item--active'] : ''}`}
+                                            >
+                                                <CalendarIcon size={20} color="s-color-fg-primary" />
+                                                <span className={styles['drawer__nav-text']}>{t('seasons_nav', 'Seasons')}</span>
+                                            </Link>
+                                        </motion.div>
+                                        <motion.div 
+                                            whileHover={{ scale: 1.02 }}
+                                            whileTap={{ scale: 0.98 }}
+                                        >
+                                            <Link 
+                                                onClick={handleDrawerClose} 
+                                                to={{ pathname: '/reviews', search: '' }}
+                                                className={`${styles['drawer__nav-item']} ${location.pathname === '/reviews' || location.pathname.startsWith('/top/reviews') ? styles['drawer__nav-item--active'] : ''}`}
+                                            >
+                                                <ReviewIcon size={20} color="s-color-fg-primary" />
+                                                <span className={styles['drawer__nav-text']}>{t('reviews_nav', 'Reviews')}</span>
                                             </Link>
                                         </motion.div>
                                     </nav>
@@ -178,7 +220,10 @@ function Drawer() {
                                 transition={{ delay: 0.2 }}
                             >
                                 <Label className={styles['drawer__menu-heading']} font='typo-primary-l-medium'>Settings</Label>
-                                <div className={styles['drawer__theme-toggle']}>
+                                <div 
+                                    className={styles['drawer__theme-toggle']}
+                                    onClick={(e) => e.stopPropagation()}
+                                >
                                     <ThemeToggle />
                                 </div>
                             </motion.div>

@@ -1,8 +1,8 @@
 import { jikanApi } from './baseApi';
-import type { JikanResponse, Anime, AnimeTopParams, SeasonNowParams, JikanSeasonsParams, AnimeSearchParams, Genre } from './models';
+import type { JikanResponse, Anime, AnimeTopParams, SeasonNowParams, JikanSeasonsParams, AnimeSearchParams, Genre, AnimeStaff, AnimeStreaming, AnimeEpisode, EpisodesParams } from './models';
 
 const AnimeEndpoints = {
-    // animeEpisodes: '/anime/{id}/episodes',
+    animeEpisodes: '/anime/{id}/episodes',
     // animeEpisodeById: '/anime/{id}/episodes/{episode}',
     // animeVideos: '/anime/{id}/videos',
     // animeVideosEpisodes: '/anime/{id}/videos/episodes',
@@ -16,6 +16,8 @@ const AnimeEndpoints = {
     animeStatistics: '/anime/{id}/statistics',
     animeReviews: '/anime/{id}/reviews',
     animeCharacters: '/anime/{id}/characters',
+    animeStaff: '/anime/{id}/staff',
+    animeStreaming: '/anime/{id}/streaming',
     animeGenres: '/genres/anime'
 } as const;
 
@@ -114,7 +116,29 @@ export const animeApi = jikanApi.injectEndpoints({
                 };
             },
             keepUnusedDataFor: 60 * 5, // 5 minutes for random anime
-        })
+        }),
+
+        getAnimeStaff: builder.query<JikanResponse<AnimeStaff[]>, { id: number }>({
+            query: ({ id }) => ({
+                url: AnimeEndpoints.animeStaff.replace('{id}', String(id)),
+            }),
+            keepUnusedDataFor: 60 * 30, // 30 minutes - staff rarely changes
+        }),
+
+        getAnimeStreaming: builder.query<JikanResponse<AnimeStreaming[]>, { id: number }>({
+            query: ({ id }) => ({
+                url: AnimeEndpoints.animeStreaming.replace('{id}', String(id)),
+            }),
+            keepUnusedDataFor: 60 * 60, // 60 minutes - streaming links rarely change
+        }),
+
+        getAnimeEpisodes: builder.query<JikanResponse<AnimeEpisode[]>, { id: number } & EpisodesParams>({
+            query: ({ id, page = 1, limit = 100 }) => ({
+                url: AnimeEndpoints.animeEpisodes.replace('{id}', String(id)),
+                params: { page, limit },
+            }),
+            keepUnusedDataFor: 60 * 30, // 30 minutes - episodes rarely change
+        }),
     }),
 });
 
@@ -126,5 +150,8 @@ export const {
     useGetAnimeSearchQuery,
     useGetRecentAnimeRecommendationsQuery,
     useGetAnimeGenresQuery,
-    useGetRandomAnimeQuery
+    useGetRandomAnimeQuery,
+    useGetAnimeStaffQuery,
+    useGetAnimeStreamingQuery,
+    useGetAnimeEpisodesQuery,
 } = animeApi;

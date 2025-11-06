@@ -1,0 +1,352 @@
+@use "./breakpoint" as *;
+
+// Focus state mixins
+@mixin focus-visible {
+  &:focus-visible {
+    outline: 2px solid var(--s-color-fg-info);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}
+
+@mixin focus-ring {
+  &:focus {
+    outline: 2px solid var(--s-color-fg-info);
+    outline-offset: 2px;
+  }
+}
+
+// Interactive state mixins
+@mixin interactive-scale($scale: 1.05, $duration: 0.2s) {
+  transition: transform $duration ease, box-shadow $duration ease;
+  cursor: pointer;
+
+  @include screen-mouse-first {
+    &:hover {
+      transform: scale($scale);
+    }
+  }
+
+  @include screen-touch-first {
+    &:active {
+      transform: scale($scale);
+    }
+  }
+}
+
+@mixin interactive-lift($translateY: -4px, $duration: 0.2s) {
+  transition: transform $duration ease, box-shadow $duration ease;
+  cursor: pointer;
+
+  @include screen-mouse-first {
+    &:hover {
+      transform: translateY($translateY);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  @include screen-touch-first {
+    &:active {
+      transform: translateY($translateY);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+  }
+}
+
+@mixin interactive-brightness($brightness: 1.1, $duration: 0.2s) {
+  transition: filter $duration ease;
+  cursor: pointer;
+
+  @include screen-mouse-first {
+    &:hover {
+      filter: brightness($brightness);
+    }
+  }
+
+  @include screen-touch-first {
+    &:active {
+      filter: brightness($brightness);
+    }
+  }
+}
+
+@mixin interactive-opacity($opacity: 0.8, $duration: 0.2s) {
+  transition: opacity $duration ease;
+  cursor: pointer;
+
+  @include screen-mouse-first {
+    &:hover {
+      opacity: $opacity;
+    }
+  }
+
+  @include screen-touch-first {
+    &:active {
+      opacity: $opacity;
+    }
+  }
+}
+
+// Animation mixins
+@mixin fade-in($duration: 0.3s, $delay: 0s) {
+  animation: fadeIn $duration ease $delay forwards;
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+}
+
+@mixin slide-in-up($duration: 0.3s, $delay: 0s, $distance: 20px) {
+  animation: slideInUp $duration ease $delay forwards;
+
+  @keyframes slideInUp {
+    from {
+      opacity: 0;
+      transform: translateY($distance);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+@mixin slide-in-down($duration: 0.3s, $delay: 0s, $distance: 20px) {
+  animation: slideInDown $duration ease $delay forwards;
+
+  @keyframes slideInDown {
+    from {
+      opacity: 0;
+      transform: translateY(-$distance);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+@mixin slide-in-left($duration: 0.3s, $delay: 0s, $distance: 20px) {
+  animation: slideInLeft $duration ease $delay forwards;
+
+  @keyframes slideInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-$distance);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+}
+
+@mixin slide-in-right($duration: 0.3s, $delay: 0s, $distance: 20px) {
+  animation: slideInRight $duration ease $delay forwards;
+
+  @keyframes slideInRight {
+    from {
+      opacity: 0;
+      transform: translateX($distance);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+}
+
+@mixin scale-in($duration: 0.3s, $delay: 0s) {
+  animation: scaleIn $duration ease $delay forwards;
+
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+}
+
+@mixin pulse($duration: 2s) {
+  animation: pulse $duration ease-in-out infinite;
+
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 1;
+    }
+
+    50% {
+      opacity: 0.5;
+    }
+  }
+}
+
+@mixin spin($duration: 1s) {
+  animation: spin $duration linear infinite;
+
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+
+    to {
+      transform: rotate(360deg);
+    }
+  }
+}
+
+// Loading skeleton mixin
+@mixin skeleton-loading($duration: 1.5s) {
+  background: linear-gradient(
+    90deg,
+    var(--s-color-bg-secondary) 25%,
+    var(--s-color-bg-placeholder) 50%,
+    var(--s-color-bg-secondary) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer $duration ease-in-out infinite;
+
+  @keyframes shimmer {
+    0% {
+      background-position: 200% 0;
+    }
+
+    100% {
+      background-position: -200% 0;
+    }
+  }
+}
+
+// Scrollbar styling
+@mixin custom-scrollbar($width: 8px, $track-color: var(--s-color-bg-secondary), $thumb-color: var(--s-color-bg-placeholder)) {
+  scrollbar-width: thin;
+  scrollbar-color: $thumb-color $track-color;
+
+  &::-webkit-scrollbar {
+    width: $width;
+    height: $width;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $track-color;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $thumb-color;
+    border-radius: 4px;
+
+    &:hover {
+      background: var(--s-color-bg-placeholder);
+    }
+  }
+}
+
+@mixin hide-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+}
+
+// Truncate text
+@mixin truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// Aspect ratio container
+@mixin aspect-ratio($width, $height) {
+  aspect-ratio: #{$width} / #{$height};
+
+  @supports not (aspect-ratio: 1 / 1) {
+    &::before {
+      content: "";
+      display: block;
+      padding-top: calc(#{$height} / #{$width} * 100%);
+    }
+  }
+}
+
+// Visually hidden (for accessibility)
+@mixin visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+// Glass morphism effect
+@mixin glass-morphism($blur: 10px, $opacity: 0.7) {
+  background: rgba(255, 255, 255, $opacity);
+  backdrop-filter: blur($blur);
+  -webkit-backdrop-filter: blur($blur);
+}
+
+// Grid responsive
+@mixin grid-responsive($min-width: 250px, $gap: var(--s-spacing-5)) {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax($min-width, 1fr));
+  gap: $gap;
+}
+
+// Flexbox center
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// Absolute center
+@mixin absolute-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+// Card style
+@mixin card($padding: var(--s-spacing-5), $radius: 8px) {
+  padding: $padding;
+  background-color: var(--s-color-bg-secondary);
+  border-radius: $radius;
+  border: 1px solid var(--s-color-border-primary);
+}
+
+// Gradient text
+@mixin gradient-text($gradient) {
+  background: $gradient;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+// Backdrop blur
+@mixin backdrop-blur($blur: 10px) {
+  backdrop-filter: blur($blur);
+  -webkit-backdrop-filter: blur($blur);
+}

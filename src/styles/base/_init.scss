@@ -1,13 +1,16 @@
 @use "../tokens/semantics" as *;
 
 body {
-  background-color: var(--s-color-bg-primary);
+  background-color: var(--s-color-bg-base);
+  color: var(--s-color-fg-primary);
+  font-family: outfit, sans-serif;
 }
 
 #root {
   min-width: $minScreenWidth;
   max-width: $maxScreenWidth;
   margin: 0 auto;
+  color: var(--s-color-fg-primary);
 }
 
 .no-text-select {

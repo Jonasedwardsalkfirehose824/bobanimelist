@@ -1,6 +1,7 @@
 import { useParams } from "react-router";
 import { useGetPersonByIdQuery } from "../../services/jikan";
 import { MediaContent } from "../../components/widgets/media-content";
+import { PersonAnimeWorks, PersonVoiceRoles } from "../../components/widgets/person-works";
 import { formatThresholdNumber } from "../../shared/util";
 import { getLargeImageUrl } from "../../shared/util/image-utils";
 
@@ -39,6 +40,12 @@ function PersonPage() {
                     );
                 }}
             />
+            
+            {/* Person Anime Works */}
+            {id && <PersonAnimeWorks personId={Number(id)} />}
+            
+            {/* Person Voice Acting Roles */}
+            {id && <PersonVoiceRoles personId={Number(id)} />}
         </div>
     );
 

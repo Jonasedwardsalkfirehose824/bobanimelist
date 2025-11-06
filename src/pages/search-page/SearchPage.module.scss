@@ -1,0 +1,62 @@
+@use "/src/styles/tokens/semantics" as *;
+
+.search-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--s-color-bg-base);
+  color: var(--s-color-fg-primary);
+
+  &__container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__options {
+    position: sticky;
+    top: var(--s-header-height);
+    z-index: 10;
+    background-color: var(--s-color-bg-primary);
+    border-bottom: 1px solid var(--s-color-border-primary);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  &__results {
+    flex: 1;
+    padding: var(--s-spacing-6) var(--s-spacing-app-horizontal);
+
+    @include screen-md {
+      padding: var(--s-spacing-8) var(--s-spacing-app-horizontal);
+    }
+  }
+
+  &__loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+    color: var(--s-color-fg-secondary);
+  }
+
+  &__empty {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+    gap: var(--s-spacing-4);
+    color: var(--s-color-fg-secondary);
+    text-align: center;
+    padding: var(--s-spacing-6);
+
+    &-icon {
+      font-size: 48px;
+      opacity: 0.5;
+    }
+
+    &-text {
+      @extend .typo-primary-l-regular;
+    }
+  }
+}

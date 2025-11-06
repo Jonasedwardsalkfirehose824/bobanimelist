@@ -94,7 +94,7 @@ class CacheStore {
       
       if (!cached) return false;
 
-      const entry: CacheEntry<any> = JSON.parse(cached);
+      const entry: CacheEntry<unknown> = JSON.parse(cached);
       const now = Date.now();
 
       return (now - entry.timestamp < entry.ttl);
@@ -145,18 +145,19 @@ export function delay(ms: number): Promise<void> {
 /**
  * Debounce function to limit API calls
  */
-export function debounce<T extends (...args: any[]) => any>(
+export function debounce<T extends (...args: never[]) => unknown>(
   func: T,
   wait: number
 ): (...args: Parameters<T>) => Promise<ReturnType<T>> {
   let timeout: NodeJS.Timeout;
   
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return function executedFunction(this: any, ...args: Parameters<T>): Promise<ReturnType<T>> {
     return new Promise((resolve, reject) => {
       const later = () => {
         clearTimeout(timeout);
         Promise.resolve(func.apply(this, args))
-          .then(resolve)
+          .then(resolve as (value: unknown) => void)
           .catch(reject);
       };
       

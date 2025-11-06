@@ -1,0 +1,98 @@
+// ============================================
+// SIDEBAR LAYOUT (Mobile Navigation)
+// ============================================
+
+@use '../base/variables' as *;
+@use '../base/mixins' as *;
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 300px;
+  background: var(--color-bg-elevated);
+  border-right: 1px solid var(--color-border-light);
+  transform: translateX(-100%);
+  @include transition(transform);
+  z-index: map-get($z-index, 'modal');
+  overflow-y: auto;
+  @include custom-scrollbar;
+
+  &--open {
+    transform: translateX(0);
+  }
+
+  @include respond-min('md') {
+    transform: translateX(0);
+    position: static;
+    height: auto;
+  }
+
+  &__header {
+    @include flex-between;
+    padding: map-get($spacing, 'lg');
+    border-bottom: 1px solid var(--color-border-light);
+
+    @include respond-min('md') {
+      display: none;
+    }
+  }
+
+  &__close {
+    @include button-ghost;
+    padding: map-get($spacing, 'sm');
+    width: 36px;
+    height: 36px;
+  }
+
+  &__nav {
+    padding: map-get($spacing, 'md');
+  }
+
+  &__link {
+    display: flex;
+    align-items: center;
+    gap: map-get($spacing, 'sm');
+    padding: map-get($spacing, 'md');
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    border-radius: map-get($radius, 'md');
+    @include transition(background-color, color);
+
+    &:hover {
+      background: var(--color-bg-surface);
+      color: var(--color-text-primary);
+    }
+
+    &--active {
+      background: var(--color-bg-surface);
+      color: var(--color-accent-primary);
+      font-weight: map-get($font-weights, 'semibold');
+    }
+
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+}
+
+.sidebar-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: calc(#{map-get($z-index, 'modal')} - 1);
+  opacity: 0;
+  visibility: hidden;
+  @include transition(opacity, visibility);
+
+  &--open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  @include respond-min('md') {
+    display: none;
+  }
+}

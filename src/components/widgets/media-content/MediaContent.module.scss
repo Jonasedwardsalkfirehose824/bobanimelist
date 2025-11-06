@@ -92,6 +92,7 @@
       white-space: nowrap;
       flex-grow: 2;
       text-align: center;
+      color: #000000;
 
       &--rank {
         background-color: var(--s-color-bg-warning);
@@ -111,6 +112,7 @@
 
       &--listed {
         background-color: var(--s-color-bg-secondary);
+        color: var(--s-color-fg-primary); // Use theme-adaptive text for watch list due to dark background
       }
     }
   }
@@ -155,6 +157,7 @@
 
 .string-group {
   padding-top: var(--s-spacing-5);
+  color: var(--s-color-fg-primary); // Theme-adaptive text for container content (titles like "Genre", "External", etc.)
 
   &__group {
     display: flex;
@@ -167,6 +170,11 @@
     padding: var(--s-spacing-3) var(--s-spacing-4);
     border-radius: 8px;
     white-space: nowrap;
+    color: #000000 !important;
+
+    * {
+      color: #000000 !important;
+    }
 
     &--primary {
       background-color: var(--s-color-bg-warning);
@@ -181,7 +189,7 @@
     }
 
     &--info {
-      background-color: var(--s-color-bg-secondary);
+      background-color: var(--s-color-bg-error);
     }
 
     &--clickable {

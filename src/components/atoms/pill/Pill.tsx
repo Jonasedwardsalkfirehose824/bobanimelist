@@ -10,10 +10,11 @@ interface PillProps {
 }
 
 function Pill({ icon: Icon, text, active }: PillProps) {
+    const iconColor = active ? 's-color-bg-secondary' : 's-color-fg-primary';
     return (
         <div className={classNames({ [styles.pill]: true, [styles['pill--active']]: active })}>
-            <Icon size={20} color={active ? 's-color-bg-secondary' : 's-color-fg-primary'} />
-            <Label as='span' font='typo-primary-m-medium' className={classNames({ [styles.pill__text]: true, [styles['pill__text--active']]: active })}>{text}</Label>
+            <Icon size={20} color={iconColor} />
+            <Label as='span' font='typo-primary-m-medium' className={classNames({ [styles.pill__text]: true, [styles['pill__text--active']]: active })} style={active ? { color: `var(--${iconColor})` } : undefined}>{text}</Label>
         </div>
     );
 }

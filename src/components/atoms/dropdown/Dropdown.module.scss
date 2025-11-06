@@ -74,6 +74,9 @@
 
     &--selected {
       background-color: var(--s-color-bg-info);
+      // Light mode: primary text on light info background
+      // Dark mode: black text on bright info color for better contrast
+      color: var(--color-badge-info-text);
     }
 
     @include screen-mouse-first {

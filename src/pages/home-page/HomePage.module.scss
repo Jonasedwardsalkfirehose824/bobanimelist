@@ -1,0 +1,547 @@
+@use "/src/styles/tokens/semantics" as *;
+@use "/src/styles/base/page-tokens" as *;
+
+.home-page {
+	@include page-container;
+
+	// Hero Section - 3D Enhanced with Interactive Tilt
+	&__hero {
+		padding: var(--s-spacing-10) 0;
+		text-align: center;
+		background: 
+			linear-gradient(145deg, rgba(0, 0, 0, 0.75) 0%, rgba(20, 20, 40, 0.65) 50%, rgba(0, 0, 0, 0.7) 100%),
+			url('/hero_home__bg.jpg');
+		background-size: cover;
+		background-position: center;
+		background-repeat: no-repeat;
+		margin: 0 auto var(--s-spacing-10);
+		border-radius: 24px;
+		animation: fadeInUp 0.6s ease-out;
+		position: relative;
+		overflow: hidden;
+		
+		// Enhanced 3D shadows - multiple layers for depth
+		box-shadow: 
+			0 25px 70px rgba(0, 0, 0, 0.4),
+			0 15px 40px rgba(0, 0, 0, 0.3),
+			0 8px 20px rgba(0, 0, 0, 0.2),
+			0 4px 10px rgba(0, 0, 0, 0.15),
+			inset 0 2px 4px rgba(255, 255, 255, 0.1),
+			inset 0 -4px 20px rgba(0, 0, 0, 0.35);
+		
+		// 3D Transform properties
+		transform-style: preserve-3d;
+		transform-origin: center center;
+		will-change: transform;
+		
+		// Smooth transition for tilt reset
+		transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), 
+					box-shadow 0.3s ease;
+		
+		// Prevent text selection during tilt
+		user-select: none;
+
+		// Shimmer light effect - subtle and slow
+		&::before {
+			content: '';
+			position: absolute;
+			top: -50%;
+			left: -100%;
+			width: 80%;
+			height: 200%;
+			background: linear-gradient(
+				90deg,
+				transparent 0%,
+				rgba(255, 255, 255, 0.04) 20%,
+				rgba(255, 255, 255, 0.12) 50%,
+				rgba(255, 255, 255, 0.04) 80%,
+				transparent 100%
+			);
+			transform: skewX(-25deg) translateZ(30px);
+			animation: shimmerMove 8s ease-in-out infinite;
+			pointer-events: none;
+			z-index: 1;
+			opacity: 0.7;
+			mix-blend-mode: overlay;
+		}
+
+		// Depth overlay with gradient vignette
+		&::after {
+			content: '';
+			position: absolute;
+			inset: 0;
+			background: radial-gradient(
+				ellipse at center,
+				transparent 0%,
+				rgba(0, 0, 0, 0.15) 50%,
+				rgba(0, 0, 0, 0.4) 100%
+			);
+			pointer-events: none;
+			z-index: 0;
+		}
+
+		// Light mode adjustments
+		:global(.light) & {
+			background: 
+				linear-gradient(145deg, rgba(248, 248, 248, 0.95) 0%, rgba(234, 234, 234, 0.92) 50%, rgba(248, 248, 248, 0.95) 100%),
+				url('/hero_home__bg.jpg');
+			
+			box-shadow: 
+				0 25px 70px rgba(0, 0, 0, 0.15),
+				0 15px 40px rgba(0, 0, 0, 0.1),
+				0 8px 20px rgba(0, 0, 0, 0.08),
+				0 4px 10px rgba(0, 0, 0, 0.05),
+				inset 0 2px 4px rgba(255, 255, 255, 0.6),
+				inset 0 -4px 20px rgba(0, 0, 0, 0.08);
+			
+			&::before {
+				background: linear-gradient(
+					90deg,
+					transparent 0%,
+					rgba(255, 255, 255, 0.2) 20%,
+					rgba(255, 255, 255, 0.5) 50%,
+					rgba(255, 255, 255, 0.2) 80%,
+					transparent 100%
+				);
+			}
+		}
+
+		@include screen-md {
+			padding: var(--s-spacing-12) 0;
+			margin: 0 auto var(--s-spacing-12);
+			border-radius: 32px;
+			
+			// Enhanced shadows on larger screens
+			box-shadow: 
+				0 30px 90px rgba(0, 0, 0, 0.45),
+				0 20px 45px rgba(0, 0, 0, 0.35),
+				0 10px 25px rgba(0, 0, 0, 0.25),
+				0 5px 12px rgba(0, 0, 0, 0.18),
+				inset 0 2px 5px rgba(255, 255, 255, 0.12),
+				inset 0 -5px 25px rgba(0, 0, 0, 0.4);
+			
+			:global(.light) & {
+				box-shadow: 
+					0 30px 90px rgba(0, 0, 0, 0.18),
+					0 20px 45px rgba(0, 0, 0, 0.12),
+					0 10px 25px rgba(0, 0, 0, 0.1),
+					0 5px 12px rgba(0, 0, 0, 0.06),
+					inset 0 2px 5px rgba(255, 255, 255, 0.8),
+					inset 0 -5px 25px rgba(0, 0, 0, 0.1);
+			}
+		}
+		
+		// Disable tilt on mobile/touch devices
+		@media (hover: none) and (pointer: coarse) {
+			transform: none !important;
+			user-select: auto;
+		}
+	}
+
+	&__hero-content {
+		max-width: 900px;
+		margin: 0 auto;
+		padding: 0 var(--s-spacing-6);
+		position: relative;
+		z-index: 2;
+		transform: translateZ(50px);
+		animation: fadeInUp 0.8s ease-out;
+		
+		// Subtle 3D lift effect
+		filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.3));
+	}
+
+	&__hero-title {
+		@include page-title;
+		margin-bottom: var(--s-spacing-4);
+		color: #ffffff;
+		
+		// Enhanced 3D text depth
+		text-shadow: 
+			0 0 40px rgba(59, 130, 246, 0.5),
+			0 0 20px rgba(59, 130, 246, 0.35),
+			2px 2px 4px rgba(0, 0, 0, 0.8),
+			4px 4px 12px rgba(0, 0, 0, 0.65),
+			6px 6px 20px rgba(0, 0, 0, 0.45);
+		
+		transform: translateZ(60px);
+		letter-spacing: -0.02em;
+		font-weight: 700;
+		
+		// Subtle edge highlight for 3D effect
+		-webkit-text-stroke: 0.5px rgba(255, 255, 255, 0.15);
+		
+		// Light mode text styling
+		:global(.light) & {
+			color: #ffffff;
+			text-shadow: 
+				0 0 40px rgba(59, 130, 246, 0.3),
+				0 0 20px rgba(59, 130, 246, 0.2),
+				2px 2px 4px rgba(0, 0, 0, 0.25),
+				4px 4px 12px rgba(0, 0, 0, 0.15),
+				6px 6px 20px rgba(0, 0, 0, 0.08),
+				-1px -1px 2px rgba(255, 255, 255, 0.8);
+			-webkit-text-stroke: 0.5px rgba(0, 0, 0, 0.05);
+		}
+	}
+
+	&__hero-subtitle {
+		@include page-subtitle;
+		margin-bottom: var(--s-spacing-8);
+		color: rgba(255, 255, 255, 0.94);
+		
+		// Layered text shadow for depth
+		text-shadow: 
+			1px 1px 3px rgba(0, 0, 0, 0.9),
+			2px 2px 8px rgba(0, 0, 0, 0.75),
+			3px 3px 15px rgba(0, 0, 0, 0.55);
+		
+		transform: translateZ(40px);
+		font-weight: 400;
+		
+		// Subtle letter glow
+		filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.5));
+		
+		// Light mode subtitle styling
+		:global(.light) & {
+			color: rgba(26, 26, 26, 0.85);
+			text-shadow: 
+				1px 1px 3px rgba(0, 0, 0, 0.2),
+				2px 2px 8px rgba(0, 0, 0, 0.12),
+				3px 3px 15px rgba(0, 0, 0, 0.08),
+				-1px -1px 1px rgba(255, 255, 255, 0.6);
+			filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.15));
+		}
+	}
+
+	&__hero-buttons {
+		display: flex;
+		gap: var(--s-spacing-4);
+		justify-content: center;
+		flex-wrap: wrap;
+		transform: translateZ(30px);
+		animation: fadeInUp 1s ease-out;
+	}
+
+	&__hero-btn,
+	&__hero-btn-secondary {
+		padding: var(--s-spacing-4) var(--s-spacing-7);
+		border-radius: 16px;
+		font-size: 1rem;
+		font-weight: 600;
+		cursor: pointer;
+		transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+		border: none;
+		font-family: inherit;
+		position: relative;
+		overflow: hidden;
+		transform: translateZ(0);
+
+		// 3D button effect
+		&::before {
+			content: '';
+			position: absolute;
+			inset: 0;
+			background: linear-gradient(
+				135deg,
+				rgba(255, 255, 255, 0.2) 0%,
+				transparent 50%,
+				rgba(0, 0, 0, 0.1) 100%
+			);
+			opacity: 0;
+			transition: opacity 0.3s ease;
+		}
+
+		@include screen-md {
+			padding: var(--s-spacing-5) var(--s-spacing-8);
+			font-size: 1.125rem;
+		}
+	}
+
+	&__hero-btn {
+		background: var(--color-accent-primary);
+		color: var(--color-btn-primary-text);
+		font-weight: 700;
+		
+		// Enhanced 3D button shadows
+		box-shadow: 
+			0 6px 20px rgba(59, 130, 246, 0.45),
+			0 3px 10px rgba(0, 0, 0, 0.35),
+			0 1px 3px rgba(0, 0, 0, 0.2),
+			inset 0 1px 2px rgba(255, 255, 255, 0.15),
+			inset 0 -3px 10px rgba(0, 0, 0, 0.25);
+
+		@include screen-mouse-first {
+			&:hover {
+				background: var(--color-accent-primary-hover);
+				transform: translateY(-5px) translateZ(15px);
+				
+				// Deeper 3D shadows on hover
+				box-shadow: 
+					0 15px 40px rgba(59, 130, 246, 0.6),
+					0 8px 25px rgba(0, 0, 0, 0.45),
+					0 3px 8px rgba(0, 0, 0, 0.3),
+					inset 0 1px 3px rgba(255, 255, 255, 0.2),
+					inset 0 -3px 12px rgba(0, 0, 0, 0.3);
+
+				&::before {
+					opacity: 1;
+				}
+			}
+
+			&:active {
+				transform: translateY(-2px) translateZ(8px);
+				
+				// Pressed state shadows
+				box-shadow: 
+					0 8px 25px rgba(59, 130, 246, 0.5),
+					0 4px 12px rgba(0, 0, 0, 0.4),
+					inset 0 -3px 10px rgba(0, 0, 0, 0.3);
+			}
+		}
+	}
+
+	&__hero-btn-secondary {
+		background: rgba(255, 255, 255, 0.1);
+		color: #ffffff;
+		border: 2px solid rgba(255, 255, 255, 0.3);
+		backdrop-filter: blur(10px);
+		
+		// Glass-morphism 3D effect
+		box-shadow: 
+			0 6px 20px rgba(0, 0, 0, 0.25),
+			0 2px 8px rgba(0, 0, 0, 0.15),
+			inset 0 1px 2px rgba(255, 255, 255, 0.15),
+			inset 0 -2px 8px rgba(0, 0, 0, 0.2);
+
+		@include screen-mouse-first {
+			&:hover {
+				border-color: rgba(255, 255, 255, 0.6);
+				background: rgba(255, 255, 255, 0.2);
+				transform: translateY(-5px) translateZ(15px);
+				
+				// Enhanced glass 3D on hover
+				box-shadow: 
+					0 15px 40px rgba(0, 0, 0, 0.35),
+					0 6px 20px rgba(0, 0, 0, 0.25),
+					inset 0 1px 3px rgba(255, 255, 255, 0.25),
+					inset 0 -2px 10px rgba(0, 0, 0, 0.25);
+
+				&::before {
+					opacity: 1;
+				}
+			}
+
+			&:active {
+				transform: translateY(-2px) translateZ(8px);
+				
+				// Pressed glass state
+				box-shadow: 
+					0 8px 25px rgba(0, 0, 0, 0.3),
+					0 3px 10px rgba(0, 0, 0, 0.2),
+					inset 0 -2px 8px rgba(0, 0, 0, 0.25);
+			}
+		}
+	}
+
+	// Featured Section
+	&__featured {
+		@include section-container;
+		animation: fadeInUp 0.7s ease-out;
+	}
+
+	&__featured-card {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: var(--s-spacing-6);
+		background: var(--s-color-bg-secondary);
+		border-radius: 20px;
+		overflow: hidden;
+		box-shadow: 0 4px 16px var(--color-shadow);
+
+		@include screen-md {
+			grid-template-columns: 400px 1fr;
+			gap: var(--s-spacing-8);
+		}
+	}
+
+	&__featured-image {
+		width: 100%;
+		height: 400px;
+		overflow: hidden;
+
+		@include screen-md {
+			height: 100%;
+		}
+
+		img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			transition: transform 0.5s ease;
+		}
+
+		&:hover img {
+			transform: scale(1.05);
+		}
+	}
+
+	&__featured-info {
+		padding: var(--s-spacing-6);
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+
+		@include screen-md {
+			padding: var(--s-spacing-8);
+		}
+	}
+
+	&__featured-badge {
+		display: inline-block;
+		padding: var(--s-spacing-2) var(--s-spacing-4);
+		background: var(--color-accent-primary);
+		color: var(--color-btn-primary-text);
+		border-radius: 8px;
+		margin-bottom: var(--s-spacing-4);
+		width: fit-content;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		font-weight: 700;
+	}
+
+	&__featured-title {
+		margin-bottom: var(--s-spacing-4);
+		font-size: clamp(1.5rem, 3vw, 2.5rem);
+		color: var(--s-color-fg-primary);
+	}
+
+	&__featured-synopsis {
+		color: var(--s-color-fg-secondary);
+		line-height: 1.7;
+		margin-bottom: var(--s-spacing-6);
+		font-size: 1rem;
+	}
+
+	&__featured-btn {
+		padding: var(--s-spacing-4) var(--s-spacing-6);
+		background: var(--color-accent-primary);
+		color: var(--color-btn-primary-text);
+		border: none;
+		border-radius: 12px;
+		font-size: 1rem;
+		font-weight: 700;
+		cursor: pointer;
+		transition: all $transition-base;
+		width: fit-content;
+		font-family: inherit;
+
+		@include screen-mouse-first {
+			&:hover {
+				background: var(--color-accent-primary-hover);
+				transform: translateY(-2px);
+				box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+			}
+		}
+	}
+
+	// Section
+	&__section {
+		@include section-container;
+		animation: fadeInUp 0.8s ease-out;
+	}
+
+	&__section-header {
+		@include section-header;
+	}
+
+	&__section-title {
+		@include section-title;
+	}
+
+	&__section-link {
+		padding: var(--s-spacing-3) var(--s-spacing-5);
+		background: transparent;
+		color: var(--color-accent-primary);
+		border: 2px solid var(--color-accent-primary);
+		border-radius: 10px;
+		font-size: 0.9375rem;
+		font-weight: 700;
+		cursor: pointer;
+		transition: all $transition-base;
+		font-family: inherit;
+
+		@include screen-mouse-first {
+			&:hover {
+				background: var(--color-accent-primary);
+				color: var(--color-btn-primary-text);
+				transform: translateY(-2px);
+			}
+		}
+	}
+
+	&__grid {
+		@include content-grid;
+	}
+
+	// Actions
+	&__actions {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: var(--s-spacing-5);
+		animation: fadeInUp 0.9s ease-out;
+
+		@include screen-sm {
+			grid-template-columns: repeat(2, 1fr);
+		}
+
+		@include screen-lg {
+			grid-template-columns: repeat(3, 1fr);
+		}
+	}
+
+	&__action-card {
+		padding: var(--s-spacing-7);
+		background: var(--s-color-bg-secondary);
+		border: 2px solid var(--s-color-border-primary);
+		border-radius: 16px;
+		text-align: center;
+		cursor: pointer;
+		transition: all $transition-base;
+		font-family: inherit;
+
+		h3 {
+			color: var(--s-color-fg-primary);
+			margin-bottom: var(--s-spacing-3);
+		}
+
+		p {
+			color: var(--s-color-fg-secondary);
+			margin: 0;
+		}
+
+		@include screen-mouse-first {
+			&:hover {
+				border-color: var(--color-accent-primary);
+				transform: translateY(-4px);
+				box-shadow: 0 8px 24px var(--color-shadow);
+
+				h3 {
+					color: var(--color-accent-primary);
+				}
+			}
+		}
+	}
+}
+
+// 3D Hero Shimmer Animation
+@keyframes shimmerMove {
+	0% {
+		left: -100%;
+	}
+	100% {
+		left: 120%;
+	}
+}
+
+

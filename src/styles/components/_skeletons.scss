@@ -1,0 +1,53 @@
+// ============================================
+// SKELETON LOADING COMPONENTS
+// ============================================
+
+@use '../base/variables' as *;
+@use '../base/mixins' as *;
+
+.skeleton {
+  @include skeleton;
+  border-radius: map-get($radius, 'md');
+
+  &--text {
+    height: 1em;
+    width: 100%;
+    margin-bottom: map-get($spacing, 'sm');
+
+    &:last-child {
+      width: 60%;
+    }
+  }
+
+  &--title {
+    height: 2em;
+    width: 80%;
+    margin-bottom: map-get($spacing, 'md');
+  }
+
+  &--avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: map-get($radius, 'full');
+  }
+
+  &--card {
+    height: 300px;
+    border-radius: map-get($radius, 'lg');
+  }
+
+  &--media {
+    @include aspect-ratio(3, 4);
+    border-radius: map-get($radius, 'md');
+  }
+
+  &--button {
+    height: 40px;
+    width: 120px;
+    border-radius: map-get($radius, 'md');
+  }
+}
+
+.skeleton-grid {
+  @include grid-auto(250px, map-get($spacing, 'lg'));
+}

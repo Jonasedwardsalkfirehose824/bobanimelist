@@ -5,6 +5,8 @@ import Logo from "../../atoms/logo";
 import MangaIcon from "../../atoms/icons/MangaIcon";
 import SearchIcon from "../../atoms/icons/SearchIcon";
 import SettingIcon from "../../atoms/icons/SettingIcon";
+import CalendarIcon from "../../atoms/icons/CalendarIcon";
+import ReviewIcon from "../../atoms/icons/ReviewIcon";
 import Pill from "../../atoms/pill";
 import styles from "./Header.module.scss";
 import LanguageIcon from "../../atoms/icons/LanguageIcon";
@@ -31,6 +33,15 @@ function HeaderNav() {
       </Link>
       <Link to={{ pathname: "/manga", search: "" }}>
         <Pill icon={MangaIcon} text={t("manga_nav")} active={location.pathname === "/manga"} />
+      </Link>
+      <Link to={{ pathname: "/schedule", search: "" }}>
+        <Pill icon={CalendarIcon} text={t("schedule_nav", "Schedule")} active={location.pathname === "/schedule"} />
+      </Link>
+      <Link to={{ pathname: "/seasons", search: "" }}>
+        <Pill icon={CalendarIcon} text={t("seasons_nav", "Seasons")} active={location.pathname === "/seasons"} />
+      </Link>
+      <Link to={{ pathname: "/reviews", search: "" }}>
+        <Pill icon={ReviewIcon} text={t("reviews_nav", "Reviews")} active={location.pathname === "/reviews" || location.pathname.startsWith("/top/reviews")} />
       </Link>
     </nav>
   );
@@ -104,6 +115,7 @@ function Header() {
   const maxHeaderWidth = useRef<number>(0);
   const [isOverflowing, setIsOverflowing] = useState(false);
   const [isLanguageDropdownOpen, setIsLanguageDropdownOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const dispatch = useAppDispatch();
   const { isDrawerOpen } = useAppSelector(state => state.appContext);
   const { changeLanguage: handleChangeLanguage, currentLanguage } = useChangeLanguage();
@@ -140,6 +152,16 @@ function Header() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [isLanguageDropdownOpen]);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      setIsScrolled(scrollY > 50);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   const handleLanguageChange = useCallback((locale: "en" | "id" | "jp") => { 
     handleChangeLanguage(locale); // Panggil fungsi dari hook kita
     // Jika kita ingin tetap menyimpan pilihan ke localStorage via VernacUtil
@@ -159,31 +181,38 @@ function Header() {
   const languages: Array<"en" | "id" | "jp"> = ["en", "id", "jp"];
 
   return (
-    <header className={styles.header} ref={headerRef}>
-      <div className={classNames({ [styles.header__lhs]: true, "no-text-select": true })}>
-        <Link to={{ pathname: "/", search: "" }}>
-          <Logo />
-        </Link>
-        {!isOverflowing && <HeaderNav />}
-      </div>
-      <div className={styles.header__rhs}>
-        <LanguageDropdown
-          currentLocale={currentLanguage as "en" | "id" | "jp"} 
-          changeLanguage={handleLanguageChange} 
-          isDropdownOpen={isLanguageDropdownOpen}
-          setDropdownOpen={setIsLanguageDropdownOpen}
-          languages={languages}
-        />
-        <Link to={{ pathname: "/search", search: "" }}>
-          <SearchIcon size={22} color="s-color-fg-primary" className={styles.header__actions} />
-        </Link>
-        <button onClick={onDrawerClick}>
-          {isOverflowing ? (
-            <MenuIcon isActive={isDrawerOpen} size={22} className={styles.header__actions} />
-          ) : (
-            <SettingIcon size={22} color="s-color-fg-primary" className={styles.header__actions} />
-          )}
-        </button>
+    <header 
+      className={classNames(styles.header, {
+        [styles['header--scrolled']]: isScrolled
+      })} 
+      ref={headerRef}
+    >
+      <div className={styles.header__container}>
+        <div className={classNames({ [styles.header__lhs]: true, "no-text-select": true })}>
+          <Link to={{ pathname: "/", search: "" }}>
+            <Logo />
+          </Link>
+          {!isOverflowing && <HeaderNav />}
+        </div>
+        <div className={styles.header__rhs}>
+          <LanguageDropdown
+            currentLocale={currentLanguage as "en" | "id" | "jp"} 
+            changeLanguage={handleLanguageChange} 
+            isDropdownOpen={isLanguageDropdownOpen}
+            setDropdownOpen={setIsLanguageDropdownOpen}
+            languages={languages}
+          />
+          <Link to={{ pathname: "/search", search: "" }}>
+            <SearchIcon size={22} color="s-color-fg-primary" className={styles.header__actions} />
+          </Link>
+          <button onClick={onDrawerClick}>
+            {isOverflowing ? (
+              <MenuIcon isActive={isDrawerOpen} size={22} className={styles.header__actions} />
+            ) : (
+              <SettingIcon size={22} color="s-color-fg-primary" className={styles.header__actions} />
+            )}
+          </button>
+        </div>
       </div>
     </header>
   );

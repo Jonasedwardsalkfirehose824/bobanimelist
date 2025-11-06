@@ -29,5 +29,15 @@
   "EP_404_TITLE": "404 - Halaman Tidak Ditemukan",
   "EP_ERROR_DESC": "Terjadi kesalahan yang tidak terduga.",
   "EP_ERROR_TITLE": "Ada yang salah",
-  "EP_REDIRECT_TEXT": "Ke Beranda"
+  "EP_REDIRECT_TEXT": "Ke Beranda",
+  "schedule_nav": "Jadwal",
+  "seasons_nav": "Musim",
+  "reviews_nav": "Review",
+  "search_nav": "Cari",
+  "producers_nav": "Produser",
+  "clubs_nav": "Klub",
+  "top_nav": "Teratas",
+  "random_nav": "Acak",
+  "HP_RANDOM_DISCOVERY_TITLE": "Bingung mau nonton apa?",
+  "HP_RANDOM_DISCOVERY_SUBTITLE": "Biarkan takdir memilih petualangan berikutnya!"
 }

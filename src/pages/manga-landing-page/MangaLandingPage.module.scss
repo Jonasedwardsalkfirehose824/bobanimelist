@@ -1,0 +1,39 @@
+@use "/src/styles/tokens/semantics" as *;
+
+.manga-landing-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--s-color-bg-base);
+  color: var(--s-color-fg-primary);
+
+  &__hero {
+    position: relative;
+    padding: var(--s-spacing-10) var(--s-spacing-app-horizontal);
+    background: linear-gradient(135deg, var(--s-color-bg-primary) 0%, var(--s-color-bg-secondary) 100%);
+    
+    @include screen-md {
+      padding: var(--s-spacing-12) var(--s-spacing-app-horizontal);
+    }
+  }
+
+  &__section {
+    padding: var(--s-spacing-6) 0;
+
+    @include screen-md {
+      padding: var(--s-spacing-8) 0;
+    }
+
+    &:not(:last-child) {
+      border-bottom: 1px solid var(--s-color-border-primary);
+    }
+  }
+
+  &__loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+    color: var(--s-color-fg-secondary);
+  }
+}

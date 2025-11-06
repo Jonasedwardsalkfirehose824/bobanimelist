@@ -29,5 +29,15 @@
   "EP_404_TITLE": "404 - Page Not Found",
   "EP_ERROR_DESC": "An unexpected error has occurred.",
   "EP_ERROR_TITLE": "Something went wrong",
-  "EP_REDIRECT_TEXT": "Go to Home"
+  "EP_REDIRECT_TEXT": "Go to Home",
+  "schedule_nav": "Schedule",
+  "seasons_nav": "Seasons",
+  "reviews_nav": "Reviews",
+  "search_nav": "Search",
+  "producers_nav": "Producers",
+  "clubs_nav": "Clubs",
+  "top_nav": "Top",
+  "random_nav": "Random",
+  "HP_RANDOM_DISCOVERY_TITLE": "Can't decide what to watch?",
+  "HP_RANDOM_DISCOVERY_SUBTITLE": "Let fate choose your next adventure!"
 }

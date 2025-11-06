@@ -1,0 +1,85 @@
+@use "/src/styles/tokens/semantics" as *;
+
+.streaming-links {
+	padding: var(--s-spacing-6) var(--s-spacing-app-horizontal);
+
+	&__title {
+		margin-bottom: var(--s-spacing-5);
+		color: var(--s-color-fg-primary);
+	}
+
+	&__grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+		gap: var(--s-spacing-5);
+
+		@include screen-sm {
+			grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+		}
+
+		@include screen-md {
+			grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+			gap: var(--s-spacing-6);
+		}
+	}
+}
+
+.streaming-link {
+	display: flex;
+	align-items: center;
+	gap: var(--s-spacing-4);
+	padding: var(--s-spacing-4) var(--s-spacing-5);
+	background-color: var(--s-color-bg-info);
+	border-radius: 12px;
+	text-decoration: none;
+	color: #000000 !important;
+	transition: scale 0.2s ease, box-shadow 0.2s ease;
+	cursor: pointer;
+	border: none;
+
+	* {
+		color: #000000 !important;
+	}
+
+	@include screen-mouse-first {
+		&:hover {
+			scale: 1.05;
+			box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+		}
+	}
+
+	@include screen-touch-first {
+		&:active {
+			scale: 1.05;
+		}
+	}
+
+	&--loading {
+		height: 52px;
+		background-color: var(--s-color-bg-secondary);
+		animation: pulse 1.5s ease-in-out infinite;
+
+		@include screen-sm {
+			height: 56px;
+		}
+	}
+
+	&__icon {
+		font-size: 1.25rem;
+		line-height: 1;
+		flex-shrink: 0;
+
+		@include screen-sm {
+			font-size: 1.5rem;
+		}
+	}
+}
+
+@keyframes pulse {
+	0%, 100% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0.5;
+	}
+}

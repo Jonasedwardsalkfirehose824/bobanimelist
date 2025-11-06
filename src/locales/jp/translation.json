@@ -29,5 +29,15 @@
   "EP_ERROR_DESC": "何か問題が発生しました",
   "EP_404_TITLE": "ページが見つかりません",
   "EP_404_DESC": "お探しのページは見つかりませんでした",
-  "EP_REDIRECT_TEXT": "ホームページに戻る"
+  "EP_REDIRECT_TEXT": "ホームページに戻る",
+  "schedule_nav": "スケジュール",
+  "seasons_nav": "シーズン",
+  "reviews_nav": "レビュー",
+  "search_nav": "検索",
+  "producers_nav": "制作会社",
+  "clubs_nav": "クラブ",
+  "top_nav": "トップ",
+  "random_nav": "ランダム",
+  "HP_RANDOM_DISCOVERY_TITLE": "何を見るか迷っていますか？",
+  "HP_RANDOM_DISCOVERY_SUBTITLE": "運命に次の冒険を選ばせよう！"
 }

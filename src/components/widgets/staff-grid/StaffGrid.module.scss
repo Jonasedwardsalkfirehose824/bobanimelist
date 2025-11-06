@@ -1,0 +1,121 @@
+@use "/src/styles/tokens/semantics" as *;
+
+.staff-grid {
+	padding: var(--s-spacing-6) var(--s-spacing-app-horizontal);
+
+	&__title {
+		margin-bottom: var(--s-spacing-5);
+		color: var(--s-color-fg-primary);
+	}
+
+	&__container {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+		gap: var(--s-spacing-5);
+
+		@include screen-sm {
+			grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+		}
+
+		@include screen-md {
+			grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+			gap: var(--s-spacing-6);
+		}
+
+		@include screen-xl {
+			grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+		}
+	}
+}
+
+.staff-card {
+	display: flex;
+	flex-direction: column;
+	text-decoration: none;
+	overflow: hidden;
+	background-color: var(--s-color-bg-secondary);
+	border-radius: 16px;
+	transition: scale 0.2s ease, box-shadow 0.2s ease;
+
+	@include screen-mouse-first {
+		&:hover {
+			scale: 1.05;
+			box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+		}
+	}
+
+	@include screen-touch-first {
+		&:active {
+			scale: 1.05;
+		}
+	}
+
+	&--loading {
+		animation: pulse 1.5s ease-in-out infinite;
+		pointer-events: none;
+	}
+
+	&__image {
+		width: 100%;
+		aspect-ratio: 3/4;
+		background-color: var(--s-color-bg-placeholder);
+		overflow: hidden;
+		position: relative;
+	}
+
+	&__img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	&__content {
+		padding: var(--s-spacing-4);
+		display: flex;
+		flex-direction: column;
+		gap: var(--s-spacing-2);
+		flex-grow: 1;
+	}
+
+	&__name {
+		@include number-of-lines(2);
+		color: var(--s-color-fg-primary);
+		line-height: 1.4;
+		min-height: 2.8em;
+	}
+
+	&__role {
+		@include number-of-lines(1);
+		color: var(--s-color-fg-secondary);
+	}
+}
+
+.staff-card--loading {
+	.staff-card__image {
+		height: 100%;
+	}
+
+	.staff-card__name,
+	.staff-card__role {
+		height: 16px;
+		background-color: var(--s-color-bg-placeholder);
+		border-radius: 4px;
+	}
+
+	.staff-card__name {
+		width: 80%;
+	}
+
+	.staff-card__role {
+		width: 60%;
+	}
+}
+
+@keyframes pulse {
+	0%, 100% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0.5;
+	}
+}

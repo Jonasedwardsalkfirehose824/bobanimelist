@@ -1,0 +1,222 @@
+// ============================================
+// BUTTON COMPONENTS - Theme-Aware Styling
+// ============================================
+
+@use "../tokens/semantics" as *;
+@use "../base/page-tokens" as *;
+
+// Base button mixin
+@mixin btn-base {
+	padding: var(--s-spacing-4) var(--s-spacing-6);
+	border-radius: 12px;
+	font-size: 1rem;
+	font-weight: 700;
+	cursor: pointer;
+	transition: all $transition-base;
+	border: none;
+	font-family: inherit;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: var(--s-spacing-2);
+	outline: none;
+
+	&:focus-visible {
+		box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+	}
+
+	&:active {
+		transform: scale(0.98);
+	}
+
+	&:disabled {
+		opacity: 0.5;
+		cursor: not-allowed;
+		pointer-events: none;
+	}
+}
+
+// Primary Button (Blue)
+.btn-primary {
+	@include btn-base;
+	background: var(--color-accent-primary);
+	color: var(--color-btn-primary-text);
+
+	@include screen-mouse-first {
+		&:hover:not(:disabled) {
+			background: var(--color-accent-primary-hover);
+			transform: translateY(-2px);
+			box-shadow: 0 8px 24px rgba(59, 130, 246, 0.3);
+		}
+	}
+}
+
+// Success Button (Green)
+.btn-success {
+	@include btn-base;
+	background: var(--color-success);
+	color: var(--color-btn-success-text);
+
+	@include screen-mouse-first {
+		&:hover:not(:disabled) {
+			filter: brightness(1.1);
+			transform: translateY(-2px);
+			box-shadow: 0 8px 24px rgba(16, 185, 129, 0.3);
+		}
+	}
+}
+
+// Warning Button (Yellow/Orange)
+.btn-warning {
+	@include btn-base;
+	background: var(--color-warning);
+	color: var(--color-btn-warning-text);
+
+	@include screen-mouse-first {
+		&:hover:not(:disabled) {
+			filter: brightness(1.1);
+			transform: translateY(-2px);
+			box-shadow: 0 8px 24px rgba(245, 158, 11, 0.3);
+		}
+	}
+}
+
+// Error Button (Red)
+.btn-error {
+	@include btn-base;
+	background: var(--color-error);
+	color: var(--color-btn-error-text);
+
+	@include screen-mouse-first {
+		&:hover:not(:disabled) {
+			filter: brightness(1.1);
+			transform: translateY(-2px);
+			box-shadow: 0 8px 24px rgba(239, 68, 68, 0.3);
+		}
+	}
+}
+
+// Info Button (Light Blue)
+.btn-info {
+	@include btn-base;
+	background: var(--color-info);
+	color: var(--color-btn-info-text);
+
+	@include screen-mouse-first {
+		&:hover:not(:disabled) {
+			filter: brightness(1.1);
+			transform: translateY(-2px);
+			box-shadow: 0 8px 24px rgba(59, 130, 246, 0.3);
+		}
+	}
+}
+
+// Secondary Button (Outline)
+.btn-secondary {
+	@include btn-base;
+	background: transparent;
+	color: var(--s-color-fg-primary);
+	border: 2px solid var(--s-color-border-primary);
+
+	@include screen-mouse-first {
+		&:hover:not(:disabled) {
+			border-color: var(--color-accent-primary);
+			color: var(--color-accent-primary);
+			transform: translateY(-2px);
+		}
+	}
+}
+
+// Ghost Button (No border)
+.btn-ghost {
+	@include btn-base;
+	background: transparent;
+	color: var(--s-color-fg-primary);
+
+	@include screen-mouse-first {
+		&:hover:not(:disabled) {
+			background: var(--s-color-bg-secondary);
+			transform: translateY(-2px);
+		}
+	}
+}
+
+// Link Button (Text only)
+.btn-link {
+	padding: var(--s-spacing-3) var(--s-spacing-4);
+	background: transparent;
+	color: var(--color-accent-primary);
+	border: none;
+	font-size: 0.9375rem;
+	font-weight: 600;
+	cursor: pointer;
+	transition: all $transition-base;
+	font-family: inherit;
+	text-decoration: none;
+
+	@include screen-mouse-first {
+		&:hover:not(:disabled) {
+			color: var(--color-accent-primary-hover);
+			text-decoration: underline;
+		}
+	}
+}
+
+// Size Variants
+.btn-sm {
+	padding: var(--s-spacing-2) var(--s-spacing-4);
+	font-size: 0.875rem;
+}
+
+.btn-lg {
+	padding: var(--s-spacing-5) var(--s-spacing-8);
+	font-size: 1.125rem;
+}
+
+// Full Width
+.btn-block {
+	width: 100%;
+}
+
+// Icon Button
+.btn-icon {
+	padding: var(--s-spacing-3);
+	border-radius: 50%;
+	aspect-ratio: 1;
+}
+
+// Badge (Pill style)
+.badge {
+	display: inline-block;
+	padding: 2px 8px;
+	border-radius: 6px;
+	font-size: 0.75rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+
+	&--primary {
+		background: var(--color-accent-primary);
+		color: var(--color-badge-primary-text);
+	}
+
+	&--success {
+		background: var(--color-success);
+		color: var(--color-badge-success-text);
+	}
+
+	&--warning {
+		background: var(--color-warning);
+		color: var(--color-badge-warning-text);
+	}
+
+	&--error {
+		background: var(--color-error);
+		color: var(--color-badge-error-text);
+	}
+
+	&--info {
+		background: var(--color-info);
+		color: var(--color-badge-info-text);
+	}
+}

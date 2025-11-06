@@ -4,4 +4,7 @@ export * from './common';
 export * from './genre';
 export * from './manga';
 export * from './params';
+export * from './people';
 export * from './response';
+export * from './review';
+export * from './schedule';

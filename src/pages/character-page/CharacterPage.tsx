@@ -1,6 +1,8 @@
 import { useParams } from "react-router";
 import { useGetCharacterByIdQuery } from "../../services/jikan";
 import { MediaContent } from "../../components/widgets/media-content";
+import { CharacterAnimeAppearances, CharacterMangaAppearances } from "../../components/widgets/character-appearances";
+import { CharacterVoiceActors } from "../../components/widgets/character-voice-actors";
 import { formatThresholdNumber } from "../../shared/util";
 import { getLargeImageUrl } from "../../shared/util/image-utils";
 
@@ -45,6 +47,15 @@ function CharacterPage() {
                     );
                 }}
             />
+            
+            {/* Character Anime Appearances */}
+            {id && <CharacterAnimeAppearances characterId={Number(id)} />}
+            
+            {/* Character Manga Appearances */}
+            {id && <CharacterMangaAppearances characterId={Number(id)} />}
+            
+            {/* Voice Actors */}
+            {id && <CharacterVoiceActors characterId={Number(id)} />}
         </div>
     );
 

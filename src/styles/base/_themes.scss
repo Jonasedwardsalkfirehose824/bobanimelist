@@ -1,0 +1,274 @@
+// ============================================
+// DUAL THEME SYSTEM - Light & Dark
+// ============================================
+
+@use 'sass:map';
+
+// Light Theme Color Palette
+$light-colors: (
+  // Background Layers
+  'bg-base': #ffffff,
+  'bg-elevated': #f9fafb,
+  'bg-surface': #f3f4f6,
+  'bg-overlay': rgba(255, 255, 255, 0.95),
+  
+  // Text Colors
+  'text-primary': #111827,
+  'text-secondary': #6b7280,
+  'text-tertiary': #9ca3af,
+  'text-inverse': #ffffff,
+  
+  // Border Colors
+  'border-light': #e5e7eb,
+  'border-medium': #d1d5db,
+  'border-heavy': #9ca3af,
+  
+  // Accent Colors
+  'accent-primary': #3b82f6,
+  'accent-primary-hover': #2563eb,
+  'accent-secondary': #8b5cf6,
+  'accent-tertiary': #ec4899,
+  
+  // Semantic Colors
+  'success': #10b981,
+  'success-bg': #d1fae5,
+  'warning': #f59e0b,
+  'warning-bg': #fef3c7,
+  'error': #ef4444,
+  'error-bg': #fee2e2,
+  'info': #3b82f6,
+  'info-bg': #dbeafe,
+  
+  // Glassmorphism
+  'glass-bg': rgba(255, 255, 255, 0.7),
+  'glass-border': rgba(255, 255, 255, 0.2),
+  
+  // Shadows
+  'shadow-color': rgba(0, 0, 0, 0.1)
+);
+
+// Dark Theme Color Palette
+$dark-colors: (
+  // Background Layers
+  'bg-base': #0d0d0d,
+  'bg-elevated': #1a1a1a,
+  'bg-surface': #262626,
+  'bg-overlay': rgba(13, 13, 13, 0.95),
+  
+  // Text Colors
+  'text-primary': #f5f5f5,
+  'text-secondary': #a3a3a3,
+  'text-tertiary': #737373,
+  'text-inverse': #111827,
+  
+  // Border Colors
+  'border-light': #404040,
+  'border-medium': #525252,
+  'border-heavy': #737373,
+  
+  // Accent Colors
+  'accent-primary': #60a5fa,
+  'accent-primary-hover': #3b82f6,
+  'accent-secondary': #a78bfa,
+  'accent-tertiary': #f472b6,
+  
+  // Semantic Colors
+  'success': #34d399,
+  'success-bg': #064e3b,
+  'warning': #fbbf24,
+  'warning-bg': #78350f,
+  'error': #f87171,
+  'error-bg': #7f1d1d,
+  'info': #60a5fa,
+  'info-bg': #1e3a8a,
+  
+  // Glassmorphism
+  'glass-bg': rgba(26, 26, 26, 0.7),
+  'glass-border': rgba(255, 255, 255, 0.1),
+  
+  // Shadows
+  'shadow-color': rgba(0, 0, 0, 0.5)
+);
+
+// Generate CSS Variables for Light Theme (Root)
+:root {
+  // Backgrounds
+  --color-bg-base: #{map.get($light-colors, 'bg-base')};
+  --color-bg-elevated: #{map.get($light-colors, 'bg-elevated')};
+  --color-bg-surface: #{map.get($light-colors, 'bg-surface')};
+  --color-bg-overlay: #{map.get($light-colors, 'bg-overlay')};
+  
+  // Text
+  --color-text-primary: #{map.get($light-colors, 'text-primary')};
+  --color-text-secondary: #{map.get($light-colors, 'text-secondary')};
+  --color-text-tertiary: #{map.get($light-colors, 'text-tertiary')};
+  --color-text-inverse: #{map.get($light-colors, 'text-inverse')};
+  
+  // Borders
+  --color-border-light: #{map.get($light-colors, 'border-light')};
+  --color-border-medium: #{map.get($light-colors, 'border-medium')};
+  --color-border-heavy: #{map.get($light-colors, 'border-heavy')};
+  
+  // Accents
+  --color-accent-primary: #{map.get($light-colors, 'accent-primary')};
+  --color-accent-primary-hover: #{map.get($light-colors, 'accent-primary-hover')};
+  --color-accent-secondary: #{map.get($light-colors, 'accent-secondary')};
+  --color-accent-tertiary: #{map.get($light-colors, 'accent-tertiary')};
+  
+  // Semantic
+  --color-success: #{map.get($light-colors, 'success')};
+  --color-success-bg: #{map.get($light-colors, 'success-bg')};
+  --color-warning: #{map.get($light-colors, 'warning')};
+  --color-warning-bg: #{map.get($light-colors, 'warning-bg')};
+  --color-error: #{map.get($light-colors, 'error')};
+  --color-error-bg: #{map.get($light-colors, 'error-bg')};
+  --color-info: #{map.get($light-colors, 'info')};
+  --color-info-bg: #{map.get($light-colors, 'info-bg')};
+  
+  // Glass
+  --color-glass-bg: #{map.get($light-colors, 'glass-bg')};
+  --color-glass-border: #{map.get($light-colors, 'glass-border')};
+  
+  // Shadows
+  --color-shadow: #{map.get($light-colors, 'shadow-color')};
+  
+  // Gradients
+  --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --gradient-accent: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  --gradient-success: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  --gradient-warm: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+  
+  // Theme Mode
+  --theme-transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  
+  // Button Text Colors (for colored backgrounds)
+  // Light mode: white text on colored buttons looks good
+  --color-btn-primary-text: #ffffff;
+  --color-btn-success-text: #ffffff;
+  --color-btn-warning-text: #ffffff;
+  --color-btn-error-text: #ffffff;
+  --color-btn-info-text: #ffffff;
+  
+  // Badge & Tag Text Colors
+  --color-badge-primary-text: #ffffff;
+  --color-badge-success-text: #ffffff;
+  --color-badge-warning-text: #ffffff;
+  --color-badge-error-text: #ffffff;
+  --color-badge-info-text: #ffffff;
+  
+  // Pill & Chip Text Colors
+  --color-pill-active-text: #000000;
+  --color-chip-text: #000000;
+}
+
+// Dark Theme Override
+.dark {
+  // Backgrounds
+  --color-bg-base: #{map.get($dark-colors, 'bg-base')};
+  --color-bg-elevated: #{map.get($dark-colors, 'bg-elevated')};
+  --color-bg-surface: #{map.get($dark-colors, 'bg-surface')};
+  --color-bg-overlay: #{map.get($dark-colors, 'bg-overlay')};
+  
+  // Text
+  --color-text-primary: #{map.get($dark-colors, 'text-primary')};
+  --color-text-secondary: #{map.get($dark-colors, 'text-secondary')};
+  --color-text-tertiary: #{map.get($dark-colors, 'text-tertiary')};
+  --color-text-inverse: #{map.get($dark-colors, 'text-inverse')};
+  
+  // Borders
+  --color-border-light: #{map.get($dark-colors, 'border-light')};
+  --color-border-medium: #{map.get($dark-colors, 'border-medium')};
+  --color-border-heavy: #{map.get($dark-colors, 'border-heavy')};
+  
+  // Accents
+  --color-accent-primary: #{map.get($dark-colors, 'accent-primary')};
+  --color-accent-primary-hover: #{map.get($dark-colors, 'accent-primary-hover')};
+  --color-accent-secondary: #{map.get($dark-colors, 'accent-secondary')};
+  --color-accent-tertiary: #{map.get($dark-colors, 'accent-tertiary')};
+  
+  // Semantic
+  --color-success: #{map.get($dark-colors, 'success')};
+  --color-success-bg: #{map.get($dark-colors, 'success-bg')};
+  --color-warning: #{map.get($dark-colors, 'warning')};
+  --color-warning-bg: #{map.get($dark-colors, 'warning-bg')};
+  --color-error: #{map.get($dark-colors, 'error')};
+  --color-error-bg: #{map.get($dark-colors, 'error-bg')};
+  --color-info: #{map.get($dark-colors, 'info')};
+  --color-info-bg: #{map.get($dark-colors, 'info-bg')};
+  
+  // Glass
+  --color-glass-bg: #{map.get($dark-colors, 'glass-bg')};
+  --color-glass-border: #{map.get($dark-colors, 'glass-border')};
+  
+  // Shadows
+  --color-shadow: #{map.get($dark-colors, 'shadow-color')};
+  
+  // Gradients (adjusted for dark mode)
+  --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --gradient-accent: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  --gradient-success: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  --gradient-warm: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+  
+  // Button Text Colors (for colored backgrounds)
+  // Dark mode: black/dark text on bright colored buttons for better contrast
+  --color-btn-primary-text: #0a0a0a;
+  --color-btn-success-text: #0a0a0a;
+  --color-btn-warning-text: #0a0a0a;
+  --color-btn-error-text: #0a0a0a;
+  --color-btn-info-text: #0a0a0a;
+  
+  // Badge & Tag Text Colors (dark mode = black text on bright backgrounds)
+  --color-badge-primary-text: #000000;
+  --color-badge-success-text: #000000;
+  --color-badge-warning-text: #000000;
+  --color-badge-error-text: #000000;
+  --color-badge-info-text: #000000;
+  
+  // Pill & Chip Text Colors
+  --color-pill-active-text: #000000;
+  --color-chip-text: #000000;
+}
+
+// Smooth Theme Transitions
+* {
+  transition: background-color var(--theme-transition),
+              color var(--theme-transition),
+              border-color var(--theme-transition),
+              box-shadow var(--theme-transition);
+}
+
+// Disable transitions on elements that shouldn't animate
+*:focus,
+*:active,
+input,
+textarea,
+select {
+  transition: none;
+}
+
+// Global text color inheritance for dark mode
+body,
+#root,
+div,
+p,
+span,
+h1, h2, h3, h4, h5, h6,
+a,
+li,
+label {
+  color: inherit;
+}
+
+// Ensure all text elements inherit color properly
+* {
+  color: var(--color-text-primary);
+}
+
+// Override for specific semantic elements
+.text-secondary {
+  color: var(--color-text-secondary);
+}
+
+.text-tertiary {
+  color: var(--color-text-tertiary);
+}

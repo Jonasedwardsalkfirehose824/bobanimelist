@@ -123,6 +123,9 @@
     margin-top: var(--s-spacing-4);
     padding: var(--s-spacing-4);
     background-color: var(--s-color-bg-warning);
+    // Light mode: dark text on light warning background
+    // Dark mode: dark text on bright warning color for better contrast
+    color: var(--color-badge-warning-text);
     width: fit-content;
     border-radius: 8px;
   }

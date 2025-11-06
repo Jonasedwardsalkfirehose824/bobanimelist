@@ -2,24 +2,64 @@
 @use "/src/styles/tokens/primitives/typography" as *;
 
 .header {
-  padding: var(--s-spacing-4) var(--s-spacing-app-horizontal);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   position: sticky;
   top: 0;
-  background-color: var(--s-color-bg-primary);
+  background-color: transparent;
   color: var(--s-color-fg-primary);
   z-index: 10;
-  height: var(--s-header-height);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 0;
 
-  
-  @include screen-xs {
-    padding: var(--s-spacing-4) var(--s-spacing-app-horizontal);
+  &--scrolled {
+    background-color: var(--s-color-bg-primary);
+    backdrop-filter: blur(12px);
+    box-shadow: 
+      0 4px 20px 0 rgba(0, 0, 0, 0.08),
+      0 2px 8px 0 rgba(0, 0, 0, 0.04);
+
+    // Dark mode shadow
+    @media (prefers-color-scheme: dark) {
+      box-shadow: 
+        0 4px 20px 0 rgba(0, 0, 0, 0.4),
+        0 2px 8px 0 rgba(0, 0, 0, 0.2);
+    }
+
+    // If project uses theme class on body/html
+    :global(.dark) & {
+      box-shadow: 
+        0 4px 20px 0 rgba(0, 0, 0, 0.4),
+        0 2px 8px 0 rgba(0, 0, 0, 0.2);
+    }
   }
-  
-  @include screen-sm {
-    padding: var(--s-spacing-6) var(--s-spacing-app-horizontal);
+
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--s-spacing-4) var(--s-spacing-app-horizontal);
+    height: var(--s-header-height);
+    max-width: 1920px;
+    margin: 0 auto;
+
+    @include screen-xs {
+      padding: var(--s-spacing-4) var(--s-spacing-app-horizontal);
+    }
+    
+    @include screen-sm {
+      padding: var(--s-spacing-6) var(--s-spacing-app-horizontal);
+    }
+
+    @include screen-lg {
+      max-width: 1600px;
+    }
+
+    @include screen-xl {
+      max-width: 1800px;
+    }
+
+    @include screen-xxl {
+      max-width: 1920px;
+    }
   }
 
   &__nav {

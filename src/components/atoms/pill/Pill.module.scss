@@ -29,7 +29,9 @@
     color: var(--s-color-fg-primary);
 
     &--active {
-      color: var(--s-color-bg-secondary);
+      // Light mode: dark background needs light text
+      // Dark mode: light background needs dark text
+      color: var(--color-pill-active-text);
     }
   }
 }

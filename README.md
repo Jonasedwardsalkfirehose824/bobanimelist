@@ -1,141 +1,151 @@
 # <img src="/public/zero.gif" width="60" height="auto" ></img> bobanimelist
-m
-**bobanimelist** adalah platform modern untuk menjelajahi anime dan manga, dibangun dari awal dengan fokus pada performa, skalabilitas, dan pengalaman pengembang. Versi 2.0 ini menampilkan keahlian saya dalam React, TypeScript, manajemen state, dan praktik terbaik UI/UX dengan sentuhan animasi yang menarik.
 
-<!--**Dipublikasikan di https://suriyakishoreks.github.io/bobanimelist/**-->
+**bobanimelist** is a modern platform for exploring anime and manga, built from scratch with a focus on performance, scalability, and developer experience. Version 2.0 showcases my expertise in React, TypeScript, state management, and UI/UX best practices with engaging animations.
+
+<!--**Published at https://suriyakishoreks.github.io/bobanimelist/**-->
 
 ---
 
-## 🚀 Teknologi yang Digunakan
+## 🚀 Tech Stack
 
-- **React** (didukung Vite)
-- **TypeScript** (dengan tiping ketat)
+- **React** (powered by Vite)
+- **TypeScript** (with strict typing)
 - **Redux Toolkit** (RTK Query & Redux Persist)
 - **React Router**
-- **SCSS** (modular & dapat di-tema)
-- **motion** (framework animasi)
+- **SCSS** (modular & themeable)
+- **motion** (animation framework)
 
 ---
 
-## ✨ Fitur-fitur Menarik
+## ✨ Key Features
 
-- **Beranda & widget interaktif** untuk penjelajahan cepat anime, manga, manhwa, manhua
-- **Halaman Detail** untuk informasi mendalam tentang konten
-- **Animasi Halus & Responsif** (transisi halaman, interaksi mikro, efek typing)
-- **Layer Data Lanjutan**
-  - RTK Query untuk mengambil/menyimpan data API secara efisien
-  - Redux Persist untuk kontinuitas sesi yang mulus
-- **Komponen UI Kustom**
-  - Desain atomik: Atom, Molekul, Organisme
-  - Komponen yang dapat digunakan kembali (Label, Box, Image, dll.)
-- **Sistem Desain**
-  - Toggle tema Gelap/Cerah (variabel SCSS & token)
-  - Layout responsif, HTML semantik
-- **Lokalisasi** (didukung vernac, siap multi-bahasa)
-- **Penanganan Error yang Kuat** (error boundaries, state loading)
-- **Peralatan Modern**
-  - ESLint & Stylelint untuk kualitas kode
-  - Vite untuk build yang cepat luar biasa
-- **Animasi Keren** - termasuk efek typing pada logo dengan cursor berkedip
-
----
-
-## 🎨 Tampilan & Interaksi
-
-- **Efek Typing** pada logo aplikasi dengan cursor berkedip
-- **Animasi Transisi** yang halus antar halaman
-- **Efek Hover** dan interaksi mikro yang menarik
-- **Animasi Loading** yang menyenangkan
-- **Toggle Tema** yang responsif
+- **Home & Interactive Widgets** for quick browsing of anime, manga, manhwa, manhua
+- **Detail Pages** for in-depth content information
+- **Smooth & Responsive Animations** (page transitions, micro-interactions, typing effects)
+- **Advanced Data Layer**
+  - RTK Query for efficient API fetching/caching
+  - Redux Persist for seamless session continuity
+- **Custom UI Components**
+  - Atomic design: Atoms, Molecules, Organisms
+  - Reusable components (Label, Box, Image, etc.)
+- **Design System**
+  - Dark/Light theme toggle (SCSS variables & tokens)
+  - Responsive layouts, semantic HTML
+- **Localization** (powered by vernac, multi-language ready)
+- **Robust Error Handling** (error boundaries, loading states)
+- **Modern Tooling**
+  - ESLint & Stylelint for code quality
+  - Vite for blazing fast builds
+- **Cool Animations** - including typing effect on logo with blinking cursor
 
 ---
 
-## 🛠️ Sorotan Implementasi
+## 🎨 UI & Interactions
 
-- **Struktur Proyek yang Dapat Diskalakan**
-  - `atoms`, `molecules`, `organisms`: Desain atomik untuk UI yang dapat digunakan kembali
-  - `pages`, `layouts`: Pemisahan tanggung jawab yang jelas
-  - `services`: Abstraksi API (Jikan API)
-  - `shared`: Utilitas, hooks, model (contoh: `useIntersectionObserver`, `useTypingEffect`)
-  - `store`: State Redux terpusat
-  - `styles`: SCSS modular, token desain
-- **Pola React Modern**
-  - Komponen fungsional, hooks, custom hooks (contoh: `useIntersectionObserver`)
-  - TypeScript ketat untuk kemudahan pemeliharaan
-- **UI/UX yang Hebat**
-  - Transisi halus, desain responsif, aksesibilitas
-  - Toggle tema, lokalisasi, animasi mikro yang halus
+- **Typing Effect** on app logo with blinking cursor
+- **Smooth Transition Animations** between pages
+- **Hover Effects** and engaging micro-interactions
+- **Delightful Loading Animations**
+- **Responsive Theme Toggle**
 
 ---
 
-## 🏆 Capaian & Milestone
+## 🛠️ Implementation Highlights
 
-### ✅ Milestone 1 (Selesai)
+- **Scalable Project Structure**
+  - `atoms`, `molecules`, `organisms`: Atomic design for reusable UI
+  - `pages`, `layouts`: Clear separation of concerns
+  - `services`: API abstractions (Jikan API)
+  - `shared`: Utilities, hooks, models (e.g., `useIntersectionObserver`, `useTypingEffect`)
+  - `store`: Centralized Redux state
+  - `styles`: Modular SCSS, design tokens
+- **Modern React Patterns**
+  - Functional components, hooks, custom hooks (e.g., `useIntersectionObserver`)
+  - Strict TypeScript for maintainability
+- **Excellent UI/UX**
+  - Smooth transitions, responsive design, accessibility
+  - Theme toggle, localization, polished micro-animations
 
-- Setup inti & struktur proyek
-- Integrasi API Jikan
-- Halaman beranda, anime, dan manga
-- Fitur pencarian & detail konten
-- Dukungan tema & lokalisasi
-- State loading dan error handling
-- Efek animasi typing pada logo
+---
 
-### 🔜 Milestone 2 (Dalam Pengembangan)
+## 🏆 Achievements & Milestones
 
-- Dukungan PWA
+### ✅ Milestone 1 (Completed)
+
+- Core setup & project structure
+- Jikan API integration
+- Home, anime, and manga pages
+- Search & content detail features
+- Theme & localization support
+- Loading state and error handling
+- Typing animation effect on logo
+
+### 🔜 Milestone 2 (In Development)
+
+- PWA support
 - Infinite feed
-- Scroll restoration kustom
-- Optimasi - lazy loading, SEO, dll
-- Layanan analytics sederhana
-- Unit relatif untuk spasi & font
-- Animasi interaktif tambahan
+- Custom scroll restoration
+- Optimizations - lazy loading, SEO, etc.
+- Simple analytics service
+- Relative units for spacing & fonts
+- Additional interactive animations
 
 ---
 
-## 🎯 Animasi & Interaksi Keren
+## 🎯 Cool Animations & Interactions
 
-bobanimelist menampilkan berbagai animasi dan efek visual menarik:
+bobanimelist features various engaging animations and visual effects:
 
-- **Efek typing pada logo** - menampilkan nama aplikasi dengan cara mengetik dan cursor berkedip
-- **Transisi halaman yang halus** - perpindahan antar halaman dengan animasi
-- **Efek hover pada kartu** - efek visual saat mengarahkan kursor
-- **Animasi loading widget** - menampilkan konten dengan animasi saat memuat
+- **Typing effect on logo** - displays app name with typing animation and blinking cursor
+- **Smooth page transitions** - animated navigation between pages
+- **Card hover effects** - visual feedback on cursor hover
+- **Widget loading animations** - content appears with animations while loading
 
 ---
 
-## 🚩 Memulai
+## 🚩 Getting Started
 
 ```bash
-# Instal dependensi
+# Install dependencies
 npm install
 
-# Jalankan server development
+# Run development server
 npm run dev
 ```
 
-Aplikasi berjalan di [http://localhost:5173](http://localhost:5173)
+App runs at [http://localhost:5173](http://localhost:5173)
 
 ```bash
-# Build untuk produksi
+# Build for production
 npm run build
 ```
 
-File produksi akan tersedia di direktori `dist`.
+Production files will be available in the `dist` directory.
 
 ---
 
-## 🤝 Kontribusi
+## 🤝 Contributing
 
-Kami menyambut kontribusi dari komunitas. Silakan buat issue atau pull request untuk:
-- Menambahkan fitur baru
-- Memperbaiki bug
-- Meningkatkan dokumentasi
-- Menambahkan animasi & efek visual
+We welcome contributions from the community. Feel free to create issues or pull requests for:
+- Adding new features
+- Fixing bugs
+- Improving documentation
+- Adding animations & visual effects
 
 ---
 
-## 📄 Lisensi
+## 📄 License
 
-Proyek ini dilisensikan di bawah Lisensi MIT - lihat file [LICENSE](LICENSE) untuk detail lebih lanjut.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for more details.
+
+---
+
+## 📸 Screenshots
+
+### Desktop View
+<img src="/public/screenshot-wide.png" alt="Desktop Screenshot" width="100%">
+
+### Mobile View
+<img src="/public/screenshot-narrow.png" alt="Mobile Screenshot" width="375px">
 
 ---

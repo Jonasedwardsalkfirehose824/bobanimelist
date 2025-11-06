@@ -1,0 +1,51 @@
+@use "/src/styles/tokens/semantics" as *;
+
+.person-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--s-color-bg-base);
+  color: var(--s-color-fg-primary);
+
+  &__content {
+    flex: 1;
+  }
+
+  &__section {
+    padding: var(--s-spacing-6) var(--s-spacing-app-horizontal);
+    
+    @include screen-md {
+      padding: var(--s-spacing-8) var(--s-spacing-app-horizontal);
+    }
+
+    &:not(:last-child) {
+      border-bottom: 1px solid var(--s-color-border-primary);
+    }
+  }
+
+  &__section-title {
+    @extend .typo-primary-xl-semibold;
+    margin-bottom: var(--s-spacing-5);
+    color: var(--s-color-fg-primary);
+
+    @include screen-md {
+      margin-bottom: var(--s-spacing-6);
+    }
+  }
+
+  &__loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+    color: var(--s-color-fg-secondary);
+  }
+
+  &__error {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+    padding: var(--s-spacing-6);
+  }
+}

@@ -1,6 +1,8 @@
 import { useParams } from "react-router";
 import { useGetMangaByIdQuery } from "../../services/jikan";
 import { MediaContent } from "../../components/widgets/media-content";
+import { MangaCharacters } from "../../components/widgets/manga-characters";
+import { ReviewsList } from "../../components/widgets/reviews-list";
 import { formatThresholdNumber } from "../../shared/util";
 import { getLargeImageUrl } from "../../shared/util/image-utils";
 
@@ -58,6 +60,12 @@ function MangaPage() {
                     );
                 }}
             />
+            
+            {/* Manga Characters Section */}
+            {id && <MangaCharacters mangaId={Number(id)} />}
+            
+            {/* Reviews Section */}
+            {id && <ReviewsList contentId={Number(id)} contentType="manga" />}
         </div>
     );
 }

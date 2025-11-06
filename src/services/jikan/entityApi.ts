@@ -1,5 +1,5 @@
 import { jikanApi } from './baseApi';
-import type { Character, CharacterFull, CharactersSearchParams, JikanPerson, JikanPersonFull, JikanResponse, PeopleSearchParams } from './models';
+import type { Character, CharacterFull, CharactersSearchParams, JikanPerson, JikanPersonFull, JikanResponse, PeopleSearchParams, CharacterAnimeAppearance, CharacterMangaAppearance, CharacterVoiceActorData, PersonAnimeWork, PersonMangaWork, PersonVoiceRole } from './models';
 
 const EntityEndpoints = {
     topPeople: '/top/people',
@@ -7,7 +7,13 @@ const EntityEndpoints = {
     characterFullById: 'characters/{id}/full',
     personFullById: '/people/{id}/full',
     characterSearch: '/characters',
-    peopleSearch: '/people'
+    peopleSearch: '/people',
+    characterAnime: '/characters/{id}/anime',
+    characterManga: '/characters/{id}/manga',
+    characterVoices: '/characters/{id}/voices',
+    personAnime: '/people/{id}/anime',
+    personManga: '/people/{id}/manga',
+    personVoices: '/people/{id}/voices',
 } as const;
 
 export const entityApi = jikanApi.injectEndpoints({
@@ -72,6 +78,48 @@ export const entityApi = jikanApi.injectEndpoints({
             },
             keepUnusedDataFor: 60 * 5, // 5 minutes for search results
         }),
+
+        getCharacterAnime: builder.query<JikanResponse<CharacterAnimeAppearance[]>, { id: number }>({
+            query: ({ id }) => ({
+                url: EntityEndpoints.characterAnime.replace('{id}', String(id)),
+            }),
+            keepUnusedDataFor: 60 * 30, // 30 minutes
+        }),
+
+        getCharacterManga: builder.query<JikanResponse<CharacterMangaAppearance[]>, { id: number }>({
+            query: ({ id }) => ({
+                url: EntityEndpoints.characterManga.replace('{id}', String(id)),
+            }),
+            keepUnusedDataFor: 60 * 30, // 30 minutes
+        }),
+
+        getCharacterVoices: builder.query<JikanResponse<CharacterVoiceActorData[]>, { id: number }>({
+            query: ({ id }) => ({
+                url: EntityEndpoints.characterVoices.replace('{id}', String(id)),
+            }),
+            keepUnusedDataFor: 60 * 30, // 30 minutes
+        }),
+
+        getPersonAnime: builder.query<JikanResponse<PersonAnimeWork[]>, { id: number }>({
+            query: ({ id }) => ({
+                url: EntityEndpoints.personAnime.replace('{id}', String(id)),
+            }),
+            keepUnusedDataFor: 60 * 30, // 30 minutes
+        }),
+
+        getPersonManga: builder.query<JikanResponse<PersonMangaWork[]>, { id: number }>({
+            query: ({ id }) => ({
+                url: EntityEndpoints.personManga.replace('{id}', String(id)),
+            }),
+            keepUnusedDataFor: 60 * 30, // 30 minutes
+        }),
+
+        getPersonVoices: builder.query<JikanResponse<PersonVoiceRole[]>, { id: number }>({
+            query: ({ id }) => ({
+                url: EntityEndpoints.personVoices.replace('{id}', String(id)),
+            }),
+            keepUnusedDataFor: 60 * 30, // 30 minutes
+        }),
     }),
 });
 
@@ -81,5 +129,11 @@ export const {
     useGetCharacterByIdQuery,
     useGetPersonByIdQuery,
     useGetCharacterSearchQuery,
-    useGetPeopleSearchQuery
+    useGetPeopleSearchQuery,
+    useGetCharacterAnimeQuery,
+    useGetCharacterMangaQuery,
+    useGetCharacterVoicesQuery,
+    useGetPersonAnimeQuery,
+    useGetPersonMangaQuery,
+    useGetPersonVoicesQuery,
 } = entityApi;

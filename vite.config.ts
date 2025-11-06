@@ -9,7 +9,7 @@ import { VitePWA } from 'vite-plugin-pwa';
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
 // Determine base path based on deployment environment
-let BASE_PATH = '/bobanimelist/';
+let BASE_PATH = '/';
 if (process.env.DEPLOY_ENV === 'vercel' || process.env.VERCEL || process.env.CI) {
   BASE_PATH = '/';
 }

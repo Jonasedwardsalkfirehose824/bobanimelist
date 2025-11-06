@@ -1,6 +1,10 @@
 import { useParams } from "react-router";
 import { useGetAnimeByIdQuery } from "../../services/jikan";
 import { MediaContent, type MediaContentData } from "../../components/widgets/media-content";
+import { StreamingLinks } from "../../components/widgets/streaming-links";
+import { StaffGrid } from "../../components/widgets/staff-grid";
+import { EpisodesList } from "../../components/widgets/episodes-list";
+import { ReviewsList } from "../../components/widgets/reviews-list";
 import { formatThresholdNumber } from "../../shared/util";
 import { getLargeImageUrl } from "../../shared/util/image-utils";
 
@@ -61,6 +65,18 @@ function AnimePage() {
                     );
                 }}
             />
+            
+            {/* Streaming Links Section */}
+            {id && <StreamingLinks animeId={Number(id)} />}
+            
+            {/* Staff Section */}
+            {id && <StaffGrid animeId={Number(id)} />}
+            
+            {/* Episodes List Section */}
+            {id && <EpisodesList animeId={Number(id)} />}
+            
+            {/* Reviews Section */}
+            {id && <ReviewsList contentId={Number(id)} contentType="anime" />}
         </div>
     );
 

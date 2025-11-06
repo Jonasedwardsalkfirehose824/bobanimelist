@@ -11,7 +11,8 @@ function ThemeToggle() {
     const theme = useAppSelector((state) => state.persistedAppContext.theme);
     const dispatch = useDispatch();
 
-    const handleThemeToggle = () => {
+    const handleThemeToggle = (e: React.MouseEvent) => {
+        e.stopPropagation(); // Prevent event from bubbling up
         dispatch(updateTheme(theme === 'light' ? 'dark' : 'light'));
     };
 

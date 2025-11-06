@@ -1,0 +1,432 @@
+// ============================================
+// UTILITY MIXINS - BobaNimeList
+// ============================================
+
+@use 'variables' as *;
+
+// ========================================
+// RESPONSIVE MIXINS
+// ========================================
+
+@use 'sass:map';
+
+@mixin respond($size) {
+  @if map.has-key($breakpoints, $size) {
+    @media (max-width: map.get($breakpoints, $size)) {
+      @content;
+    }
+  } @else {
+    @warn "Breakpoint #{$size} not found in $breakpoints map";
+  }
+}
+
+@mixin respond-min($size) {
+  @if map.has-key($breakpoints, $size) {
+    @media (min-width: map.get($breakpoints, $size)) {
+      @content;
+    }
+  }
+}
+
+@mixin respond-between($min, $max) {
+  @media (min-width: map.get($breakpoints, $min)) and (max-width: map.get($breakpoints, $max)) {
+    @content;
+  }
+}
+
+// ========================================
+// SHADOW MIXINS
+// ========================================
+
+@mixin shadow-sm {
+  box-shadow: 0 1px 2px 0 var(--color-shadow);
+}
+
+@mixin shadow-md {
+  box-shadow: 0 4px 6px -1px var(--color-shadow),
+              0 2px 4px -1px var(--color-shadow);
+}
+
+@mixin shadow-lg {
+  box-shadow: 0 10px 15px -3px var(--color-shadow),
+              0 4px 6px -2px var(--color-shadow);
+}
+
+@mixin shadow-xl {
+  box-shadow: 0 20px 25px -5px var(--color-shadow),
+              0 10px 10px -5px var(--color-shadow);
+}
+
+@mixin shadow-2xl {
+  box-shadow: 0 25px 50px -12px var(--color-shadow);
+}
+
+@mixin shadow-inner {
+  box-shadow: inset 0 2px 4px 0 var(--color-shadow);
+}
+
+// ========================================
+// GLASSMORPHISM
+// ========================================
+
+@mixin glass($blur: 10px, $opacity: 0.7) {
+  background: var(--color-glass-bg);
+  backdrop-filter: blur($blur) saturate(180%);
+  -webkit-backdrop-filter: blur($blur) saturate(180%);
+  border: 1px solid var(--color-glass-border);
+}
+
+@mixin glass-card {
+  @include glass(12px, 0.7);
+  border-radius: map-get($radius, 'xl');
+  padding: map-get($spacing, 'lg');
+  @include shadow-lg;
+}
+
+// ========================================
+// TRANSITIONS & ANIMATIONS
+// ========================================
+
+@mixin transition($properties...) {
+  $transitions: ();
+  @each $property in $properties {
+    $transitions: append($transitions, #{$property} $transition-base, comma);
+  }
+  transition: $transitions;
+}
+
+@mixin transition-fast($properties...) {
+  $transitions: ();
+  @each $property in $properties {
+    $transitions: append($transitions, #{$property} $transition-fast, comma);
+  }
+  transition: $transitions;
+}
+
+@mixin hover-lift {
+  @include transition(transform, box-shadow);
+  
+  &:hover {
+    transform: translateY(-4px);
+    @include shadow-lg;
+  }
+}
+
+@mixin hover-scale($scale: 1.05) {
+  @include transition(transform);
+  
+  &:hover {
+    transform: scale($scale);
+  }
+}
+
+@mixin hover-glow($color: var(--color-accent-primary)) {
+  @include transition(box-shadow);
+  
+  &:hover {
+    box-shadow: 0 0 20px rgba($color, 0.4);
+  }
+}
+
+// ========================================
+// LAYOUT MIXINS
+// ========================================
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@mixin grid-auto($min-width: 250px, $gap: map-get($spacing, 'lg')) {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax($min-width, 1fr));
+  gap: $gap;
+}
+
+@mixin absolute-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin fixed-center {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+// ========================================
+// TEXT MIXINS
+// ========================================
+
+@mixin truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin line-clamp($lines: 2) {
+  display: -webkit-box;
+  -webkit-line-clamp: $lines;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@mixin gradient-text($gradient: var(--gradient-primary)) {
+  background: $gradient;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+// ========================================
+// SCROLLBAR STYLING
+// ========================================
+
+@mixin custom-scrollbar($width: 8px, $track: var(--color-bg-surface), $thumb: var(--color-border-medium)) {
+  scrollbar-width: thin;
+  scrollbar-color: $thumb $track;
+  
+  &::-webkit-scrollbar {
+    width: $width;
+    height: $width;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: $track;
+    border-radius: map-get($radius, 'full');
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: $thumb;
+    border-radius: map-get($radius, 'full');
+    
+    &:hover {
+      background: var(--color-border-heavy);
+    }
+  }
+}
+
+@mixin hide-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+// ========================================
+// FOCUS & ACCESSIBILITY
+// ========================================
+
+@mixin focus-ring($color: var(--color-accent-primary)) {
+  outline: 2px solid $color;
+  outline-offset: 2px;
+}
+
+@mixin focus-visible {
+  &:focus-visible {
+    @include focus-ring;
+  }
+}
+
+@mixin visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+// ========================================
+// ASPECT RATIO
+// ========================================
+
+@mixin aspect-ratio($width, $height) {
+  @supports (aspect-ratio: 1 / 1) {
+    aspect-ratio: #{$width} / #{$height};
+  }
+  
+  @supports not (aspect-ratio: 1 / 1) {
+    &::before {
+      content: "";
+      display: block;
+      padding-top: calc(#{$height} / #{$width} * 100%);
+    }
+  }
+}
+
+// ========================================
+// SKELETON LOADING
+// ========================================
+
+@mixin skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--color-bg-surface) 0%,
+    var(--color-bg-elevated) 50%,
+    var(--color-bg-surface) 100%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes skeleton-pulse {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+// ========================================
+// REDUCE MOTION
+// ========================================
+
+@mixin reduce-motion {
+  @media (prefers-reduced-motion: reduce) {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+// ========================================
+// CONTAINER
+// ========================================
+
+@mixin container($max-width: 'xl') {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: map.get($spacing, 'lg');
+  padding-right: map.get($spacing, 'lg');
+  
+  @if map.has-key($container-max-widths, $max-width) {
+    max-width: map.get($container-max-widths, $max-width);
+  }
+}
+
+// ========================================
+// CARD VARIANTS
+// ========================================
+
+@mixin card-base {
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border-light);
+  border-radius: map.get($radius, 'lg');
+  padding: map.get($spacing, 'lg');
+  @include transition(transform, box-shadow, border-color);
+}
+
+@mixin card-hover {
+  @include card-base;
+  cursor: pointer;
+  
+  &:hover {
+    border-color: var(--color-accent-primary);
+    @include shadow-md;
+    transform: translateY(-2px);
+  }
+}
+
+// ========================================
+// COLOR UTILITIES
+// ========================================
+
+// Mixin for light/bright colored elements in dark mode
+// Automatically applies dark text for better contrast
+@mixin bright-color-dark-mode($bg-color, $light-text-color: #ffffff, $dark-text-color: #000000) {
+  background: $bg-color;
+  color: $light-text-color;
+  
+  .dark & {
+    color: $dark-text-color;
+  }
+}
+
+// Mixin for semantic color backgrounds with auto text contrast
+@mixin semantic-bg-with-contrast($bg-var, $text-var-light: var(--color-text-inverse), $text-var-dark: #000000) {
+  background: $bg-var;
+  color: $text-var-light;
+  
+  .dark & {
+    color: $text-var-dark;
+  }
+}
+
+// ========================================
+// BUTTON VARIANTS
+// ========================================
+
+@mixin button-base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: map.get($spacing, 'sm');
+  padding: map.get($spacing, 'md') map.get($spacing, 'xl');
+  border: none;
+  border-radius: map.get($radius, 'md');
+  font-weight: map.get($font-weights, 'semibold');
+  font-size: map.get($font-sizes, 'base');
+  cursor: pointer;
+  @include transition(all);
+  @include focus-visible;
+  
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+}
+
+@mixin button-primary {
+  @include button-base;
+  background: var(--gradient-primary);
+  color: white;
+  
+  &:hover:not(:disabled) {
+    transform: translateY(-2px);
+    @include shadow-lg;
+  }
+  
+  &:active:not(:disabled) {
+    transform: translateY(0);
+  }
+}
+
+@mixin button-secondary {
+  @include button-base;
+  background: var(--color-bg-surface);
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border-medium);
+  
+  &:hover:not(:disabled) {
+    background: var(--color-bg-elevated);
+    border-color: var(--color-accent-primary);
+  }
+}
+
+@mixin button-ghost {
+  @include button-base;
+  background: transparent;
+  color: var(--color-text-secondary);
+  
+  &:hover:not(:disabled) {
+    background: var(--color-bg-surface);
+    color: var(--color-text-primary);
+  }
+}

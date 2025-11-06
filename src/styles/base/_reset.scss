@@ -3,6 +3,7 @@
 *::after {
   box-sizing: border-box;
   -webkit-tap-highlight-color: transparent;
+  color: inherit; // Force inherit color for theme support
 }
 
 body,

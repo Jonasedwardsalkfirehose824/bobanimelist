@@ -1,0 +1,110 @@
+// ============================================
+// CARD COMPONENTS
+// ============================================
+
+@use 'sass:map';
+@use '../base/variables' as *;
+@use '../base/mixins' as *;
+
+.card {
+  @include card-base;
+
+  &--hover {
+    @include card-hover;
+  }
+
+  &--glass {
+    @include glass-card;
+  }
+
+  &--elevated {
+    @include shadow-lg;
+  }
+
+  &__header {
+    padding-bottom: map-get($spacing, 'md');
+    border-bottom: 1px solid var(--color-border-light);
+    margin-bottom: map-get($spacing, 'md');
+  }
+
+  &__title {
+    font-size: map-get($font-sizes, 'xl');
+    font-weight: map-get($font-weights, 'semibold');
+    color: var(--color-text-primary);
+  }
+
+  &__subtitle {
+    font-size: map-get($font-sizes, 'sm');
+    color: var(--color-text-secondary);
+    margin-top: map-get($spacing, 'xs');
+  }
+
+  &__body {
+    color: var(--color-text-secondary);
+    line-height: map-get($line-heights, 'relaxed');
+  }
+
+  &__footer {
+    @include flex-between;
+    padding-top: map-get($spacing, 'md');
+    margin-top: map-get($spacing, 'md');
+    border-top: 1px solid var(--color-border-light);
+  }
+
+  &__image {
+    @include aspect-ratio(16, 9);
+    width: 100%;
+    object-fit: cover;
+    border-radius: map.get($radius, 'md');
+    overflow: hidden;
+  }
+
+  &__badge {
+    position: absolute;
+    top: map-get($spacing, 'sm');
+    right: map-get($spacing, 'sm');
+    padding: map-get($spacing, 'xs') map-get($spacing, 'sm');
+    background: var(--color-accent-primary);
+    // Light mode: white text on colored background
+    // Dark mode: black text on bright colored background for better contrast
+    color: var(--color-badge-primary-text);
+    border-radius: map-get($radius, 'md');
+    font-size: map-get($font-sizes, 'xs');
+    font-weight: map-get($font-weights, 'semibold');
+  }
+}
+
+// Media Card (Anime/Manga)
+.media-card {
+  @include card-hover;
+  overflow: hidden;
+  padding: 0;
+
+  &__image {
+    @include aspect-ratio(3, 4);
+    @include transition(transform);
+    width: 100%;
+    object-fit: cover;
+  }
+
+  &:hover &__image {
+    transform: scale(1.05);
+  }
+
+  &__content {
+    padding: map-get($spacing, 'md');
+  }
+
+  &__title {
+    @include line-clamp(2);
+    font-weight: map-get($font-weights, 'semibold');
+    color: var(--color-text-primary);
+    margin-bottom: map-get($spacing, 'xs');
+  }
+
+  &__meta {
+    @include flex-between;
+    font-size: map-get($font-sizes, 'sm');
+    color: var(--color-text-tertiary);
+  }
+}

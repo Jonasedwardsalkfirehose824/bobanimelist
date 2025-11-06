@@ -5,6 +5,9 @@ import { mangaRoutes } from './manga.routes';
 import { ErrorPage } from '../../pages/error-page';
 import { entityRoutes } from './entity.routes';
 import { searchRoutes } from './search.routes';
+import { scheduleRoutes } from './schedule.routes';
+import { seasonsRoutes } from './seasons.routes';
+import { reviewsRoutes } from './reviews.routes';
 import React from 'react';
 
 const HomePage = React.lazy(() => import('../../pages/home-page'));
@@ -20,6 +23,9 @@ const mainChildRoutes: RouteObject[] = [
   mangaRoutes,
   entityRoutes,
   searchRoutes,
+  scheduleRoutes,
+  ...seasonsRoutes,
+  ...reviewsRoutes,
   // Rute 404 untuk child
   {
     path: '*',

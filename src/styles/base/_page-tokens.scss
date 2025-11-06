@@ -1,0 +1,208 @@
+// ============================================
+// SHARED PAGE TOKENS & VARIABLES
+// ============================================
+
+@use "../tokens/semantics" as *;
+
+// Color tokens for dual theme
+$color-bg-dark: #0d0d0d;
+$color-bg-light: #ffffff;
+$color-surface-dark: #1a1a1a;
+$color-surface-light: #f9fafb;
+$color-text-dark: #f5f5f5;
+$color-text-light: #111827;
+$color-text-secondary-dark: #a3a3a3;
+$color-text-secondary-light: #6b7280;
+$accent-color: #3b82f6;
+$accent-hover: #2563eb;
+$transition-base: 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+
+// Shared page mixins
+@mixin page-container {
+	max-width: 1440px;
+	margin: 0 auto;
+	padding: var(--s-spacing-8) var(--s-spacing-app-horizontal);
+	min-height: calc(100vh - var(--s-header-height));
+	background-color: var(--s-color-bg-base);
+
+	@include screen-md {
+		padding: var(--s-spacing-10) var(--s-spacing-app-horizontal);
+	}
+
+	@include screen-lg {
+		padding: var(--s-spacing-12) var(--s-spacing-app-horizontal);
+	}
+}
+
+@mixin page-header {
+	margin-bottom: var(--s-spacing-8);
+	text-align: center;
+
+	@include screen-md {
+		margin-bottom: var(--s-spacing-10);
+	}
+}
+
+@mixin page-title {
+	color: var(--s-color-fg-primary);
+	margin-bottom: var(--s-spacing-3);
+	font-size: clamp(2rem, 4vw, 3rem);
+	font-weight: 700;
+	letter-spacing: -0.02em;
+}
+
+@mixin page-subtitle {
+	color: var(--s-color-fg-secondary);
+	font-size: clamp(1rem, 2vw, 1.25rem);
+	font-weight: 400;
+}
+
+@mixin content-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+	gap: var(--s-spacing-5);
+	animation: fadeInUp 0.5s ease-out;
+
+	@include screen-sm {
+		grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+		gap: var(--s-spacing-6);
+	}
+
+	@include screen-md {
+		grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+		gap: var(--s-spacing-7);
+	}
+
+	@include screen-lg {
+		grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+		gap: var(--s-spacing-8);
+	}
+
+	@include screen-xl {
+		grid-template-columns: repeat(5, 1fr);
+	}
+}
+
+@mixin section-container {
+	margin-bottom: var(--s-spacing-10);
+
+	@include screen-lg {
+		margin-bottom: var(--s-spacing-12);
+	}
+}
+
+@mixin section-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: var(--s-spacing-6);
+	padding-bottom: var(--s-spacing-4);
+	border-bottom: 2px solid var(--s-color-border-primary);
+
+	@include screen-md {
+		margin-bottom: var(--s-spacing-7);
+	}
+}
+
+@mixin section-title {
+	font-size: clamp(1.5rem, 3vw, 2rem);
+	font-weight: 700;
+	color: var(--s-color-fg-primary);
+}
+
+@mixin card-hover-effect {
+	transition: all $transition-base;
+
+	@include screen-mouse-first {
+		&:hover {
+			transform: translateY(-4px);
+			box-shadow: 0 8px 24px var(--color-shadow);
+		}
+	}
+}
+
+@mixin empty-state {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	min-height: 400px;
+	padding: var(--s-spacing-8);
+	background: var(--s-color-bg-secondary);
+	border-radius: 16px;
+	border: 2px dashed var(--s-color-border-primary);
+	text-align: center;
+
+	p {
+		font-size: clamp(1rem, 2vw, 1.25rem);
+		margin: 0;
+		color: var(--s-color-fg-secondary);
+	}
+}
+
+@mixin loading-skeleton {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+	gap: var(--s-spacing-5);
+	animation: fadeInUp 0.5s ease-out;
+
+	@include screen-sm {
+		grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+		gap: var(--s-spacing-6);
+	}
+
+	@include screen-md {
+		grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+		gap: var(--s-spacing-7);
+	}
+
+	@include screen-lg {
+		grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+		gap: var(--s-spacing-8);
+	}
+
+	@include screen-xl {
+		grid-template-columns: repeat(5, 1fr);
+	}
+}
+
+// Animation keyframes
+@keyframes fadeInUp {
+	from {
+		opacity: 0;
+		transform: translateY(20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes slideInLeft {
+	from {
+		opacity: 0;
+		transform: translateX(-20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+
+@keyframes pulse {
+	0%, 100% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0.5;
+	}
+}

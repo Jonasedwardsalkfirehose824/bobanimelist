@@ -1,11 +1,15 @@
 import { jikanApi } from './baseApi';
-import type { Genre, JikanResponse, Manga, MangaSearchParams, MangaTopParams } from './models';
+import type { Genre, JikanResponse, Manga, MangaSearchParams, MangaTopParams, MangaCharacter, MangaStatistics, MangaRecommendation, MangaPicture } from './models';
 
 const MangaEndpoints = {
     topManga: '/top/manga',
     mangaFullById: '/manga/{id}/full',
     mangaGenres: 'genres/manga',
     mangaSearch: '/manga',
+    mangaCharacters: '/manga/{id}/characters',
+    mangaStatistics: '/manga/{id}/statistics',
+    mangaRecommendations: '/manga/{id}/recommendations',
+    mangaPictures: '/manga/{id}/pictures',
 } as const;
 
 export const mangaApi = jikanApi.injectEndpoints({
@@ -50,6 +54,34 @@ export const mangaApi = jikanApi.injectEndpoints({
             },
             keepUnusedDataFor: 60 * 5, // 5 minutes for search results
         }),
+
+        getMangaCharacters: builder.query<JikanResponse<MangaCharacter[]>, { id: number }>({
+            query: ({ id }) => ({
+                url: MangaEndpoints.mangaCharacters.replace('{id}', String(id)),
+            }),
+            keepUnusedDataFor: 60 * 30, // 30 minutes
+        }),
+
+        getMangaStatistics: builder.query<JikanResponse<MangaStatistics>, { id: number }>({
+            query: ({ id }) => ({
+                url: MangaEndpoints.mangaStatistics.replace('{id}', String(id)),
+            }),
+            keepUnusedDataFor: 60 * 10, // 10 minutes - statistics update more frequently
+        }),
+
+        getMangaRecommendations: builder.query<JikanResponse<MangaRecommendation[]>, { id: number }>({
+            query: ({ id }) => ({
+                url: MangaEndpoints.mangaRecommendations.replace('{id}', String(id)),
+            }),
+            keepUnusedDataFor: 60 * 30, // 30 minutes
+        }),
+
+        getMangaPictures: builder.query<JikanResponse<MangaPicture[]>, { id: number }>({
+            query: ({ id }) => ({
+                url: MangaEndpoints.mangaPictures.replace('{id}', String(id)),
+            }),
+            keepUnusedDataFor: 60 * 60, // 60 minutes - pictures rarely change
+        }),
     }),
 });
 
@@ -57,5 +89,9 @@ export const {
     useGetTopMangaQuery,
     useGetMangaByIdQuery,
     useGetMangaGenresQuery,
-    useGetMangaSearchQuery
+    useGetMangaSearchQuery,
+    useGetMangaCharactersQuery,
+    useGetMangaStatisticsQuery,
+    useGetMangaRecommendationsQuery,
+    useGetMangaPicturesQuery,
 } = mangaApi;

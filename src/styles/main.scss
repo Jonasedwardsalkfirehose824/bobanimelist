@@ -1,5 +1,44 @@
+// ============================================
+// BOBANIME LIST - MAIN STYLESHEET
+// Dual Theme Design System (Light/Dark)
+// ============================================
+
+// ====================
+// 1. NEW THEME SYSTEM
+// ====================
+@use "./base/variables";
+@use "./base/themes";
+@use "./base/mixins";
+@use "./base/animations";
+
+// ====================
+// 2. BASE (EXISTING)
+// ====================
 @use "./base/font";
 @use "./base/reset";
 @use "./base/init";
+
+// ====================
+// 2.5. GLOBAL OVERRIDES (Fix Dark Mode)
+// ====================
+@use "./base/global-overrides";
+
+// ====================
+// 3. LAYOUT
+// ====================
+@use "./layout/header";
+@use "./layout/footer";
+@use "./layout/sidebar";
+
+// ====================
+// 4. COMPONENTS
+// ====================
+@use "./components/buttons";
+@use "./components/cards";
+@use "./components/skeletons";
+
+// ====================
+// 5. LEGACY TOKENS (Compatibility)
+// ====================
 @use "./tokens/semantics";
 @use "./components/selection";

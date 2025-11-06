@@ -1,0 +1,98 @@
+// ============================================
+// GLOBAL OVERRIDES - Fix Dark Mode Text Color
+// ============================================
+
+// Force all text to use theme colors
+* {
+  color: var(--color-text-primary);
+}
+
+// Ensure body and root inherit properly
+body {
+  background-color: var(--color-bg-base);
+  color: var(--color-text-primary);
+}
+
+#root {
+  color: var(--color-text-primary);
+}
+
+// All heading elements
+h1, h2, h3, h4, h5, h6 {
+  color: var(--color-text-primary);
+}
+
+// Paragraphs and spans
+p, span, div {
+  color: inherit;
+}
+
+// Links default to primary text, hover to accent
+a {
+  color: var(--color-text-primary);
+  
+  &:hover {
+    color: var(--color-accent-primary);
+  }
+}
+
+// Lists
+ul, ol, li {
+  color: inherit;
+}
+
+// Labels and form elements
+label {
+  color: var(--color-text-primary);
+}
+
+// Buttons inherit from parent
+button {
+  color: inherit;
+}
+
+// Fix for components using old semantic tokens
+[class*="color-fg"],
+[class*="text-"] {
+  color: var(--s-color-fg-primary);
+}
+
+// Dark mode specific overrides
+.dark {
+  // Ensure all text is white in dark mode
+  * {
+    color: var(--color-text-primary);
+  }
+  
+  body, #root {
+    background-color: var(--color-bg-base);
+    color: var(--color-text-primary);
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--color-text-primary);
+  }
+  
+  p, span, div, a {
+    color: inherit;
+  }
+}
+
+// Override specific old semantic color references
+:root {
+  --s-color-fg-primary: var(--color-text-primary);
+  --s-color-fg-secondary: var(--color-text-secondary);
+  --s-color-fg-tertiary: var(--color-text-tertiary);
+  --s-color-bg-base: var(--color-bg-base);
+  --s-color-bg-primary: var(--color-bg-elevated);
+  --s-color-bg-secondary: var(--color-bg-surface);
+}
+
+.dark {
+  --s-color-fg-primary: var(--color-text-primary);
+  --s-color-fg-secondary: var(--color-text-secondary);
+  --s-color-fg-tertiary: var(--color-text-tertiary);
+  --s-color-bg-base: var(--color-bg-base);
+  --s-color-bg-primary: var(--color-bg-elevated);
+  --s-color-bg-secondary: var(--color-bg-surface);
+}
