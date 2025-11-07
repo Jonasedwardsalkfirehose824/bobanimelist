@@ -106,7 +106,7 @@ export const HomePage = () => {
 			</section>
 
 			{/* Random Featured Anime */}
-			{!randomLoading && randomData?.data && (
+			{!randomLoading && randomData?.data && randomData.data.images?.jpg && (
 				<section className={styles['home-page__featured']}>
 					<div className={styles['home-page__featured-card']}>
 						<div className={styles['home-page__featured-image']}>
@@ -164,18 +164,21 @@ export const HomePage = () => {
 
 				{!seasonLoading && !seasonError && seasonData?.data && (
 					<div className={styles['home-page__grid']}>
-						{seasonData.data.map((anime, index) => (
-							<ImageCard
-								key={anime.mal_id}
-								src={anime.images.jpg.large_image_url || anime.images.jpg.image_url}
-								alt={anime.title}
-								navigateTo={`/anime/${anime.mal_id}`}
-								title={anime.title}
-								ratings={anime.score ? String(anime.score) : undefined}
-								grid
-								index={index}
-							/>
-						))}
+						{seasonData.data
+							.filter(anime => anime.images?.jpg) // Filter out items without images
+							.map((anime, index) => (
+								<ImageCard
+									key={anime.mal_id}
+									src={anime.images.jpg.large_image_url || anime.images.jpg.image_url}
+									alt={anime.title}
+									navigateTo={`/anime/${anime.mal_id}`}
+									title={anime.title}
+									ratings={anime.score ? String(anime.score) : undefined}
+									grid
+									index={index}
+								/>
+							))
+						}
 					</div>
 				)}
 			</section>

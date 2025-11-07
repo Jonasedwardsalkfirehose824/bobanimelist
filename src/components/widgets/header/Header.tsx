@@ -13,7 +13,7 @@ import LanguageIcon from "../../atoms/icons/LanguageIcon";
 import { Link, useLocation } from "react-router-dom";
 import { useTranslation } from 'react-i18next'; // Impor hook i18n
 import classNames from "classnames";
-import MenuIcon from "../../atoms/icons/MenuIcon";
+import MenuIcon from "../../atoms/icons/menu-icon";
 import { useAppDispatch, useAppSelector } from "../../../store";
 import { updateIsDrawerOpen, updateIsHeaderNavHidden } from "../../../store/slices/appContextSlice";
 import { useChangeLanguage } from "../../../hooks/useChangeLanguage";
