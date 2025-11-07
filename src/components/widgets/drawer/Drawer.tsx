@@ -9,6 +9,7 @@ import MangaIcon from '../../atoms/icons/MangaIcon';
 import HomeIcon from '../../atoms/icons/HomeIcon';
 import CalendarIcon from '../../atoms/icons/CalendarIcon';
 import ReviewIcon from '../../atoms/icons/ReviewIcon';
+import StarIcon from '../../atoms/icons/StarIcon';
 import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import ThemeToggle from '../../atoms/theme-toggle';
@@ -192,7 +193,7 @@ function Drawer() {
                                                 to={{ pathname: '/seasons', search: '' }}
                                                 className={`${styles['drawer__nav-item']} ${location.pathname === '/seasons' ? styles['drawer__nav-item--active'] : ''}`}
                                             >
-                                                <CalendarIcon size={20} color="s-color-fg-primary" />
+                                                <StarIcon size={20} color="s-color-fg-primary" />
                                                 <span className={styles['drawer__nav-text']}>{t('seasons_nav', 'Seasons')}</span>
                                             </Link>
                                         </motion.div>

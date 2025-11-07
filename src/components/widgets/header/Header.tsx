@@ -7,6 +7,7 @@ import SearchIcon from "../../atoms/icons/SearchIcon";
 import SettingIcon from "../../atoms/icons/SettingIcon";
 import CalendarIcon from "../../atoms/icons/CalendarIcon";
 import ReviewIcon from "../../atoms/icons/ReviewIcon";
+import StarIcon from "../../atoms/icons/StarIcon";
 import Pill from "../../atoms/pill";
 import styles from "./Header.module.scss";
 import LanguageIcon from "../../atoms/icons/LanguageIcon";
@@ -38,7 +39,7 @@ function HeaderNav() {
         <Pill icon={CalendarIcon} text={t("schedule_nav", "Schedule")} active={location.pathname === "/schedule"} />
       </Link>
       <Link to={{ pathname: "/seasons", search: "" }}>
-        <Pill icon={CalendarIcon} text={t("seasons_nav", "Seasons")} active={location.pathname === "/seasons"} />
+        <Pill icon={StarIcon} text={t("seasons_nav", "Seasons")} active={location.pathname === "/seasons"} />
       </Link>
       <Link to={{ pathname: "/reviews", search: "" }}>
         <Pill icon={ReviewIcon} text={t("reviews_nav", "Reviews")} active={location.pathname === "/reviews" || location.pathname.startsWith("/top/reviews")} />
