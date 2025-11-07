@@ -12,19 +12,33 @@ const pageVariants: Variants = {
     initial: {
         opacity: 0,
         x: -20,
+        rotateY: -15,
+        scale: 0.95,
+        transformPerspective: 1200,
     },
     in: {
         opacity: 1,
         x: 0,
+        rotateY: 0,
+        scale: 1,
+        transformPerspective: 1200,
         transition: {
-            duration: 0.4,
-            ease: "easeOut",
+            duration: 0.5,
+            ease: [0.4, 0, 0.2, 1], // Custom bezier curve
+            opacity: { duration: 0.3 },
+            rotateY: { duration: 0.5, ease: "easeOut" },
+            scale: { duration: 0.4, ease: "easeOut" },
         },
     },
     out: {
         opacity: 0,
+        x: 20,
+        rotateY: 15,
+        scale: 0.95,
+        transformPerspective: 1200,
         transition: {
-            duration: 0, ease: "easeIn"
+            duration: 0.3,
+            ease: "easeIn",
         },
     },
 };
@@ -54,6 +68,11 @@ function AppLayout() {
                                 initial="initial"
                                 animate="in"
                                 exit="out"
+                                style={{ 
+                                    transformStyle: 'preserve-3d',
+                                    backfaceVisibility: 'hidden',
+                                    willChange: 'transform, opacity',
+                                }}
                             >
                                 {outlet}
                             </motion.div>

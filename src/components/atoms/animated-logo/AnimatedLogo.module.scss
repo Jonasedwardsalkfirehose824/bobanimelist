@@ -6,66 +6,312 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--color-background);
+  background: var(--s-color-bg-base);
   z-index: 9999;
-  transition: opacity 0.5s ease-out;
   width: 100vw;
   height: 100vh;
   overflow: hidden;
+  perspective: 1500px;
+  transform-style: preserve-3d;
 
   @media (max-height <= 600px) {
     align-items: center;
   }
 }
 
+// Slow Slashing Katanas (Psycho effect)
+.slashing-katanas {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
 
-@keyframes draw-line {
-  from {
-    stroke-dashoffset: 1200;
+// Vertical katana (top to bottom)
+.katana-vertical {
+  position: absolute;
+  top: 0;
+  width: 4px;
+  height: 100vh;
+  background: linear-gradient(180deg,
+    transparent 0%,
+    var(--logo-stroke-color) 5%,
+    rgba(255, 255, 255, 0.8) 8%,
+    var(--logo-stroke-color) 12%,
+    var(--logo-stroke-color) 100%
+  );
+  filter: drop-shadow(0 0 12px var(--logo-stroke-color)) 
+          drop-shadow(0 0 24px var(--logo-stroke-color))
+          drop-shadow(0 0 36px rgba(255, 0, 0, 0.5));
+  
+  // Blade shine
+  &::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 10%;
+    width: 1.5px;
+    height: 80%;
+    background: linear-gradient(180deg,
+      rgba(255, 255, 255, 0.9) 0%,
+      rgba(255, 255, 255, 0.6) 50%,
+      rgba(255, 255, 255, 0.3) 100%
+    );
+    transform: translateX(-50%);
   }
 
-  to {
-    stroke-dashoffset: 0;
+  // Handle
+  &::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: 10px;
+    height: 3%;
+    background: linear-gradient(180deg,
+      #8b0000 0%,
+      #600000 50%,
+      #400000 100%
+    );
+    transform: translateX(-50%);
+    border-radius: 2px;
+    box-shadow: 0 0 8px rgba(139, 0, 0, 0.8);
   }
 }
 
-
-@keyframes fill-in {
-  from {
-    fill: transparent;
+// Horizontal katana (left to right)
+.katana-horizontal {
+  position: absolute;
+  left: 0;
+  width: 100vw;
+  height: 4px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    var(--logo-stroke-color) 5%,
+    rgba(255, 255, 255, 0.8) 8%,
+    var(--logo-stroke-color) 12%,
+    var(--logo-stroke-color) 100%
+  );
+  filter: drop-shadow(0 0 12px var(--logo-stroke-color)) 
+          drop-shadow(0 0 24px var(--logo-stroke-color))
+          drop-shadow(0 0 36px rgba(255, 0, 0, 0.5));
+  
+  // Blade shine
+  &::before {
+    content: '';
+    position: absolute;
+    left: 10%;
+    top: 50%;
+    width: 80%;
+    height: 1.5px;
+    background: linear-gradient(90deg,
+      rgba(255, 255, 255, 0.9) 0%,
+      rgba(255, 255, 255, 0.6) 50%,
+      rgba(255, 255, 255, 0.3) 100%
+    );
+    transform: translateY(-50%);
   }
 
-  to {
-    fill: var(--logo-fill-color);
+  // Handle
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 3%;
+    height: 10px;
+    background: linear-gradient(90deg,
+      #8b0000 0%,
+      #600000 50%,
+      #400000 100%
+    );
+    transform: translateY(-50%);
+    border-radius: 2px;
+    box-shadow: 0 0 8px rgba(139, 0, 0, 0.8);
   }
 }
 
+// Slash Lines (Samurai Cut Effect)
+.slash-lines {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+}
 
+.slash-line-1,
+.slash-line-2,
+.slash-line-3 {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    var(--logo-stroke-color) 20%, 
+    var(--logo-stroke-color) 80%, 
+    transparent 100%);
+  transform-origin: left center;
+  box-shadow: 0 0 20px var(--logo-stroke-color);
+}
+
+.slash-line-1 {
+  top: 35%;
+  transform: rotate(-15deg);
+}
+
+.slash-line-2 {
+  top: 50%;
+  transform: rotate(20deg);
+}
+
+.slash-line-3 {
+  top: 65%;
+  transform: rotate(-10deg);
+}
+
+// Speed Lines (Slash Effect)
+.speed-lines {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 4;
+}
+
+.speed-line {
+  position: absolute;
+  right: 0;
+  height: 1px;
+  width: 60%;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    var(--logo-stroke-color) 50%, 
+    transparent 100%);
+  top: calc(40% + var(--line-offset));
+  transform-origin: right center;
+  opacity: 0.6;
+  animation-delay: var(--line-delay);
+}
+
+// 3D Logo Wrapper
+.logo-3d-wrapper {
+  position: relative;
+  width: 220px;
+  height: 220px;
+  max-width: 60vw;
+  max-height: 60vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform-style: preserve-3d;
+  z-index: 2;
+
+  @media (max-width: 768px) {
+    width: 180px;
+    height: 180px;
+  }
+}
+
+// Glow Layer (Single red glow)
+.glow-layer {
+  position: absolute;
+  inset: -40px;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(
+    circle,
+    var(--logo-stroke-color) 0%,
+    transparent 60%
+  );
+  opacity: 0.3;
+  filter: blur(40px);
+  animation: pulse-glow 2.5s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.15);
+  }
+}
+
+// Flash Effect (Samurai Cut Flash)
+.flash-effect {
+  position: absolute;
+  inset: -50px;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.8) 0%,
+    transparent 60%
+  );
+  pointer-events: none;
+  z-index: 10;
+}
+
+// Main Logo SVG
 .animated-logo-svg {
   width: 200px;
   height: 200px;
-  max-width: 60vw;
-  max-height: 60vh;
+  max-width: 100%;
+  max-height: 100%;
   display: block;
+  transform-style: preserve-3d;
+  filter: drop-shadow(0 10px 30px var(--color-shadow));
 
-  path {
-    stroke-width: 5;
-    stroke: var(--logo-stroke-color);
-    stroke-dasharray: 1200;
-    stroke-dashoffset: 1200;
-    animation: draw-line 2.5s ease-in-out forwards,
-               fill-in 1s ease-out 2.5s forwards;
+  @media (max-width: 768px) {
+    width: 150px;
+    height: 150px;
   }
 }
 
+.logo-path {
+  stroke-width: 5;
+  stroke: var(--logo-stroke-color);
+  fill: var(--logo-fill-color);
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  filter: drop-shadow(0 0 15px var(--logo-stroke-color));
+  transform-style: preserve-3d;
+}
 
+// Slice line (cut line)
+.slice-line {
+  filter: drop-shadow(0 0 10px var(--logo-stroke-color)) drop-shadow(0 0 20px var(--logo-stroke-color));
+  stroke-linecap: round;
+}
+
+// Theme Variables
 :root,
-[data-theme="light"] {
+.light {
   --logo-fill-color: #c10000;
   --logo-stroke-color: #c10000;
 }
 
-[data-theme="dark"] {
+.dark {
   --logo-fill-color: #ff4d4d;
   --logo-stroke-color: #ff4d4d;
+}
+
+// Reduced Motion Support
+@media (prefers-reduced-motion: reduce) {
+  .katana-vertical,
+  .katana-horizontal,
+  .glow-layer,
+  .slash-line-1,
+  .slash-line-2,
+  .slash-line-3,
+  .speed-line,
+  .flash-effect {
+    animation: none !important;
+    opacity: 0 !important;
+  }
+
+  .animated-logo-svg {
+    transform: none !important;
+  }
 }

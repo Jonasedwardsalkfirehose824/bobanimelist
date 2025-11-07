@@ -1,10 +1,12 @@
 import { useNavigate } from 'react-router';
 import { useEffect, useRef, useState } from 'react';
+import { motion } from 'motion/react';
 import { useGetSeasonAnimeQuery } from '@/services/jikan';
 import { useLazyGetRandomAnimeQuery } from '@/services/jikan/randomApi';
 import ImageCard, { ImageCardLoading } from '@/components/atoms/image-card/ImageCard';
 import Label from '@/components/atoms/label';
 import { ErrorState } from '@/components/atoms/error-state';
+import { useScrollParallax } from '@/hooks/useParallax3D';
 import styles from './HomePage.module.scss';
 
 const CURRENT_YEAR = new Date().getFullYear();
@@ -20,6 +22,10 @@ export const HomePage = () => {
 	const navigate = useNavigate();
 	const heroRef = useRef<HTMLDivElement>(null);
 	const [tiltStyle, setTiltStyle] = useState<React.CSSProperties>({});
+	
+	// Parallax effects for sections
+	const featuredParallax = useScrollParallax(80);
+	const seasonParallax = useScrollParallax(50);
 
 	// Fetch current season anime
 	const { data: seasonData, isLoading: seasonLoading, isError: seasonError } = useGetSeasonAnimeQuery({
@@ -105,9 +111,17 @@ export const HomePage = () => {
 				</div>
 			</section>
 
-			{/* Random Featured Anime */}
+			{/* Random Featured Anime with Parallax */}
 			{!randomLoading && randomData?.data && randomData.data.images?.jpg && (
-				<section className={styles['home-page__featured']}>
+				<motion.section 
+					ref={featuredParallax.ref}
+					className={styles['home-page__featured']}
+					style={{ 
+						y: featuredParallax.y,
+						rotateX: featuredParallax.rotateX,
+						transformStyle: 'preserve-3d'
+					}}
+				>
 					<div className={styles['home-page__featured-card']}>
 						<div className={styles['home-page__featured-image']}>
 							<img 
@@ -133,11 +147,18 @@ export const HomePage = () => {
 							</button>
 						</div>
 					</div>
-				</section>
+				</motion.section>
 			)}
 
-			{/* Current Season Anime */}
-			<section className={styles['home-page__section']}>
+			{/* Current Season Anime with Parallax */}
+			<motion.section 
+				ref={seasonParallax.ref}
+				className={styles['home-page__section']}
+				style={{ 
+					y: seasonParallax.y,
+					transformStyle: 'preserve-3d'
+				}}
+			>
 				<div className={styles['home-page__section-header']}>
 					<Label as="h2" font="typo-primary-xl-semibold" className={styles['home-page__section-title']}>
 						{CURRENT_SEASON.charAt(0).toUpperCase() + CURRENT_SEASON.slice(1)} {CURRENT_YEAR} Anime
@@ -181,7 +202,7 @@ export const HomePage = () => {
 						}
 					</div>
 				)}
-			</section>
+			</motion.section>
 
 			{/* Quick Actions */}
 			<section className={styles['home-page__actions']}>
