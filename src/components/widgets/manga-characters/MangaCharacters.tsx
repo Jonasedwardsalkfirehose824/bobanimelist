@@ -2,7 +2,7 @@ import { useGetMangaCharactersQuery } from '@/services/jikan';
 import Label from '@/components/atoms/label';
 import styles from './MangaCharacters.module.scss';
 import classNames from 'classnames';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 
 interface MangaCharactersProps {
 	mangaId: number;

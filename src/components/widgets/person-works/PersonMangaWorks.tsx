@@ -1,16 +1,16 @@
-import { useGetPersonVoicesQuery } from '@/services/jikan';
+import { useGetPersonMangaQuery } from '@/services/jikan';
 import Label from '@/components/atoms/label';
 import { Link } from 'react-router';
 import styles from './PersonWorks.module.scss';
 import classNames from 'classnames';
 
-interface PersonVoiceRolesProps {
+interface PersonMangaWorksProps {
 	personId: number;
 	className?: string;
 }
 
-export const PersonVoiceRoles = ({ personId, className }: PersonVoiceRolesProps) => {
-	const { data, isLoading, isError } = useGetPersonVoicesQuery({ id: personId });
+export const PersonMangaWorks = ({ personId, className }: PersonMangaWorksProps) => {
+	const { data, isLoading, isError } = useGetPersonMangaQuery({ id: personId });
 
 	if (isError) {
 		return null;
@@ -20,7 +20,7 @@ export const PersonVoiceRoles = ({ personId, className }: PersonVoiceRolesProps)
 		return (
 			<div className={classNames(styles['person-works'], className)}>
 				<Label as="h2" font="typo-primary-xl-semibold" className={styles['person-works__title']}>
-					Voice Acting Roles
+					Manga Works
 				</Label>
 				<div className={styles['person-works__grid']}>
 					{Array.from({ length: 6 }).map((_, i) => (
@@ -39,34 +39,34 @@ export const PersonVoiceRoles = ({ personId, className }: PersonVoiceRolesProps)
 		<div className={classNames(styles['person-works'], className)}>
 			<div className={styles['person-works__header']}>
 				<Label as="h2" font="typo-primary-xl-semibold" className={styles['person-works__title']}>
-					Voice Acting Roles
+					Manga Works
 				</Label>
 				<Label as="span" font="typo-primary-m-regular" className={styles['person-works__count']}>
-					{data.data.length} roles
+					{data.data.length} publications
 				</Label>
 			</div>
 
 			<div className={styles['person-works__grid']}>
-				{data.data.map((item, index) => (
+				{data.data.map((item) => (
 					<Link
-						key={`${item.anime.mal_id}-${item.character.mal_id}-${index}`}
-						to={`/anime/${item.anime.mal_id}`}
+						key={item.manga.mal_id}
+						to={`/manga/${item.manga.mal_id}`}
 						className={styles['person-works__card']}
 					>
 						<div className={styles['person-works__image-wrapper']}>
 							<img
-								src={item.anime.images.jpg.image_url}
-								alt={item.anime.title}
+								src={item.manga.images.jpg.image_url}
+								alt={item.manga.title}
 								className={styles['person-works__image']}
 								loading="lazy"
 							/>
 						</div>
 						<div className={styles['person-works__info']}>
 							<Label as="h3" font="typo-primary-m-semibold" className={styles['person-works__name']}>
-								{item.anime.title}
+								{item.manga.title}
 							</Label>
 							<Label as="span" font="typo-primary-s-regular" className={styles['person-works__position']}>
-								{item.role} • {item.character.name}
+								{item.position}
 							</Label>
 						</div>
 					</Link>
@@ -76,4 +76,4 @@ export const PersonVoiceRoles = ({ personId, className }: PersonVoiceRolesProps)
 	);
 };
 
-export default PersonVoiceRoles;
+export default PersonMangaWorks;

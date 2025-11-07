@@ -7,16 +7,16 @@
 // Light Theme Color Palette
 $light-colors: (
   // Background Layers
-  'bg-base': #ffffff,
+  'bg-base': #fff,
   'bg-elevated': #f9fafb,
   'bg-surface': #f3f4f6,
-  'bg-overlay': rgba(255, 255, 255, 0.95),
+  'bg-overlay': rgb(255 255 255 / 95%),
   
   // Text Colors
   'text-primary': #111827,
   'text-secondary': #6b7280,
   'text-tertiary': #9ca3af,
-  'text-inverse': #ffffff,
+  'text-inverse': #fff,
   
   // Border Colors
   'border-light': #e5e7eb,
@@ -40,11 +40,11 @@ $light-colors: (
   'info-bg': #dbeafe,
   
   // Glassmorphism
-  'glass-bg': rgba(255, 255, 255, 0.7),
-  'glass-border': rgba(255, 255, 255, 0.2),
+  'glass-bg': rgb(255 255 255 / 70%),
+  'glass-border': rgb(255 255 255 / 20%),
   
   // Shadows
-  'shadow-color': rgba(0, 0, 0, 0.1)
+  'shadow-color': rgb(0 0 0 / 10%)
 );
 
 // Dark Theme Color Palette
@@ -53,7 +53,7 @@ $dark-colors: (
   'bg-base': #0d0d0d,
   'bg-elevated': #1a1a1a,
   'bg-surface': #262626,
-  'bg-overlay': rgba(13, 13, 13, 0.95),
+  'bg-overlay': rgb(13 13 13 / 95%),
   
   // Text Colors
   'text-primary': #f5f5f5,
@@ -83,11 +83,11 @@ $dark-colors: (
   'info-bg': #1e3a8a,
   
   // Glassmorphism
-  'glass-bg': rgba(26, 26, 26, 0.7),
-  'glass-border': rgba(255, 255, 255, 0.1),
+  'glass-bg': rgb(26 26 26 / 70%),
+  'glass-border': rgb(255 255 255 / 10%),
   
   // Shadows
-  'shadow-color': rgba(0, 0, 0, 0.5)
+  'shadow-color': rgb(0 0 0 / 50%)
 );
 
 // Generate CSS Variables for Light Theme (Root)
@@ -143,22 +143,22 @@ $dark-colors: (
   
   // Button Text Colors (for colored backgrounds)
   // Light mode: white text on colored buttons looks good
-  --color-btn-primary-text: #ffffff;
-  --color-btn-success-text: #ffffff;
-  --color-btn-warning-text: #ffffff;
-  --color-btn-error-text: #ffffff;
-  --color-btn-info-text: #ffffff;
+  --color-btn-primary-text: #fff;
+  --color-btn-success-text: #fff;
+  --color-btn-warning-text: #fff;
+  --color-btn-error-text: #fff;
+  --color-btn-info-text: #fff;
   
   // Badge & Tag Text Colors
-  --color-badge-primary-text: #ffffff;
-  --color-badge-success-text: #ffffff;
-  --color-badge-warning-text: #ffffff;
-  --color-badge-error-text: #ffffff;
-  --color-badge-info-text: #ffffff;
+  --color-badge-primary-text: #fff;
+  --color-badge-success-text: #fff;
+  --color-badge-warning-text: #fff;
+  --color-badge-error-text: #fff;
+  --color-badge-info-text: #fff;
   
   // Pill & Chip Text Colors
-  --color-pill-active-text: #000000;
-  --color-chip-text: #000000;
+  --color-pill-active-text: #000;
+  --color-chip-text: #000;
 }
 
 // Dark Theme Override
@@ -218,15 +218,15 @@ $dark-colors: (
   --color-btn-info-text: #0a0a0a;
   
   // Badge & Tag Text Colors (dark mode = black text on bright backgrounds)
-  --color-badge-primary-text: #000000;
-  --color-badge-success-text: #000000;
-  --color-badge-warning-text: #000000;
-  --color-badge-error-text: #000000;
-  --color-badge-info-text: #000000;
+  --color-badge-primary-text: #000;
+  --color-badge-success-text: #000;
+  --color-badge-warning-text: #000;
+  --color-badge-error-text: #000;
+  --color-badge-info-text: #000;
   
   // Pill & Chip Text Colors
-  --color-pill-active-text: #000000;
-  --color-chip-text: #000000;
+  --color-pill-active-text: #000;
+  --color-chip-text: #000;
 }
 
 // Smooth Theme Transitions

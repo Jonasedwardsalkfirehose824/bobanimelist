@@ -90,7 +90,7 @@ export default defineConfig({
     stylelint({
       files: ['**/*.{css,scss,html}'],
       cache: true,
-      emitErrorAsWarning: true
+      emitErrorAsWarning: false // Changed to false to catch errors during development
     }),
     eslint({
       cache: true,

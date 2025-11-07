@@ -41,14 +41,14 @@
   @include screen-mouse-first {
     &:hover {
       transform: translateY($translateY);
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 8px 16px rgb(0 0 0 / 20%);
     }
   }
 
   @include screen-touch-first {
     &:active {
       transform: translateY($translateY);
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 8px 16px rgb(0 0 0 / 20%);
     }
   }
 }
@@ -89,9 +89,9 @@
 
 // Animation mixins
 @mixin fade-in($duration: 0.3s, $delay: 0s) {
-  animation: fadeIn $duration ease $delay forwards;
+  animation: fade-in $duration ease $delay forwards;
 
-  @keyframes fadeIn {
+  @keyframes fade-in {
     from {
       opacity: 0;
     }
@@ -103,9 +103,9 @@
 }
 
 @mixin slide-in-up($duration: 0.3s, $delay: 0s, $distance: 20px) {
-  animation: slideInUp $duration ease $delay forwards;
+  animation: slide-in-up $duration ease $delay forwards;
 
-  @keyframes slideInUp {
+  @keyframes slide-in-up {
     from {
       opacity: 0;
       transform: translateY($distance);
@@ -119,9 +119,9 @@
 }
 
 @mixin slide-in-down($duration: 0.3s, $delay: 0s, $distance: 20px) {
-  animation: slideInDown $duration ease $delay forwards;
+  animation: slide-in-down $duration ease $delay forwards;
 
-  @keyframes slideInDown {
+  @keyframes slide-in-down {
     from {
       opacity: 0;
       transform: translateY(-$distance);
@@ -135,9 +135,9 @@
 }
 
 @mixin slide-in-left($duration: 0.3s, $delay: 0s, $distance: 20px) {
-  animation: slideInLeft $duration ease $delay forwards;
+  animation: slide-in-left $duration ease $delay forwards;
 
-  @keyframes slideInLeft {
+  @keyframes slide-in-left {
     from {
       opacity: 0;
       transform: translateX(-$distance);
@@ -151,9 +151,9 @@
 }
 
 @mixin slide-in-right($duration: 0.3s, $delay: 0s, $distance: 20px) {
-  animation: slideInRight $duration ease $delay forwards;
+  animation: slide-in-right $duration ease $delay forwards;
 
-  @keyframes slideInRight {
+  @keyframes slide-in-right {
     from {
       opacity: 0;
       transform: translateX($distance);
@@ -167,9 +167,9 @@
 }
 
 @mixin scale-in($duration: 0.3s, $delay: 0s) {
-  animation: scaleIn $duration ease $delay forwards;
+  animation: scale-in $duration ease $delay forwards;
 
-  @keyframes scaleIn {
+  @keyframes scale-in {
     from {
       opacity: 0;
       transform: scale(0.8);
@@ -302,9 +302,8 @@
 
 // Glass morphism effect
 @mixin glass-morphism($blur: 10px, $opacity: 0.7) {
-  background: rgba(255, 255, 255, $opacity);
+  background: rgb(255 255 255 / #{$opacity});
   backdrop-filter: blur($blur);
-  -webkit-backdrop-filter: blur($blur);
 }
 
 // Grid responsive

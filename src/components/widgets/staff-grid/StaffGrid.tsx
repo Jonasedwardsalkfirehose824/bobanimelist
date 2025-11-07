@@ -56,7 +56,7 @@ export const StaffGrid = ({ animeId, className }: StaffGridProps) => {
 				{staffWithImages.map((staff, index) => (
 					<Link
 						key={`${staff.person.mal_id}-${index}`}
-						to={`/person/${staff.person.mal_id}`}
+						to={`/people/${staff.person.mal_id}`}
 						className={styles['staff-card']}
 						aria-label={`View ${staff.person.name} profile`}
 					>

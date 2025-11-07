@@ -1,6 +1,6 @@
 import { useGetCharacterVoicesQuery } from '@/services/jikan';
 import Label from '@/components/atoms/label';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import styles from './CharacterVoiceActors.module.scss';
 import classNames from 'classnames';
 

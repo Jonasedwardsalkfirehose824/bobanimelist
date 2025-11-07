@@ -1,6 +1,6 @@
 import { useGetCharacterMangaQuery } from '@/services/jikan';
 import Label from '@/components/atoms/label';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import styles from './CharacterAppearances.module.scss';
 import classNames from 'classnames';
 

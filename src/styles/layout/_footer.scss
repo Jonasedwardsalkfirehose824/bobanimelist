@@ -2,13 +2,14 @@
 // FOOTER LAYOUT
 // ============================================
 
+@use 'sass:map';
 @use '../base/variables' as *;
 @use '../base/mixins' as *;
 
 .footer {
   background: var(--color-bg-elevated);
   border-top: 1px solid var(--color-border-light);
-  padding: map-get($spacing, '3xl') 0 map-get($spacing, 'xl');
+  padding: map.get($spacing, '3xl') 0 map.get($spacing, 'xl');
   margin-top: auto;
 
   &__container {
@@ -18,21 +19,21 @@
   &__grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: map-get($spacing, 'xl');
-    margin-bottom: map-get($spacing, 'xl');
+    gap: map.get($spacing, 'xl');
+    margin-bottom: map.get($spacing, 'xl');
 
     @include respond('md') {
       grid-template-columns: 1fr;
-      gap: map-get($spacing, 'lg');
+      gap: map.get($spacing, 'lg');
     }
   }
 
   &__section {
     &-title {
-      font-size: map-get($font-sizes, 'lg');
-      font-weight: map-get($font-weights, 'semibold');
+      font-size: map.get($font-sizes, 'lg');
+      font-weight: map.get($font-weights, 'semibold');
       color: var(--color-text-primary);
-      margin-bottom: map-get($spacing, 'md');
+      margin-bottom: map.get($spacing, 'md');
     }
 
     &-list {
@@ -41,13 +42,13 @@
       margin: 0;
       display: flex;
       flex-direction: column;
-      gap: map-get($spacing, 'sm');
+      gap: map.get($spacing, 'sm');
     }
 
     &-link {
       color: var(--color-text-secondary);
       text-decoration: none;
-      font-size: map-get($font-sizes, 'sm');
+      font-size: map.get($font-sizes, 'sm');
       @include transition(color);
 
       &:hover {
@@ -58,30 +59,30 @@
 
   &__bottom {
     @include flex-between;
-    padding-top: map-get($spacing, 'lg');
+    padding-top: map.get($spacing, 'lg');
     border-top: 1px solid var(--color-border-light);
 
     @include respond('md') {
       flex-direction: column;
-      gap: map-get($spacing, 'md');
+      gap: map.get($spacing, 'md');
       text-align: center;
     }
   }
 
   &__copyright {
     color: var(--color-text-tertiary);
-    font-size: map-get($font-sizes, 'sm');
+    font-size: map.get($font-sizes, 'sm');
   }
 
   &__social {
     display: flex;
-    gap: map-get($spacing, 'sm');
+    gap: map.get($spacing, 'sm');
 
     &-link {
       @include flex-center;
       width: 40px;
       height: 40px;
-      border-radius: map-get($radius, 'full');
+      border-radius: map.get($radius, 'full');
       background: var(--color-bg-surface);
       color: var(--color-text-secondary);
       @include transition(background-color, color, transform);

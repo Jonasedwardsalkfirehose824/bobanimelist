@@ -76,10 +76,7 @@ button {
   p, span, div, a {
     color: inherit;
   }
-}
-
-// Override specific old semantic color references
-:root {
+  
   --s-color-fg-primary: var(--color-text-primary);
   --s-color-fg-secondary: var(--color-text-secondary);
   --s-color-fg-tertiary: var(--color-text-tertiary);
@@ -88,7 +85,8 @@ button {
   --s-color-bg-secondary: var(--color-bg-surface);
 }
 
-.dark {
+// Override specific old semantic color references
+:root {
   --s-color-fg-primary: var(--color-text-primary);
   --s-color-fg-secondary: var(--color-text-secondary);
   --s-color-fg-tertiary: var(--color-text-tertiary);

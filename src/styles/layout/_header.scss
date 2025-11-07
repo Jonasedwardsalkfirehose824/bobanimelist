@@ -2,17 +2,18 @@
 // HEADER LAYOUT - BobaNimeList
 // ============================================
 
+@use 'sass:map';
 @use '../base/variables' as *;
 @use '../base/mixins' as *;
 
 .header {
   position: sticky;
   top: 0;
-  z-index: map-get($z-index, 'sticky');
+  z-index: map.get($z-index, 'sticky');
   width: 100%;
   background: var(--color-glass-bg);
   backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+
   border-bottom: 1px solid var(--color-border-light);
   @include transition(background-color, border-color);
 
@@ -20,21 +21,21 @@
     @include container('xxl');
     @include flex-between;
     height: 72px;
-    gap: map-get($spacing, 'lg');
+    gap: map.get($spacing, 'lg');
     
     @include respond('md') {
       height: 64px;
-      gap: map-get($spacing, 'md');
+      gap: map.get($spacing, 'md');
     }
   }
 
   &__brand {
     @include flex-center;
-    gap: map-get($spacing, 'sm');
+    gap: map.get($spacing, 'sm');
     text-decoration: none;
     color: var(--color-text-primary);
-    font-size: map-get($font-sizes, 'xl');
-    font-weight: map-get($font-weights, 'bold');
+    font-size: map.get($font-sizes, 'xl');
+    font-weight: map.get($font-weights, 'bold');
     @include transition(transform);
 
     &:hover {
@@ -44,7 +45,7 @@
     &-logo {
       width: 40px;
       height: 40px;
-      border-radius: map-get($radius, 'md');
+      border-radius: map.get($radius, 'md');
     }
 
     &-text {
@@ -59,7 +60,7 @@
   &__nav {
     display: flex;
     align-items: center;
-    gap: map-get($spacing, 'md');
+    gap: map.get($spacing, 'md');
     flex: 1;
     max-width: 800px;
 
@@ -71,15 +72,15 @@
   &__actions {
     display: flex;
     align-items: center;
-    gap: map-get($spacing, 'sm');
+    gap: map.get($spacing, 'sm');
   }
 
   &__theme-toggle {
     @include button-ghost;
-    padding: map-get($spacing, 'sm');
+    padding: map.get($spacing, 'sm');
     width: 40px;
     height: 40px;
-    border-radius: map-get($radius, 'full');
+    border-radius: map.get($radius, 'full');
 
     svg {
       width: 20px;
@@ -89,7 +90,7 @@
 
   &__mobile-toggle {
     @include button-ghost;
-    padding: map-get($spacing, 'sm');
+    padding: map.get($spacing, 'sm');
     width: 40px;
     height: 40px;
     display: none;
@@ -101,10 +102,10 @@
 
   &__user {
     @include flex-center;
-    gap: map-get($spacing, 'sm');
-    padding: map-get($spacing, 'sm') map-get($spacing, 'md');
+    gap: map.get($spacing, 'sm');
+    padding: map.get($spacing, 'sm') map.get($spacing, 'md');
     background: var(--color-bg-surface);
-    border-radius: map-get($radius, 'full');
+    border-radius: map.get($radius, 'full');
     cursor: pointer;
     @include transition(background-color);
 
@@ -115,13 +116,13 @@
     &-avatar {
       width: 32px;
       height: 32px;
-      border-radius: map-get($radius, 'full');
+      border-radius: map.get($radius, 'full');
       border: 2px solid var(--color-border-medium);
     }
 
     &-name {
-      font-size: map-get($font-sizes, 'sm');
-      font-weight: map-get($font-weights, 'medium');
+      font-size: map.get($font-sizes, 'sm');
+      font-weight: map.get($font-weights, 'medium');
       color: var(--color-text-primary);
 
       @include respond('sm') {
@@ -136,7 +137,7 @@
   &__list {
     display: flex;
     align-items: center;
-    gap: map-get($spacing, 'sm');
+    gap: map.get($spacing, 'sm');
     list-style: none;
     padding: 0;
     margin: 0;
@@ -149,13 +150,13 @@
   &__link {
     display: flex;
     align-items: center;
-    gap: map-get($spacing, 'xs');
-    padding: map-get($spacing, 'sm') map-get($spacing, 'md');
+    gap: map.get($spacing, 'xs');
+    padding: map.get($spacing, 'sm') map.get($spacing, 'md');
     color: var(--color-text-secondary);
     text-decoration: none;
-    font-size: map-get($font-sizes, 'sm');
-    font-weight: map-get($font-weights, 'medium');
-    border-radius: map-get($radius, 'md');
+    font-size: map.get($font-sizes, 'sm');
+    font-weight: map.get($font-weights, 'medium');
+    border-radius: map.get($radius, 'md');
     @include transition(color, background-color);
 
     &:hover {
@@ -178,11 +179,11 @@
     position: absolute;
     top: 100%;
     left: 0;
-    margin-top: map-get($spacing, 'xs');
+    margin-top: map.get($spacing, 'xs');
     min-width: 200px;
     background: var(--color-bg-elevated);
     border: 1px solid var(--color-border-light);
-    border-radius: map-get($radius, 'lg');
+    border-radius: map.get($radius, 'lg');
     @include shadow-lg;
     opacity: 0;
     visibility: hidden;
@@ -196,7 +197,7 @@
     }
 
     &-item {
-      padding: map-get($spacing, 'sm') map-get($spacing, 'md');
+      padding: map.get($spacing, 'sm') map.get($spacing, 'md');
       color: var(--color-text-secondary);
       text-decoration: none;
       display: block;
@@ -208,11 +209,11 @@
       }
 
       &:first-child {
-        border-radius: map-get($radius, 'lg') map-get($radius, 'lg') 0 0;
+        border-radius: map.get($radius, 'lg') map.get($radius, 'lg') 0 0;
       }
 
       &:last-child {
-        border-radius: 0 0 map-get($radius, 'lg') map-get($radius, 'lg');
+        border-radius: 0 0 map.get($radius, 'lg') map.get($radius, 'lg');
       }
     }
   }
@@ -233,13 +234,13 @@
 
   &__input {
     width: 100%;
-    padding: map-get($spacing, 'sm') map-get($spacing, 'md');
-    padding-left: map-get($spacing, 'xl');
+    padding: map.get($spacing, 'sm') map.get($spacing, 'md');
+    padding-left: map.get($spacing, 'xl');
     background: var(--color-bg-surface);
     border: 1px solid var(--color-border-light);
-    border-radius: map-get($radius, 'full');
+    border-radius: map.get($radius, 'full');
     color: var(--color-text-primary);
-    font-size: map-get($font-sizes, 'sm');
+    font-size: map.get($font-sizes, 'sm');
     @include transition(border-color, background-color);
 
     &:focus {
@@ -255,7 +256,7 @@
 
   &__icon {
     position: absolute;
-    left: map-get($spacing, 'md');
+    left: map.get($spacing, 'md');
     top: 50%;
     transform: translateY(-50%);
     width: 16px;

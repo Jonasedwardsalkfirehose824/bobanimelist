@@ -25,6 +25,23 @@ function SearchOptions({ options, searchQueryKey, searchCategory }: SearchOption
     const [searchParams, setSearchParams] = useSearchParams();
     const location = useLocation();
     const [internalSearchParams, setInternalSearchParams] = useState(new URLSearchParams(searchParams));
+    
+    // Initialize with a random placeholder on component mount
+    const [placeholder] = useState(() => {
+        const placeholderOptions = [
+            "Search anime...",
+            "Find your next adventure...",
+            "Discover great anime...",
+            "Explore the anime world...",
+            "Find what you're looking for...",
+            "Seek your favorite series...",
+            "Discover hidden gems...",
+            "Search for epic stories...",
+            "Find your anime match...",
+            "Explore vast anime universe..."
+        ];
+        return placeholderOptions[Math.floor(Math.random() * placeholderOptions.length)];
+    });
 
     useEffect(() => {
         setInternalSearchParams(new URLSearchParams(searchParams));
@@ -75,6 +92,12 @@ function SearchOptions({ options, searchQueryKey, searchCategory }: SearchOption
         });
     };
 
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter') {
+            handleSearch();
+        }
+    };
+
     const handleCategoryChange = (newCategory: DropdownOption) => {
         if (location.pathname !== '/search') {
             return;
@@ -122,9 +145,10 @@ function SearchOptions({ options, searchQueryKey, searchCategory }: SearchOption
                     <SearchIcon size={20} color="s-color-fg-primary" />
                     <input
                         type="text"
-                        placeholder="Find what you're looking for..."
+                        placeholder={placeholder}
                         value={internalSearchParams.get(searchQueryKey) ?? ''}
                         onChange={handleSearchChange}
+                        onKeyDown={handleKeyDown}
                         className={'typo-primary-m-medium'}
                     />
                 </div>
@@ -153,7 +177,6 @@ function SearchOptions({ options, searchQueryKey, searchCategory }: SearchOption
             </div>
             <div className={styles['search__button-container']}>
                 <button onClick={handleSearch} className={styles['search__button']}>
-                    <SearchIcon size={24} color='s-color-fg-primary' />
                     <Label as='p' font='typo-primary-l-medium'>Search</Label>
                 </button>
             </div>

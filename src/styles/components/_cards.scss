@@ -22,32 +22,32 @@
   }
 
   &__header {
-    padding-bottom: map-get($spacing, 'md');
+    padding-bottom: map.get($spacing, 'md');
     border-bottom: 1px solid var(--color-border-light);
-    margin-bottom: map-get($spacing, 'md');
+    margin-bottom: map.get($spacing, 'md');
   }
 
   &__title {
-    font-size: map-get($font-sizes, 'xl');
-    font-weight: map-get($font-weights, 'semibold');
+    font-size: map.get($font-sizes, 'xl');
+    font-weight: map.get($font-weights, 'semibold');
     color: var(--color-text-primary);
   }
 
   &__subtitle {
-    font-size: map-get($font-sizes, 'sm');
+    font-size: map.get($font-sizes, 'sm');
     color: var(--color-text-secondary);
-    margin-top: map-get($spacing, 'xs');
+    margin-top: map.get($spacing, 'xs');
   }
 
   &__body {
     color: var(--color-text-secondary);
-    line-height: map-get($line-heights, 'relaxed');
+    line-height: map.get($line-heights, 'relaxed');
   }
 
   &__footer {
     @include flex-between;
-    padding-top: map-get($spacing, 'md');
-    margin-top: map-get($spacing, 'md');
+    padding-top: map.get($spacing, 'md');
+    margin-top: map.get($spacing, 'md');
     border-top: 1px solid var(--color-border-light);
   }
 
@@ -61,16 +61,16 @@
 
   &__badge {
     position: absolute;
-    top: map-get($spacing, 'sm');
-    right: map-get($spacing, 'sm');
-    padding: map-get($spacing, 'xs') map-get($spacing, 'sm');
+    top: map.get($spacing, 'sm');
+    right: map.get($spacing, 'sm');
+    padding: map.get($spacing, 'xs') map.get($spacing, 'sm');
     background: var(--color-accent-primary);
     // Light mode: white text on colored background
     // Dark mode: black text on bright colored background for better contrast
     color: var(--color-badge-primary-text);
-    border-radius: map-get($radius, 'md');
-    font-size: map-get($font-sizes, 'xs');
-    font-weight: map-get($font-weights, 'semibold');
+    border-radius: map.get($radius, 'md');
+    font-size: map.get($font-sizes, 'xs');
+    font-weight: map.get($font-weights, 'semibold');
   }
 }
 
@@ -92,19 +92,19 @@
   }
 
   &__content {
-    padding: map-get($spacing, 'md');
+    padding: map.get($spacing, 'md');
   }
 
   &__title {
     @include line-clamp(2);
-    font-weight: map-get($font-weights, 'semibold');
+    font-weight: map.get($font-weights, 'semibold');
     color: var(--color-text-primary);
-    margin-bottom: map-get($spacing, 'xs');
+    margin-bottom: map.get($spacing, 'xs');
   }
 
   &__meta {
     @include flex-between;
-    font-size: map-get($font-sizes, 'sm');
+    font-size: map.get($font-sizes, 'sm');
     color: var(--color-text-tertiary);
   }
 }

@@ -26,7 +26,7 @@
 // Light theme override (compatible with new system)
 .light-theme,
 :root:not(.dark) {
-  --s-color-bg-base: var(--color-bg-base, #ffffff);
+  --s-color-bg-base: var(--color-bg-base, #fff);
   --s-color-bg-primary: var(--color-bg-elevated, #f9fafb);
   --s-color-bg-secondary: var(--color-bg-surface, #f3f4f6);
   --s-color-bg-success: #{$p-color-green-300};

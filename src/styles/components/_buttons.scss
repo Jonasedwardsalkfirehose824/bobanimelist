@@ -22,7 +22,7 @@
 	outline: none;
 
 	&:focus-visible {
-		box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+		box-shadow: 0 0 0 3px rgb(59 130 246 / 20%);
 	}
 
 	&:active {
@@ -46,7 +46,7 @@
 		&:hover:not(:disabled) {
 			background: var(--color-accent-primary-hover);
 			transform: translateY(-2px);
-			box-shadow: 0 8px 24px rgba(59, 130, 246, 0.3);
+			box-shadow: 0 8px 24px rgb(59 130 246 / 30%);
 		}
 	}
 }
@@ -61,7 +61,7 @@
 		&:hover:not(:disabled) {
 			filter: brightness(1.1);
 			transform: translateY(-2px);
-			box-shadow: 0 8px 24px rgba(16, 185, 129, 0.3);
+			box-shadow: 0 8px 24px rgb(16 185 129 / 30%);
 		}
 	}
 }
@@ -76,7 +76,7 @@
 		&:hover:not(:disabled) {
 			filter: brightness(1.1);
 			transform: translateY(-2px);
-			box-shadow: 0 8px 24px rgba(245, 158, 11, 0.3);
+			box-shadow: 0 8px 24px rgb(245 158 11 / 30%);
 		}
 	}
 }
@@ -91,7 +91,7 @@
 		&:hover:not(:disabled) {
 			filter: brightness(1.1);
 			transform: translateY(-2px);
-			box-shadow: 0 8px 24px rgba(239, 68, 68, 0.3);
+			box-shadow: 0 8px 24px rgb(239 68 68 / 30%);
 		}
 	}
 }
@@ -106,7 +106,7 @@
 		&:hover:not(:disabled) {
 			filter: brightness(1.1);
 			transform: translateY(-2px);
-			box-shadow: 0 8px 24px rgba(59, 130, 246, 0.3);
+			box-shadow: 0 8px 24px rgb(59 130 246 / 30%);
 		}
 	}
 }
