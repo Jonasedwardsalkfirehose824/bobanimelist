@@ -60,10 +60,18 @@
 
 .no-result {
   color: var(--s-color-fg-primary);
+  grid-column: 1 / -1; /* Span entire grid width */
+  justify-self: center; /* Center horizontally */
+  width: 100%; /* Full width of grid cell */
+  max-width: 600px; /* Limit width on large screens */
+  margin: 0 auto; /* Center in container */
 }
 
 .error-container {
   width: 100%;
   grid-column: 1 / -1;
   padding: var(--s-spacing-10) var(--s-spacing-4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
