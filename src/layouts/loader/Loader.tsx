@@ -1,34 +1,37 @@
 import AnimatedLogo from '../../components/atoms/animated-logo';
 import { motion, type Variants } from "motion/react";
+import { useState, useEffect } from 'react';
 import styles from './Loader.module.scss';
 
 const pageVariants: Variants = {
     initial: {
-        opacity: 0,
-        scale: 0.9,
-        rotateY: -20,
+        opacity: 1,
     },
     in: {
         opacity: 1,
-        scale: 1,
-        rotateY: 0,
         transition: {
-            duration: 0.6,
-            ease: [0.4, 0, 0.2, 1],
+            duration: 0.3,
         },
     },
     out: {
-        opacity: 0,
-        scale: 0.95,
-        rotateY: 20,
+        opacity: 1,
         transition: {
-            duration: 0.3,
-            ease: "easeIn"
+            duration: 0.8,
         },
     },
 };
 
 function Loader() {
+    const [isExiting, setIsExiting] = useState(false);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setIsExiting(true);
+        }, 1500);
+
+        return () => clearTimeout(timer);
+    }, []);
+
     return (
         <motion.div
             key={"page-loader"}
@@ -37,12 +40,8 @@ function Loader() {
             animate="in"
             exit="out"
             className={styles.loader}
-            style={{
-                transformStyle: 'preserve-3d',
-                perspective: 1200,
-            }}
         >
-            <AnimatedLogo />
+            <AnimatedLogo isExiting={isExiting} />
         </motion.div>
     );
 }

@@ -1,6 +1,7 @@
 @use "/src/styles/tokens/semantics" as *;
 
 .animated-logo-container {
+  color: #000000;
   position: fixed;
   inset: 0;
   display: flex;
@@ -11,11 +12,8 @@
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  perspective: 1500px;
-  transform-style: preserve-3d;
   box-sizing: border-box;
 
-  /* Ensure perfect centering on all devices */
   top: 0;
   left: 0;
   right: 0;
@@ -23,190 +21,59 @@
   margin: 0;
   padding: 0;
 
-  /* For TV and other screen types */
   overscroll-behavior: none;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 35%;
+    background: var(--s-color-bg-base);
+    z-index: 10;
+    pointer-events: none;
+  }
 
   @media (max-height <= 600px) {
     align-items: center;
   }
   
-  /* Extra targeting for TV screens */
   @media screen and (min-width: 1920px) and (min-height: 1080px) {
     align-items: center;
     justify-content: center;
   }
 }
 
-// Laser Container
-.laser-container {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 1;
-  overflow: hidden;
-}
-
-// Laser Beam (Red laser effect)
-.laser-beam {
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(90deg,
-    transparent 0%,
-    var(--logo-stroke-color) 20%,
-    rgba(255, 255, 255, 0.9) 50%,
-    var(--logo-stroke-color) 80%,
-    transparent 100%
-  );
-  filter: drop-shadow(0 0 8px var(--logo-stroke-color)) 
-          drop-shadow(0 0 16px var(--logo-stroke-color))
-          drop-shadow(0 0 24px rgba(255, 0, 0, 0.8));
-  box-shadow: 0 0 20px var(--logo-stroke-color),
-              0 0 40px var(--logo-stroke-color),
-              0 0 60px rgba(255, 0, 0, 0.5);
-  
-  // Inner bright core
-  &::before {
-    content: '';
-    position: absolute;
-    left: 20%;
-    top: 50%;
-    width: 60%;
-    height: 1px;
-    background: linear-gradient(90deg,
-      transparent 0%,
-      rgba(255, 255, 255, 1) 50%,
-      transparent 100%
-    );
-    transform: translateY(-50%);
-  }
-}
-
-// 3D Logo Wrapper
-.logo-3d-wrapper {
+.brand-text {
+  font-size: clamp(1rem, 4vw, 2rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color:#B22222 !important;
+  text-shadow: 
+    0 0 10px rgba(139, 0, 0, 0.1),
+    0 0 20px rgba(139, 0, 0, 0.2),
+    0 0 30px rgba(139, 0, 0, 0.1);
+  margin: 0;
+  padding: 0;
+  user-select: none;
   position: relative;
-  width: 220px;
-  height: 220px;
-  max-width: 60vw;
-  max-height: 60vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transform-style: preserve-3d;
-  z-index: 2;
-
+  z-index: 5;
+  
   @media (max-width: 768px) {
-    width: 180px;
-    height: 180px;
+    font-size: clamp(1.5rem, 3vw, 1.5rem);
+    letter-spacing: 0.05em;
   }
   
-  // Extra targeting for TV screens
   @media screen and (min-width: 1920px) and (min-height: 1080px) {
-    width: 300px;
-    height: 300px;
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
   }
-}
-
-// Glow Layer (Single red glow)
-.glow-layer {
-  position: absolute;
-  inset: -40px;
-  border-radius: 50%;
-  pointer-events: none;
-  background: radial-gradient(
-    circle,
-    var(--logo-stroke-color) 0%,
-    transparent 60%
-  );
-  opacity: 0.3;
-  filter: blur(40px);
-  animation: pulse-glow 2.5s ease-in-out infinite;
-}
-
-@keyframes pulse-glow {
-  0%, 100% {
-    opacity: 0.3;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.5;
-    transform: scale(1.15);
-  }
-}
-
-// Flash Effect (Samurai Cut Flash)
-.flash-effect {
-  position: absolute;
-  inset: -50px;
-  background: radial-gradient(
-    circle,
-    rgba(255, 255, 255, 0.8) 0%,
-    transparent 60%
-  );
-  pointer-events: none;
-  z-index: 10;
-}
-
-// Main Logo SVG
-.animated-logo-svg {
-  width: 200px;
-  height: 200px;
-  max-width: 100%;
-  max-height: 100%;
-  display: block;
-  transform-style: preserve-3d;
-  filter: drop-shadow(0 10px 30px var(--color-shadow));
-
-  @media (max-width: 768px) {
-    width: 150px;
-    height: 150px;
-  }
-  
-  // Extra targeting for TV screens
-  @media screen and (min-width: 1920px) and (min-height: 1080px) {
-    width: 250px;
-    height: 250px;
-  }
-}
-
-.logo-path {
-  stroke-width: 5;
-  stroke: var(--logo-stroke-color);
-  fill: var(--logo-fill-color);
-  stroke-linejoin: round;
-  stroke-linecap: round;
-  filter: drop-shadow(0 0 15px var(--logo-stroke-color));
-  transform-style: preserve-3d;
-}
-
-// Slice line (cut line)
-.slice-line {
-  filter: drop-shadow(0 0 10px var(--logo-stroke-color)) drop-shadow(0 0 20px var(--logo-stroke-color));
-  stroke-linecap: round;
-}
-
-// Theme Variables
-:root,
-.light {
-  --logo-fill-color: #c10000;
-  --logo-stroke-color: #c10000;
-}
-
-.dark {
-  --logo-fill-color: #ff4d4d;
-  --logo-stroke-color: #ff4d4d;
 }
 
 // Reduced Motion Support
 @media (prefers-reduced-motion: reduce) {
-  .laser-beam,
-  .glow-layer,
-  .flash-effect {
+  .brand-text {
     animation: none !important;
-    opacity: 0 !important;
-  }
-
-  .animated-logo-svg {
-    transform: none !important;
   }
 }

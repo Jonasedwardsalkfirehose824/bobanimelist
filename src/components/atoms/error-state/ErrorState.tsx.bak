@@ -166,7 +166,7 @@ function ErrorState({
         onClick={() => setIsFlipped(!isFlipped)}
       >
         <motion.div
-          className={classNames(styles['error-state__icon'], styles['error-state__icon--animated'])}
+          className={styles['error-state__icon']}
           initial={{ scale: 0, rotateY: 0 }}
           animate={{ 
             scale: 1, 
@@ -189,50 +189,25 @@ function ErrorState({
             '--error-color': config.color,
           } as React.CSSProperties}
         >
-          <div className={styles['error-state__card-face']} style={{ transform: 'rotateY(0deg)', backfaceVisibility: 'hidden' }}>
-            <img
-              src="/card__front.png"
-              alt="Error card front"
-              className={styles["error-state__image"]}
-            />
+          <div className={styles['error-state__card-face']} style={{ transform: 'rotateY(0deg)' }}>
+            {config.image ? (
+              <img 
+                src={config.image} 
+                alt={config.defaultTitle}
+                className={styles['error-state__image']}
+              />
+            ) : (
+              <span className={styles['error-state__emoji']}>{config.emoji}</span>
+            )}
           </div>
           
-          <div className={styles['error-state__card-back']} style={{ transform: 'rotateY(180deg)', backfaceVisibility: 'hidden' }}>
-            <img
-              src="/card__back.png"
-              alt="Error card back"
-              className={styles["error-state__image"]}
+          <div className={styles['error-state__card-back']} style={{ transform: 'rotateY(180deg)' }}>
+            <img 
+              src="/flip__error.png" 
+              alt="Error flip side"
+              className={styles['error-state__flip-image']}
             />
           </div>
-          
-          {/* Sparkle effects for added shimmer */}
-          {[...Array(5)].map((_, i) => (
-            <motion.div
-              key={`sparkle-${i}`}
-              className={styles['error-state__sparkle']}
-              initial={{ opacity: 0, scale: 0 }}
-              animate={{ 
-                opacity: [0, 1, 0],
-                scale: [0, 1, 0],
-              }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-                delay: i * 0.4,
-                ease: 'easeInOut'
-              }}
-              style={{
-                position: 'absolute',
-                top: `${Math.random() * 80 + 10}%`,
-                left: `${Math.random() * 80 + 10}%`,
-                width: `${Math.random() * 10 + 5}px`,
-                height: `${Math.random() * 10 + 5}px`,
-                borderRadius: '50%',
-                background: 'radial-gradient(circle, rgba(255,255,255,0.8), rgba(255,255,255,0.3))',
-                zIndex: 3,
-              }}
-            />
-          ))}
         </motion.div>
       </motion.div>
 

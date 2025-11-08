@@ -45,6 +45,7 @@ function AppLayout() {
     const location = useLocation();
     const outlet = useOutlet();
     const [showIntro, setShowIntro] = useState(true);
+    const [isExiting, setIsExiting] = useState(false);
     
     // Lock scroll when intro is showing
     useScrollLock(showIntro);
@@ -53,7 +54,13 @@ function AppLayout() {
         <>
             {showIntro && (
                 <div className={styles['animated-logo-container']}>
-                    <AnimatedLogo onAnimationComplete={() => setShowIntro(false)} />
+                    <AnimatedLogo 
+                        isExiting={isExiting}
+                        onAnimationComplete={() => {
+                            setIsExiting(true);
+                            setTimeout(() => setShowIntro(false), 800);
+                        }} 
+                    />
                 </div>
             )}
             <div className={`${styles['app-layout']} ${showIntro ? styles['intro-active'] : ''}`}>

@@ -1,8 +1,7 @@
-# <img src="/public/zero.gif" width="60" height="auto" ></img> bobanimelist
-
-**bobanimelist** is a modern platform for exploring anime and manga, built from scratch with a focus on performance, scalability, and developer experience. Version 2.0 showcases my expertise in React, TypeScript, state management, and UI/UX best practices with engaging animations.
-
-<!--**Published at https://suriyakishoreks.github.io/bobanimelist/**-->
+<div align="center">
+    # <img src="/public/readme__header/jpg" width="120" height="auto"></img> bobanimelist
+    **bobanimelist** is a modern platform for exploring anime and manga, built from scratch with a focus on performance, scalability, and developer experience. Version 2.0 showcases my expertise in React, TypeScript, state management, and UI/UX best practices with engaging animations.
+</div>
 
 ---
 
@@ -37,6 +36,10 @@
   - ESLint & Stylelint for code quality
   - Vite for blazing fast builds
 - **Cool Animations** - including typing effect on logo with blinking cursor
+- **PWA Support** - Installable app with offline functionality
+- **Infinite Scrolling** - Seamless content loading
+- **Advanced Search Filters** - Genre, year, type, rating filters
+- **Anime/Manga Lists** - Personal tracking lists (watching, completed, etc.)
 
 ---
 
@@ -47,6 +50,10 @@
 - **Hover Effects** and engaging micro-interactions
 - **Delightful Loading Animations**
 - **Responsive Theme Toggle**
+- **3D Card Flip Effects** on content cards
+- **Parallax Scrolling** on detail pages
+- **Particle Backgrounds** for special events
+- **Dynamic Color Schemes** based on content
 
 ---
 
@@ -80,7 +87,7 @@
 - Loading state and error handling
 - Typing animation effect on logo
 
-### 🔜 Milestone 2 (In Development)
+### ✅ Milestone 2 (Completed)
 
 - PWA support
 - Infinite feed
@@ -89,6 +96,16 @@
 - Simple analytics service
 - Relative units for spacing & fonts
 - Additional interactive animations
+
+### 🚧 Milestone 3 (In Development)
+
+- Advanced search filters
+- User authentication & profiles
+- Anime/manga tracking lists
+- Recommendation engine
+- Social features
+- Enhanced offline capabilities
+- Performance monitoring
 
 ---
 
@@ -100,6 +117,17 @@ bobanimelist features various engaging animations and visual effects:
 - **Smooth page transitions** - animated navigation between pages
 - **Card hover effects** - visual feedback on cursor hover
 - **Widget loading animations** - content appears with animations while loading
+- **3D flip cards** - interactive card animations
+- **Parallax backgrounds** - depth effect on detail pages
+- **Floating particles** - dynamic background effects
+- **Dynamic theme transitions** - smooth color scheme changes
+
+---
+
+<div align="center">
+  <h3>🌟 Powered by Modern Technologies 🌟</h3>
+  <p>✨ Where anime meets cutting-edge web development ✨</p>
+</div>
 
 ---
 
@@ -140,6 +168,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
+<div align="center">
+
 ## 📸 Screenshots
 
 ### Desktop View
@@ -147,5 +177,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ### Mobile View
 <img src="/public/screenshot-narrow.png" alt="Mobile Screenshot" width="375px">
+
+</div>
 
 ---
