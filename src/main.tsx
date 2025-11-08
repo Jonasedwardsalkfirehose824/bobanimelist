@@ -10,6 +10,10 @@ import router from './router';
 import { PersistGate } from 'redux-persist/integration/react';
 import ThemeUpdater from './shared/side-effect-handlers/ThemeUpdater';
 import { Loader } from './layouts/loader';
+import { setupGlobalErrorHandler } from './error-handling';
+
+// Setup global error handler for production
+setupGlobalErrorHandler();
 
 preload(`${import.meta.env.BASE_URL}font/outfit-variable.woff2`, { as: 'font', type: 'font/woff2', crossOrigin: 'anonymous' });
 

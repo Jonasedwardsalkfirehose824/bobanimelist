@@ -5,7 +5,11 @@ import Label from '../label';
 import styles from './ErrorState.module.scss';
 import classNames from 'classnames';
 
-export type ErrorType = '404' | '500' | 'network' | 'timeout' | 'unauthorized' | 'forbidden' | 'generic';
+export type ErrorType = '404' | '500' | 'network' | 'timeout' | 'unauthorized' | 'forbidden' | 'generic' | 
+  'deployment-blocked' | 'deployment-deleted' | 'deployment-disabled' | 'deployment-not-ready' | 
+  'deployment-paused' | 'dns-error' | 'edge-function-error' | 'function-timeout' | 'function-throttled' | 
+  'infinite-loop' | 'invalid-request' | 'middleware-error' | 'router-error' | 'sandbox-error' | 
+  'too-many-requests' | 'internal-error';
 
 interface ErrorConfig {
   emoji: string;
@@ -71,6 +75,102 @@ const errorConfigs: Record<ErrorType, ErrorConfig> = {
     defaultTitle: 'Something Went Wrong',
     defaultMessage: 'An unexpected error has occurred. Please try again.',
     color: '#FFAEC9',
+  },
+  'deployment-blocked': {
+    emoji: '🛑',
+    defaultTitle: 'Deployment Blocked',
+    defaultMessage: 'This deployment has been blocked. Please check your Vercel dashboard for more information.',
+    color: '#ef4444',
+  },
+  'deployment-deleted': {
+    emoji: '🗑️',
+    defaultTitle: 'Deployment Deleted',
+    defaultMessage: 'The deployment you are trying to access has been deleted.',
+    color: '#6b7280',
+  },
+  'deployment-disabled': {
+    emoji: '⏸️',
+    defaultTitle: 'Deployment Disabled',
+    defaultMessage: 'This deployment has been disabled. Please contact the site administrator.',
+    color: '#f59e0b',
+  },
+  'deployment-not-ready': {
+    emoji: '⏳',
+    defaultTitle: 'Deployment Not Ready',
+    defaultMessage: 'This deployment is still being prepared. Please try again in a few moments.',
+    color: '#3b82f6',
+  },
+  'deployment-paused': {
+    emoji: '⏸️',
+    defaultTitle: 'Deployment Paused',
+    defaultMessage: 'This deployment has been temporarily paused and is currently unavailable.',
+    color: '#8b5cf6',
+  },
+  'dns-error': {
+    emoji: '🌍',
+    defaultTitle: 'DNS Resolution Error',
+    defaultMessage: 'We are unable to resolve the domain name. Please check the URL or contact support.',
+    color: '#ec4899',
+  },
+  'edge-function-error': {
+    emoji: '⚡',
+    defaultTitle: 'Edge Function Error',
+    defaultMessage: 'An error occurred while executing an edge function. Please try again later.',
+    color: '#8b5cf6',
+  },
+  'function-timeout': {
+    emoji: '⏰',
+    defaultTitle: 'Function Timeout',
+    defaultMessage: 'The serverless function took too long to execute. Please try again.',
+    color: '#f59e0b',
+  },
+  'function-throttled': {
+    emoji: '🚦',
+    defaultTitle: 'Function Throttled',
+    defaultMessage: 'Too many requests are being processed. Please try again later.',
+    color: '#ef4444',
+  },
+  'infinite-loop': {
+    emoji: '🔄',
+    defaultTitle: 'Infinite Loop Detected',
+    defaultMessage: 'An infinite loop has been detected in your application. Please contact support.',
+    color: '#ef4444',
+  },
+  'invalid-request': {
+    emoji: '❌',
+    defaultTitle: 'Invalid Request',
+    defaultMessage: 'The request you made is invalid. Please check your request and try again.',
+    color: '#ef4444',
+  },
+  'middleware-error': {
+    emoji: '⚙️',
+    defaultTitle: 'Middleware Error',
+    defaultMessage: 'An error occurred in the middleware layer. Please try again later.',
+    color: '#8b5cf6',
+  },
+  'router-error': {
+    emoji: '🧭',
+    defaultTitle: 'Router Error',
+    defaultMessage: 'The router is unable to match your request to a valid route.',
+    color: '#f59e0b',
+  },
+  'sandbox-error': {
+    emoji: '🧰',
+    defaultTitle: 'Sandbox Error',
+    defaultMessage: 'The execution environment is not available. Please try again later.',
+    color: '#ec4899',
+  },
+  'too-many-requests': {
+    emoji: '📈',
+    defaultTitle: 'Too Many Requests',
+    defaultMessage: 'You have sent too many requests. Please wait before making more requests.',
+    color: '#ef4444',
+  },
+  'internal-error': {
+    emoji: '🔧',
+    defaultTitle: 'Internal Error',
+    defaultMessage: 'An internal error occurred. This is likely a platform issue. Please try again later.',
+    color: '#dc2626',
   },
 };
 

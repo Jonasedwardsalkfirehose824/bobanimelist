@@ -143,3 +143,58 @@ export const ExampleErrorBoundary = ({ error }: { error: Error }) => {
     />
   );
 };
+
+// Example 11: Vercel Deployment Blocked
+export const ExampleVercelDeploymentBlocked = () => (
+  <ErrorState
+    type="deployment-blocked"
+    title="Deployment Blocked"
+    message="This deployment has been blocked. Please check your Vercel dashboard for more information."
+    navigateTo="/"
+    navigateButtonText="Go Home"
+  />
+);
+
+// Example 12: Vercel Function Timeout
+export const ExampleVercelFunctionTimeout = () => (
+  <ErrorState
+    type="function-timeout"
+    title="Function Timeout"
+    message="The serverless function took too long to execute. Please try again."
+    onRetry={() => window.location.reload()}
+    retryButtonText="Try Again"
+  />
+);
+
+// Example 13: Vercel DNS Error
+export const ExampleVercelDNSError = () => (
+  <ErrorState
+    type="dns-error"
+    title="DNS Resolution Error"
+    message="We are unable to resolve the domain name. Please check the URL or contact support."
+    navigateTo="/"
+    navigateButtonText="Go Home"
+  />
+);
+
+// Example 14: Vercel Edge Function Error
+export const ExampleVercelEdgeFunctionError = () => (
+  <ErrorState
+    type="edge-function-error"
+    title="Edge Function Error"
+    message="An error occurred while executing an edge function. Please try again later."
+    onRetry={() => window.location.reload()}
+    retryButtonText="Reload"
+  />
+);
+
+// Example 15: Vercel Too Many Requests
+export const ExampleVercelTooManyRequests = () => (
+  <ErrorState
+    type="too-many-requests"
+    title="Too Many Requests"
+    message="You have sent too many requests. Please wait before making more requests."
+    onRetry={() => window.location.reload()}
+    retryButtonText="Try Again Later"
+  />
+);

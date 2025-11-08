@@ -1,7 +1,9 @@
 <div align="center">
-    # <img src="/public/readme__header/jpg" width="120" height="auto"></img> bobanimelist
-    **bobanimelist** is a modern platform for exploring anime and manga, built from scratch with a focus on performance, scalability, and developer experience. Version 2.0 showcases my expertise in React, TypeScript, state management, and UI/UX best practices with engaging animations.
+    <img src="/public/readme__header.jpg" width="300" height="auto"></img>
 </div>
+
+## **bobanimelist**
+A modern platform for exploring anime and manga, built from scratch with a focus on performance, scalability, and developer experience.
 
 ---
 

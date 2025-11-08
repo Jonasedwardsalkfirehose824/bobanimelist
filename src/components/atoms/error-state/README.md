@@ -4,13 +4,14 @@ Interactive and animated error state component with 3D effects and multiple erro
 
 ## Features
 
-- 🎨 **Multiple Error Types**: Pre-configured for 404, 500, network, timeout, unauthorized, forbidden, and generic errors
+- 🎨 **Multiple Error Types**: Pre-configured for 404, 500, network, timeout, unauthorized, forbidden, generic, and Vercel-specific errors
 - 🌈 **Dynamic Theming**: Full support for light/dark mode
 - 📱 **Fully Responsive**: Optimized for all device sizes (mobile, tablet, desktop)
 - ✨ **3D Parallax Effect**: Interactive mouse-driven 3D animation
 - 🎭 **Smooth Animations**: Built with Framer Motion for fluid transitions
 - ♿ **Accessible**: ARIA labels and reduced motion support
 - 🎯 **Customizable**: Override titles, messages, and actions
+- ☁️ **Vercel Deployment Ready**: Pre-configured for Vercel-specific deployment errors
 
 ## Usage
 
@@ -88,6 +89,22 @@ Each error type has pre-configured emoji/image, colors, and messages:
 - **timeout**: ⏱️ Request Timeout (Purple)
 - **unauthorized**: 🔒 Unauthorized (Pink)
 - **forbidden**: 🚫 Access Forbidden (Dark Red)
+- **deployment-blocked**: 🛑 Deployment Blocked (Red)
+- **deployment-deleted**: 🗑️ Deployment Deleted (Gray)
+- **deployment-disabled**: ⏸️ Deployment Disabled (Orange)
+- **deployment-not-ready**: ⏳ Deployment Not Ready (Blue)
+- **deployment-paused**: ⏸️ Deployment Paused (Purple)
+- **dns-error**: 🌍 DNS Resolution Error (Pink)
+- **edge-function-error**: ⚡ Edge Function Error (Purple)
+- **function-timeout**: ⏰ Function Timeout (Orange)
+- **function-throttled**: 🚦 Function Throttled (Red)
+- **infinite-loop**: 🔄 Infinite Loop Detected (Red)
+- **invalid-request**: ❌ Invalid Request (Red)
+- **middleware-error**: ⚙️ Middleware Error (Purple)
+- **router-error**: 🧭 Router Error (Orange)
+- **sandbox-error**: 🧰 Sandbox Error (Pink)
+- **too-many-requests**: 📈 Too Many Requests (Red)
+- **internal-error**: 🔧 Internal Error (Dark Red)
 - **generic**: 😔 Something Went Wrong (Indigo)
 
 > **Note**: The 404 error uses a custom animated GIF (`shocked-min.gif`) instead of an emoji for a more engaging visual experience.

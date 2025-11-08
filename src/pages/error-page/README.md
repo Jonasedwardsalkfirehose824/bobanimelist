@@ -49,7 +49,12 @@ import { ErrorPage } from '@/pages/error-page';
 |------|------|---------|-------------|
 | `is404` | `boolean` | `false` | Set to true for 404 error page |
 | `isRoot` | `boolean` | `false` | Set to true for full viewport height without margins |
-| `errorType` | `ErrorType` | `'generic'` | Type of error: '404', '500', 'network', 'timeout', 'unauthorized', 'forbidden', 'generic' |
+| `errorType` | `ErrorType` | `'generic'` | Type of error: '404', '500', 'network', 'timeout', 'unauthorized', 'forbidden', 'generic', and Vercel-specific errors |
+| `error` | `any` | `undefined` | Error object to automatically determine error type based on Vercel error codes |
+| `title` | `string` | Auto | Custom error title (overrides default) |
+| `message` | `string` | Auto | Custom error message (overrides default) |
+| `showRetryButton` | `boolean` | `false` | Show/hide retry button |
+| `onRetry` | `() => void` | `undefined` | Callback function for retry action |
 
 ## Internationalization
 
