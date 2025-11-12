@@ -53,10 +53,12 @@
 
   &__image {
     @include aspect-ratio(16, 9);
-    width: 100%;
-    object-fit: cover;
-    border-radius: map.get($radius, 'md');
-    overflow: hidden;
+    & {
+      width: 100%;
+      object-fit: cover;
+      border-radius: map.get($radius, 'md');
+      overflow: hidden;
+    }
   }
 
   &__badge {
@@ -83,8 +85,10 @@
   &__image {
     @include aspect-ratio(3, 4);
     @include transition(transform);
-    width: 100%;
-    object-fit: cover;
+    & {
+      width: 100%;
+      object-fit: cover;
+    }
   }
 
   &:hover &__image {

@@ -99,15 +99,19 @@
 			}
 		}
 
+		& {
+			@include screen-md {
+				padding: var(--s-spacing-12) 0;
+				margin: 0 auto var(--s-spacing-12);
+				border-radius: 32px;
+				
+				// Simplified shadow using theme variable
+				box-shadow: 
+					0 15px 40px var(--color-shadow);
+			}
+		}
+
 		@include screen-md {
-			padding: var(--s-spacing-12) 0;
-			margin: 0 auto var(--s-spacing-12);
-			border-radius: 32px;
-			
-			// Simplified shadow using theme variable
-			box-shadow: 
-				0 15px 40px var(--color-shadow);
-			
 			:global(.light) & {
 				box-shadow: 
 					0 15px 40px var(--color-shadow);
@@ -290,7 +294,9 @@
 	// Featured Section
 	&__featured {
 		@include section-container;
-		animation: fadeInUp 0.7s ease-out;
+		& {
+			animation: fadeInUp 0.7s ease-out;
+		}
 	}
 
 	&__featured-card {
@@ -391,7 +397,9 @@
 	// Section
 	&__section {
 		@include section-container;
-		animation: fadeInUp 0.8s ease-out;
+		& {
+			animation: fadeInUp 0.8s ease-out;
+		}
 	}
 
 	&__section-header {

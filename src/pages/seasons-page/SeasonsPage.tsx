@@ -1,7 +1,7 @@
 import { useState, useMemo, useEffect } from 'react';
 import { useGetSeasonsListQuery, useGetSeasonAnimeQuery } from '@/services/jikan';
 import type { SeasonName } from '@/services/jikan/models/schedule/season-archive.model';
-import { SeasonSelector, SeasonAnimeList, SeasonSkeleton } from '@/components/seasons';
+import { SeasonSelector, SeasonAnimeList, SeasonSkeleton } from '@/components/widgets/seasons';
 import Label from '@/components/atoms/label';
 import { ErrorState } from '@/components/atoms/error-state';
 import styles from './SeasonsPage.module.scss';

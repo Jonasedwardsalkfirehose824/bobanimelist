@@ -2,6 +2,7 @@ import { useGetAnimeStaffQuery } from '@/services/jikan';
 import { Link } from 'react-router';
 import Image from '@/components/atoms/image';
 import Label from '@/components/atoms/label';
+import ErrorState from '@/components/atoms/error-state';
 import styles from './StaffGrid.module.scss';
 import classNames from 'classnames';
 
@@ -34,7 +35,23 @@ export const StaffGrid = ({ animeId, className }: StaffGridProps) => {
 		);
 	}
 
-	if (isError || !data?.data || data.data.length === 0) {
+	if (isError) {
+		return (
+			<div className={classNames(styles['staff-grid'], className)}>
+				<Label as="h3" font="typo-primary-l-semibold" className={styles['staff-grid__title']}>
+					Staff
+				</Label>
+				<ErrorState 
+					type="generic" 
+					message="Failed to load staff information. Please try again later." 
+					showRetryButton={true}
+					onRetry={() => window.location.reload()}
+				/>
+			</div>
+		);
+	}
+
+	if (!data?.data || data.data.length === 0) {
 		return null;
 	}
 

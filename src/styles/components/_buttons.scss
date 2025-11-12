@@ -7,21 +7,23 @@
 
 // Base button mixin
 @mixin btn-base {
-	padding: var(--s-spacing-4) var(--s-spacing-6);
-	border-radius: 12px;
-	font-size: 1rem;
-	font-weight: 700;
-	cursor: pointer;
-	transition: all $transition-base;
-	border: none;
-	font-family: inherit;
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	gap: var(--s-spacing-2);
-	outline: none;
-	transform-style: preserve-3d;
-	position: relative;
+	& {
+		padding: var(--s-spacing-4) var(--s-spacing-6);
+		border-radius: 12px;
+		font-size: 1rem;
+		font-weight: 700;
+		cursor: pointer;
+		transition: all $transition-base;
+		border: none;
+		font-family: inherit;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		gap: var(--s-spacing-2);
+		outline: none;
+		transform-style: preserve-3d;
+		position: relative;
+	}
 
 	&:focus-visible {
 		box-shadow: 0 0 0 3px rgb(59 130 246 / 20%);
@@ -58,8 +60,10 @@
 // Primary Button (Blue)
 .btn-primary {
 	@include btn-base;
-	background: var(--color-accent-primary);
-	color: var(--color-btn-primary-text);
+	& {
+		background: var(--color-accent-primary);
+		color: var(--color-btn-primary-text);
+	}
 
 	@include screen-mouse-first {
 		&:hover:not(:disabled) {
@@ -73,8 +77,10 @@
 // Success Button (Green)
 .btn-success {
 	@include btn-base;
-	background: var(--color-success);
-	color: var(--color-btn-success-text);
+	& {
+		background: var(--color-success);
+		color: var(--color-btn-success-text);
+	}
 
 	@include screen-mouse-first {
 		&:hover:not(:disabled) {
@@ -88,8 +94,10 @@
 // Warning Button (Yellow/Orange)
 .btn-warning {
 	@include btn-base;
-	background: var(--color-warning);
-	color: var(--color-btn-warning-text);
+	& {
+		background: var(--color-warning);
+		color: var(--color-btn-warning-text);
+	}
 
 	@include screen-mouse-first {
 		&:hover:not(:disabled) {
@@ -103,8 +111,10 @@
 // Error Button (Red)
 .btn-error {
 	@include btn-base;
-	background: var(--color-error);
-	color: var(--color-btn-error-text);
+	& {
+		background: var(--color-error);
+		color: var(--color-btn-error-text);
+	}
 
 	@include screen-mouse-first {
 		&:hover:not(:disabled) {
@@ -118,8 +128,10 @@
 // Info Button (Light Blue)
 .btn-info {
 	@include btn-base;
-	background: var(--color-info);
-	color: var(--color-btn-info-text);
+	& {
+		background: var(--color-info);
+		color: var(--color-btn-info-text);
+	}
 
 	@include screen-mouse-first {
 		&:hover:not(:disabled) {
@@ -133,9 +145,11 @@
 // Secondary Button (Outline)
 .btn-secondary {
 	@include btn-base;
-	background: transparent;
-	color: var(--s-color-fg-primary);
-	border: 2px solid var(--s-color-border-primary);
+	& {
+		background: transparent;
+		color: var(--s-color-fg-primary);
+		border: 2px solid var(--s-color-border-primary);
+	}
 
 	@include screen-mouse-first {
 		&:hover:not(:disabled) {
@@ -149,8 +163,10 @@
 // Ghost Button (No border)
 .btn-ghost {
 	@include btn-base;
-	background: transparent;
-	color: var(--s-color-fg-primary);
+	& {
+		background: transparent;
+		color: var(--s-color-fg-primary);
+	}
 
 	@include screen-mouse-first {
 		&:hover:not(:disabled) {

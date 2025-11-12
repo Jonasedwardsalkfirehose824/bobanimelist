@@ -41,10 +41,12 @@
 		@include card(0, 8px);
 		@include interactive-lift(-6px, 0.3s);
 		@include focus-visible;
-		display: flex;
-		flex-direction: column;
-		text-decoration: none;
-		overflow: hidden;
+		& {
+			display: flex;
+			flex-direction: column;
+			text-decoration: none;
+			overflow: hidden;
+		}
 
 		&:hover {
 			border-color: var(--s-color-border-primary);
@@ -53,10 +55,12 @@
 
 	&__image-wrapper {
 		@include aspect-ratio(3, 4);
-		width: 100%;
-		overflow: hidden;
-		background: var(--s-color-bg-placeholder);
-		position: relative;
+		& {
+			width: 100%;
+			overflow: hidden;
+			background: var(--s-color-bg-placeholder);
+			position: relative;
+		}
 
 		&::after {
 			content: '';
@@ -109,8 +113,10 @@
 
 	&__skeleton {
 		@include skeleton-loading(1.5s);
-		height: 280px;
-		border-radius: 8px;
+		& {
+			height: 280px;
+			border-radius: 8px;
+		}
 	}
 }
 

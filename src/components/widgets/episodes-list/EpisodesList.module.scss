@@ -127,8 +127,10 @@
 
 	&__skeleton {
 		@include skeleton-loading(1.5s);
-		height: 180px;
-		border-radius: 8px;
+		& {
+			height: 180px;
+			border-radius: 8px;
+		}
 	}
 
 	&__pagination {

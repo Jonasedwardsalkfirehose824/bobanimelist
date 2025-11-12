@@ -1,5 +1,6 @@
 import { useGetMangaCharactersQuery } from '@/services/jikan';
 import Label from '@/components/atoms/label';
+import ErrorState from '@/components/atoms/error-state';
 import styles from './MangaCharacters.module.scss';
 import classNames from 'classnames';
 import { Link } from 'react-router';
@@ -13,7 +14,19 @@ export const MangaCharacters = ({ mangaId, className }: MangaCharactersProps) =>
 	const { data, isLoading, isError } = useGetMangaCharactersQuery({ id: mangaId });
 
 	if (isError) {
-		return null; // Hide section on error
+		return (
+			<div className={classNames(styles['manga-characters'], className)}>
+				<Label as="h2" font="typo-primary-xl-semibold" className={styles['manga-characters__title']}>
+					Characters
+				</Label>
+				<ErrorState 
+					type="generic" 
+					message="Failed to load characters. Please try again later." 
+					showRetryButton={true}
+					onRetry={() => window.location.reload()}
+				/>
+			</div>
+		);
 	}
 
 	if (isLoading) {

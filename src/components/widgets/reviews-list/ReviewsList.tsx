@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useGetAnimeReviewsQuery, useGetMangaReviewsQuery } from '@/services/jikan';
 import { ReviewCard } from '../review-card';
 import Label from '@/components/atoms/label';
+import ErrorState from '@/components/atoms/error-state';
 import styles from './ReviewsList.module.scss';
 import classNames from 'classnames';
 
@@ -25,7 +26,19 @@ export const ReviewsList = ({ contentId, contentType, className }: ReviewsListPr
 	});
 
 	if (isError) {
-		return null;
+		return (
+			<div className={classNames(styles['reviews-list'], className)}>
+				<Label as="h2" font="typo-primary-xl-semibold" className={styles['reviews-list__title']}>
+					Reviews
+				</Label>
+				<ErrorState 
+					type="generic" 
+					message="Failed to load reviews. Please try again later." 
+					showRetryButton={true}
+					onRetry={() => window.location.reload()}
+				/>
+			</div>
+		);
 	}
 
 	if (isLoading) {

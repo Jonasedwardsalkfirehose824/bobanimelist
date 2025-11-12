@@ -1,6 +1,7 @@
 import { useGetCharacterAnimeQuery } from '@/services/jikan';
 import Label from '@/components/atoms/label';
 import { Link } from 'react-router';
+import ErrorState from '@/components/atoms/error-state';
 import styles from './CharacterAppearances.module.scss';
 import classNames from 'classnames';
 
@@ -13,7 +14,19 @@ export const CharacterAnimeAppearances = ({ characterId, className }: CharacterA
 	const { data, isLoading, isError } = useGetCharacterAnimeQuery({ id: characterId });
 
 	if (isError) {
-		return null;
+		return (
+			<div className={classNames(styles['character-appearances'], className)}>
+				<Label as="h2" font="typo-primary-xl-semibold" className={styles['character-appearances__title']}>
+					Anime Appearances
+				</Label>
+				<ErrorState 
+					type="generic" 
+					message="Failed to load anime appearances. Please try again later." 
+					showRetryButton={true}
+					onRetry={() => window.location.reload()}
+				/>
+			</div>
+		);
 	}
 
 	if (isLoading) {

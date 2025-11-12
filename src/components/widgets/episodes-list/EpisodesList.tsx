@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useGetAnimeEpisodesQuery } from '@/services/jikan';
 import Label from '@/components/atoms/label';
+import ErrorState from '@/components/atoms/error-state';
 import styles from './EpisodesList.module.scss';
 import classNames from 'classnames';
 
@@ -14,7 +15,19 @@ export const EpisodesList = ({ animeId, className }: EpisodesListProps) => {
 	const { data, isLoading, isError } = useGetAnimeEpisodesQuery({ id: animeId, page, limit: 100 });
 
 	if (isError) {
-		return null; // Hide section on error
+		return (
+			<div className={classNames(styles['episodes-list'], className)}>
+				<Label as="h2" font="typo-primary-xl-semibold" className={styles['episodes-list__title']}>
+					Episodes
+				</Label>
+				<ErrorState 
+					type="generic" 
+					message="Failed to load episodes. Please try again later." 
+					showRetryButton={true}
+					onRetry={() => window.location.reload()}
+				/>
+			</div>
+		);
 	}
 
 	if (isLoading) {

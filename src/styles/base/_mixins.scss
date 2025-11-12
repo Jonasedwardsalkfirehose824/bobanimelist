@@ -9,6 +9,7 @@
 // ========================================
 
 @use 'sass:map';
+@use 'sass:list';
 
 @mixin respond($size) {
   @if map.has-key($breakpoints, $size) {
@@ -89,7 +90,7 @@
 @mixin transition($properties...) {
   $transitions: ();
   @each $property in $properties {
-    $transitions: append($transitions, #{$property} $transition-base, comma);
+    $transitions: list.append($transitions, #{$property} $transition-base, $separator: comma);
   }
   transition: $transitions;
 }
@@ -97,7 +98,7 @@
 @mixin transition-fast($properties...) {
   $transitions: ();
   @each $property in $properties {
-    $transitions: append($transitions, #{$property} $transition-fast, comma);
+    $transitions: list.append($transitions, #{$property} $transition-fast, $separator: comma);
   }
   transition: $transitions;
 }

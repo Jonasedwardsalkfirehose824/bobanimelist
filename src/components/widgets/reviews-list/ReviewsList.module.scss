@@ -87,8 +87,10 @@
 
 	&__skeleton {
 		@include skeleton-loading(1.5s);
-		height: 300px;
-		border-radius: 16px;
+		& {
+			height: 300px;
+			border-radius: 16px;
+		}
 
 		@include screen-md {
 			height: 350px;

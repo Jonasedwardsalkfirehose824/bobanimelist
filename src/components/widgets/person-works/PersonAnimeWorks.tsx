@@ -1,6 +1,7 @@
 import { useGetPersonAnimeQuery } from '@/services/jikan';
 import Label from '@/components/atoms/label';
 import { Link } from 'react-router';
+import ErrorState from '@/components/atoms/error-state';
 import styles from './PersonWorks.module.scss';
 import classNames from 'classnames';
 
@@ -13,7 +14,19 @@ export const PersonAnimeWorks = ({ personId, className }: PersonAnimeWorksProps)
 	const { data, isLoading, isError } = useGetPersonAnimeQuery({ id: personId });
 
 	if (isError) {
-		return null;
+		return (
+			<div className={classNames(styles['person-works'], className)}>
+				<Label as="h2" font="typo-primary-xl-semibold" className={styles['person-works__title']}>
+					Anime Works
+				</Label>
+				<ErrorState 
+					type="generic" 
+					message="Failed to load anime works. Please try again later." 
+					showRetryButton={true}
+					onRetry={() => window.location.reload()}
+				/>
+			</div>
+		);
 	}
 
 	if (isLoading) {

@@ -1,6 +1,7 @@
 import styles from './MediaContent.module.scss';
 import Image from '../../atoms/image';
 import Label from '../../atoms/label';
+import ErrorState from '../../atoms/error-state';
 import classNames from 'classnames';
 import { type TypedUseQuery } from "@reduxjs/toolkit/query/react";
 import { Link } from 'react-router';
@@ -73,7 +74,7 @@ function MediaContent<TQueryHook extends UseQuery, TContentType extends ContentT
     adapter
 }: MediaContentProps<TQueryHook, TContentType>) {
 
-    const { data: queryData } = useQueryHook(options);
+    const { data: queryData, isLoading, isError } = useQueryHook(options);
     
     // Auto-translate based on content type
     const translatedData = useJikanTranslation(queryData, {
@@ -82,7 +83,20 @@ function MediaContent<TQueryHook extends UseQuery, TContentType extends ContentT
 
     const data = translatedData ? adapter(translatedData) : undefined;
 
-    if (!data) {
+    if (isError) {
+        return (
+            <div className={styles['media-content']}>
+                <ErrorState 
+                    type="generic" 
+                    message="Failed to load content. Please try again later." 
+                    showRetryButton={true}
+                    onRetry={() => window.location.reload()}
+                />
+            </div>
+        );
+    }
+
+    if (isLoading || !data) {
         return <MediaContentLoading contentType={contentType} />;
     }
 

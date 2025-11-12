@@ -8,7 +8,9 @@
 
 .skeleton {
   @include skeleton;
-  border-radius: map.get($radius, 'md');
+  & {
+    border-radius: map.get($radius, 'md');
+  }
 
   &--text {
     height: 1em;
@@ -39,7 +41,9 @@
 
   &--media {
     @include aspect-ratio(3, 4);
-    border-radius: map.get($radius, 'md');
+    & {
+      border-radius: map.get($radius, 'md');
+    }
   }
 
   &--button {

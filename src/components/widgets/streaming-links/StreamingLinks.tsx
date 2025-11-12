@@ -1,4 +1,5 @@
 import { useGetAnimeStreamingQuery } from '@/services/jikan';
+import ErrorState from '@/components/atoms/error-state';
 import styles from './StreamingLinks.module.scss';
 import classNames from 'classnames';
 import Label from '@/components/atoms/label';
@@ -26,8 +27,24 @@ export const StreamingLinks = ({ animeId, className }: StreamingLinksProps) => {
 		);
 	}
 
-	if (isError || !data?.data || data.data.length === 0) {
-		return null;
+	if (isError) {
+		return (
+			<div className={classNames(styles['streaming-links'], className)}>
+				<Label as="h3" font="typo-primary-l-semibold" className={styles['streaming-links__title']}>
+					Watch On
+				</Label>
+				<ErrorState 
+					type="generic" 
+					message="Failed to load streaming links. Please try again later." 
+					showRetryButton={true}
+					onRetry={() => window.location.reload()}
+				/>
+			</div>
+		);
+	}
+
+	if (!data?.data || data.data.length === 0) {
+		return null; // Still return null when there's no data (no links available)
 	}
 
 	return (
